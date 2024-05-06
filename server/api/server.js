@@ -50,15 +50,43 @@ app.get("/api/authenticate/:id", (req, res) => {
  });
  
 
-app.get("/api/tickets", (req, res) => {
-  const query = `SELECT * FROM ${DB_TABLE_NAME}`;
+ app.get("/api/ticket/:uid", (req, res) => {
 
-  db.connection.query(query, (error, results) => {
+  // Helper function to format the results
+  function restructureTicketData(results) {
+    const ticketData = results[0];
+    const history = results.map(row => ({
+      date_used: row.date_used,
+      type: row.type,
+      time_used: row.time_used
+    }));
+
+    return {
+      id: ticketData.id,
+      uid: ticketData.uid,
+      check_in: ticketData.check_in,
+      check_out: ticketData.check_out,
+      history: history
+    };
+  }
+
+  const ticketId = req.params.uid;
+  const query = `
+    SELECT t.*, h.date_used, h.type, h.time_used 
+    FROM qticketdb t
+    JOIN qticketdb_history h ON t.id = h.ticket_id
+    WHERE t.uid = ? 
+  `;
+
+  db.connection.query(query, [ticketId], (error, results) => {
     if (error) {
       console.log(error);
-      res.status(500).json({ error: 'An error occurred while executing the query.' });
+      res.status(500).json({ error: 'An error occurred while fetching the ticket data.' });
+    } else if (results.length > 0) {
+      const ticket = restructureTicketData(results); // Refactor the result into the desired format
+      res.json(ticket);
     } else {
-      res.json({ data: results });
+      res.status(404).json({ error: 'Ticket not found.' });
     }
   });
 });
