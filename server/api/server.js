@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+const cors = require('cors');
 const db = require('./db');
 const bodyParser = require('body-parser');
 const os = require('os');
@@ -8,6 +9,7 @@ const PORT = 5000;
 const DB_TABLE_NAME = "attendees";
 app.use(bodyParser.json());
 app.use(express.json());
+app.use(cors());
 
 function getIPAddress() {
   const { networkInterfaces } = require('os');
@@ -62,6 +64,7 @@ app.get("/api/authenticate/:id", (req, res) => {
     }));
 
     return {
+      success: true,
       id: ticketData.id,
       uid: ticketData.uid,
       check_in: ticketData.check_in,
@@ -86,7 +89,7 @@ app.get("/api/authenticate/:id", (req, res) => {
       const ticket = restructureTicketData(results); // Refactor the result into the desired format
       res.json(ticket);
     } else {
-      res.status(404).json({ error: 'Ticket not found.' });
+      res.status(404).json({ success: false, error: 'Ticket not found.' });
     }
   });
 });

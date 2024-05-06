@@ -29,11 +29,11 @@ SET @lastTicketId = LAST_INSERT_ID();
 
 -- Add a history entry for the new ticket 
 INSERT INTO qticketdb_history (ticket_id, date_used, type, time_used)
-VALUES (@lastTicketId, CURDATE(), 0, '10:50:30');
+VALUES (@lastTicketId, NOW(), 0, NOW());
 
 -- Get ticket with full history
 SELECT t.*, h.date_used, h.type, h.time_used 
 FROM qticketdb t
 JOIN qticketdb_history h ON t.id = h.ticket_id
 -- WHERE t.id = @lastTicketId; 
-WHERE t.uid = 2; 
+WHERE t.id = 1; 
