@@ -116,6 +116,9 @@ class _TicketInfoWidgetState extends State<TicketInfoWidget>
   }
 
   void _startTimer() {
+    Timer(const Duration(seconds: 3), () {
+      context.pushNamed('HomePage');
+    });
     _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       setState(() {
         _currentTime = _getCurrentTime();

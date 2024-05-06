@@ -59,7 +59,8 @@ class _DrawerWidgetState extends State<DrawerWidget> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(12.0, 12.0, 0.0, 0.0),
+              padding:
+                  const EdgeInsetsDirectional.fromSTEB(12.0, 12.0, 0.0, 0.0),
               child: Text(
                 'Quick Help Menu',
                 textAlign: TextAlign.start,
@@ -70,7 +71,8 @@ class _DrawerWidgetState extends State<DrawerWidget> {
               ),
             ),
             Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(12.0, 4.0, 0.0, 8.0),
+              padding:
+                  const EdgeInsetsDirectional.fromSTEB(12.0, 4.0, 0.0, 8.0),
               child: Text(
                 'Find quick resources below.',
                 textAlign: TextAlign.start,
@@ -104,7 +106,8 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                     borderRadius: BorderRadius.circular(8.0),
                   ),
                   child: Padding(
-                    padding: const EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 8.0),
+                    padding: const EdgeInsetsDirectional.fromSTEB(
+                        0.0, 8.0, 0.0, 8.0),
                     child: Row(
                       mainAxisSize: MainAxisSize.max,
                       children: [
@@ -138,72 +141,7 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                 ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 8.0, 4.0),
-              child: MouseRegion(
-                opaque: false,
-                cursor: MouseCursor.defer ?? MouseCursor.defer,
-                onEnter: ((event) async {
-                  setState(() => _model.mouseRegionHovered2 = true);
-                }),
-                onExit: ((event) async {
-                  setState(() => _model.mouseRegionHovered2 = false);
-                }),
-                child: InkWell(
-                  splashColor: Colors.transparent,
-                  focusColor: Colors.transparent,
-                  hoverColor: Colors.transparent,
-                  highlightColor: Colors.transparent,
-                  onTap: () async {
-                    context.pushNamed('TicketInfo');
-                  },
-                  child: AnimatedContainer(
-                    duration: const Duration(milliseconds: 150),
-                    curve: Curves.easeInOut,
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      color: _model.mouseRegionHovered2
-                          ? FlutterFlowTheme.of(context).primaryBackground
-                          : FlutterFlowTheme.of(context).secondaryBackground,
-                      borderRadius: BorderRadius.circular(8.0),
-                    ),
-                    child: Padding(
-                      padding:
-                          const EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 8.0),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.max,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(
-                                12.0, 0.0, 0.0, 0.0),
-                            child: Icon(
-                              Icons.airplane_ticket_outlined,
-                              color: FlutterFlowTheme.of(context).primaryText,
-                              size: 20.0,
-                            ),
-                          ),
-                          Expanded(
-                            child: Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
-                                  12.0, 0.0, 0.0, 0.0),
-                              child: Text(
-                                'Ticket Page',
-                                style: FlutterFlowTheme.of(context)
-                                    .bodyMedium
-                                    .override(
-                                      fontFamily: 'Readex Pro',
-                                      letterSpacing: 0.0,
-                                    ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            ),
+
             Padding(
               padding: const EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 8.0, 4.0),
               child: MouseRegion(
@@ -248,8 +186,8 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                       borderRadius: BorderRadius.circular(8.0),
                     ),
                     child: Padding(
-                      padding:
-                          const EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 8.0),
+                      padding: const EdgeInsetsDirectional.fromSTEB(
+                          0.0, 8.0, 0.0, 8.0),
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
                         children: [
@@ -289,7 +227,8 @@ class _DrawerWidgetState extends State<DrawerWidget> {
               color: FlutterFlowTheme.of(context).alternate,
             ),
             Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(12.0, 4.0, 0.0, 8.0),
+              padding:
+                  const EdgeInsetsDirectional.fromSTEB(12.0, 4.0, 0.0, 8.0),
               child: Text(
                 'Theme',
                 textAlign: TextAlign.start,
@@ -302,7 +241,8 @@ class _DrawerWidgetState extends State<DrawerWidget> {
 
             // Trip ko la. HEHEHE . - Ej
             Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(12.0, 0.0, 0.0, 0.0),
+              padding:
+                  const EdgeInsetsDirectional.fromSTEB(12.0, 0.0, 0.0, 0.0),
               child: wrapWithModel(
                 model: _model.darkLightSwitchSmallModel,
                 updateCallback: () => setState(() {}),

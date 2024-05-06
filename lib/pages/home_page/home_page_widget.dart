@@ -219,7 +219,6 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                               hoverColor: Colors.transparent,
                                               highlightColor:
                                                   Colors.transparent,
-                                              onTap: () async {},
                                               child: AutoSizeText(
                                                 'SCAN YOUR TICKET',
                                                 textAlign: TextAlign.start,
@@ -250,7 +249,6 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                               hoverColor: Colors.transparent,
                                               highlightColor:
                                                   Colors.transparent,
-                                              onTap: () async {},
                                               child: AutoSizeText(
                                                 ' TO CHECK IN TO THE EVENT ',
                                                 textAlign: TextAlign.start,
