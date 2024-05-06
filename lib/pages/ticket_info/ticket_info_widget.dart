@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import '/components/drawer/drawer_widget.dart';
 import '/components/ticket_log/ticket_log_widget.dart';
 import '/components/upper_card_content/upper_card_content_widget.dart';
@@ -20,6 +22,8 @@ class TicketInfoWidget extends StatefulWidget {
 class _TicketInfoWidgetState extends State<TicketInfoWidget>
     with TickerProviderStateMixin {
   late TicketInfoModel _model;
+  late String _currentTime;
+  late Timer _timer;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -29,6 +33,8 @@ class _TicketInfoWidgetState extends State<TicketInfoWidget>
   void initState() {
     super.initState();
     _model = createModel(context, () => TicketInfoModel());
+    _currentTime = _getCurrentTime();
+    _startTimer();
 
     animationsMap.addAll({
       'columnOnPageLoadAnimation1': AnimationInfo(
@@ -89,8 +95,20 @@ class _TicketInfoWidgetState extends State<TicketInfoWidget>
   @override
   void dispose() {
     _model.dispose();
-
+    _timer.cancel();
     super.dispose();
+  }
+
+  void _startTimer() {
+    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      setState(() {
+        _currentTime = _getCurrentTime();
+      });
+    });
+  }
+
+  String _getCurrentTime() {
+    return DateFormat('M/d h:mm a').format(DateTime.now());
   }
 
   @override
@@ -124,8 +142,8 @@ class _TicketInfoWidgetState extends State<TicketInfoWidget>
                   Align(
                     alignment: const AlignmentDirectional(0.0, 0.0),
                     child: Padding(
-                      padding:
-                          const EdgeInsetsDirectional.fromSTEB(0.0, 48.0, 0.0, 0.0),
+                      padding: const EdgeInsetsDirectional.fromSTEB(
+                          0.0, 48.0, 0.0, 0.0),
                       child: Container(
                         height: MediaQuery.sizeOf(context).height * 0.9,
                         decoration: const BoxDecoration(),
@@ -153,11 +171,10 @@ class _TicketInfoWidgetState extends State<TicketInfoWidget>
                                       ),
                                       options: FFButtonOptions(
                                         height: 40.0,
-                                        padding: const EdgeInsetsDirectional.fromSTEB(
-                                            24.0, 0.0, 24.0, 0.0),
-                                        iconPadding:
-                                            const EdgeInsetsDirectional.fromSTEB(
-                                                0.0, 0.0, 0.0, 0.0),
+                                        padding: const EdgeInsetsDirectional
+                                            .fromSTEB(24.0, 0.0, 24.0, 0.0),
+                                        iconPadding: const EdgeInsetsDirectional
+                                            .fromSTEB(0.0, 0.0, 0.0, 0.0),
                                         color: FlutterFlowTheme.of(context)
                                             .primary,
                                         textStyle: FlutterFlowTheme.of(context)
@@ -201,9 +218,9 @@ class _TicketInfoWidgetState extends State<TicketInfoWidget>
                                         mainAxisSize: MainAxisSize.max,
                                         children: [
                                           Padding(
-                                            padding:
-                                                const EdgeInsetsDirectional.fromSTEB(
-                                                    36.0, 12.0, 36.0, 0.0),
+                                            padding: const EdgeInsetsDirectional
+                                                .fromSTEB(
+                                                36.0, 12.0, 36.0, 0.0),
                                             child: Row(
                                               mainAxisSize: MainAxisSize.max,
                                               mainAxisAlignment:
@@ -213,7 +230,8 @@ class _TicketInfoWidgetState extends State<TicketInfoWidget>
                                                   CrossAxisAlignment.end,
                                               children: [
                                                 Container(
-                                                  decoration: const BoxDecoration(),
+                                                  decoration:
+                                                      const BoxDecoration(),
                                                   child: Row(
                                                     mainAxisSize:
                                                         MainAxisSize.max,
@@ -230,11 +248,8 @@ class _TicketInfoWidgetState extends State<TicketInfoWidget>
                                                       Padding(
                                                         padding:
                                                             const EdgeInsetsDirectional
-                                                                .fromSTEB(
-                                                                    12.0,
-                                                                    0.0,
-                                                                    0.0,
-                                                                    0.0),
+                                                                .fromSTEB(12.0,
+                                                                0.0, 0.0, 0.0),
                                                         child: Text(
                                                           'Ticket Detail',
                                                           style: FlutterFlowTheme
@@ -274,11 +289,11 @@ class _TicketInfoWidgetState extends State<TicketInfoWidget>
                                                     padding:
                                                         const EdgeInsetsDirectional
                                                             .fromSTEB(24.0, 0.0,
-                                                                24.0, 0.0),
+                                                            24.0, 0.0),
                                                     iconPadding:
                                                         const EdgeInsetsDirectional
-                                                            .fromSTEB(0.0, 0.0,
-                                                                0.0, 0.0),
+                                                            .fromSTEB(
+                                                            0.0, 0.0, 0.0, 0.0),
                                                     color: FlutterFlowTheme.of(
                                                             context)
                                                         .secondary,
@@ -292,7 +307,8 @@ class _TicketInfoWidgetState extends State<TicketInfoWidget>
                                                           letterSpacing: 0.0,
                                                         ),
                                                     elevation: 3.0,
-                                                    borderSide: const BorderSide(
+                                                    borderSide:
+                                                        const BorderSide(
                                                       color: Colors.transparent,
                                                       width: 1.0,
                                                     ),
@@ -305,9 +321,9 @@ class _TicketInfoWidgetState extends State<TicketInfoWidget>
                                             ),
                                           ),
                                           Padding(
-                                            padding:
-                                                const EdgeInsetsDirectional.fromSTEB(
-                                                    36.0, 16.0, 36.0, 0.0),
+                                            padding: const EdgeInsetsDirectional
+                                                .fromSTEB(
+                                                36.0, 16.0, 36.0, 0.0),
                                             child: Row(
                                               mainAxisSize: MainAxisSize.max,
                                               children: [
@@ -319,8 +335,9 @@ class _TicketInfoWidgetState extends State<TicketInfoWidget>
                                                   size: 72.0,
                                                 ),
                                                 Padding(
-                                                  padding: const EdgeInsetsDirectional
-                                                      .fromSTEB(
+                                                  padding:
+                                                      const EdgeInsetsDirectional
+                                                          .fromSTEB(
                                                           24.0, 0.0, 0.0, 0.0),
                                                   child: Column(
                                                     mainAxisSize:
@@ -378,9 +395,9 @@ class _TicketInfoWidgetState extends State<TicketInfoWidget>
                                             ),
                                           ),
                                           Padding(
-                                            padding:
-                                                const EdgeInsetsDirectional.fromSTEB(
-                                                    36.0, 12.0, 36.0, 12.0),
+                                            padding: const EdgeInsetsDirectional
+                                                .fromSTEB(
+                                                36.0, 12.0, 36.0, 12.0),
                                             child: Row(
                                               mainAxisSize: MainAxisSize.max,
                                               children: [
@@ -472,9 +489,8 @@ class _TicketInfoWidgetState extends State<TicketInfoWidget>
                                       mainAxisSize: MainAxisSize.max,
                                       children: [
                                         Padding(
-                                          padding:
-                                              const EdgeInsetsDirectional.fromSTEB(
-                                                  36.0, 12.0, 36.0, 12.0),
+                                          padding: const EdgeInsetsDirectional
+                                              .fromSTEB(36.0, 12.0, 36.0, 12.0),
                                           child: Row(
                                             mainAxisSize: MainAxisSize.max,
                                             mainAxisAlignment:
@@ -490,8 +506,9 @@ class _TicketInfoWidgetState extends State<TicketInfoWidget>
                                                 size: 36.0,
                                               ),
                                               Padding(
-                                                padding: const EdgeInsetsDirectional
-                                                    .fromSTEB(
+                                                padding:
+                                                    const EdgeInsetsDirectional
+                                                        .fromSTEB(
                                                         12.0, 0.0, 0.0, 0.0),
                                                 child: Text(
                                                   'Ticket History',
@@ -516,9 +533,8 @@ class _TicketInfoWidgetState extends State<TicketInfoWidget>
                                           ),
                                         ),
                                         Padding(
-                                          padding:
-                                              const EdgeInsetsDirectional.fromSTEB(
-                                                  0.0, 0.0, 0.0, 24.0),
+                                          padding: const EdgeInsetsDirectional
+                                              .fromSTEB(0.0, 0.0, 0.0, 24.0),
                                           child: SingleChildScrollView(
                                             scrollDirection: Axis.horizontal,
                                             child: Row(
@@ -665,8 +681,8 @@ class _TicketInfoWidgetState extends State<TicketInfoWidget>
                     ),
                   ),
                   Padding(
-                    padding:
-                        const EdgeInsetsDirectional.fromSTEB(36.0, 16.0, 36.0, 16.0),
+                    padding: const EdgeInsetsDirectional.fromSTEB(
+                        36.0, 16.0, 36.0, 16.0),
                     child: Row(
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -695,11 +711,7 @@ class _TicketInfoWidgetState extends State<TicketInfoWidget>
                                   ),
                                 ),
                                 Text(
-                                  dateTimeFormat(
-                                      'M/d h:mm a',
-                                      dateTimeFromSecondsSinceEpoch(
-                                          getCurrentTimestamp
-                                              .secondsSinceEpoch)),
+                                  _currentTime,
                                   style: FlutterFlowTheme.of(context)
                                       .bodyMedium
                                       .override(
