@@ -27,6 +27,18 @@ class TicketInfoModel extends FlutterFlowModel<TicketInfoWidget> {
   late TicketLogModel ticketLogModel5;
   // Model for TicketLog component.
   late TicketLogModel ticketLogModel6;
+  // Model for TicketLog component.
+  late TicketLogModel ticketLogModel7;
+  // Model for TicketLog component.
+  late TicketLogModel ticketLogModel8;
+  // Model for TicketLog component.
+  late TicketLogModel ticketLogModel9;
+  // Model for TicketLog component.
+  late TicketLogModel ticketLogModel10;
+  // Model for TicketLog component.
+  late TicketLogModel ticketLogModel11;
+  // Model for TicketLog component.
+  late TicketLogModel ticketLogModel12;
   // Model for Drawer component.
   late DrawerModel drawerModel;
 
@@ -47,6 +59,12 @@ class TicketInfoModel extends FlutterFlowModel<TicketInfoWidget> {
     ticketLogModel4 = createModel(context, () => TicketLogModel());
     ticketLogModel5 = createModel(context, () => TicketLogModel());
     ticketLogModel6 = createModel(context, () => TicketLogModel());
+    ticketLogModel7 = createModel(context, () => TicketLogModel());
+    ticketLogModel8 = createModel(context, () => TicketLogModel());
+    ticketLogModel9 = createModel(context, () => TicketLogModel());
+    ticketLogModel10 = createModel(context, () => TicketLogModel());
+    ticketLogModel11 = createModel(context, () => TicketLogModel());
+    ticketLogModel12 = createModel(context, () => TicketLogModel());
     drawerModel = createModel(context, () => DrawerModel());
   }
 
@@ -62,6 +80,12 @@ class TicketInfoModel extends FlutterFlowModel<TicketInfoWidget> {
     ticketLogModel4.dispose();
     ticketLogModel5.dispose();
     ticketLogModel6.dispose();
+    ticketLogModel7.dispose();
+    ticketLogModel8.dispose();
+    ticketLogModel9.dispose();
+    ticketLogModel10.dispose();
+    ticketLogModel11.dispose();
+    ticketLogModel12.dispose();
     drawerModel.dispose();
   }
 }

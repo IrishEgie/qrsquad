@@ -34,25 +34,7 @@ function getIPAddress() {
 }
 
 
-// Authenticate
-app.get("/api/authenticate/:id", (req, res) => {
-  const id = req.params.id;
-  const query = `SELECT * FROM ${DB_TABLE_NAME} WHERE BINARY uid = ?`;
- 
-  db.connection.query(query, [id], (error, results) => {
-   if (error) {
-     console.log(error);
-     res.status(500).json({ error: 'An error occurred while executing the query.' });
-   } else if (results.length > 0) {
-     res.json({ success: true, data: results });
-   } else {
-     res.status(401).json({ success: false });
-   }
-  });
- });
- 
-
- app.get("/api/ticket/:uid", (req, res) => {
+app.get("/api/ticket/:uid", (req, res) => {
 
   // Helper function to format the results
   function restructureTicketData(results) {
