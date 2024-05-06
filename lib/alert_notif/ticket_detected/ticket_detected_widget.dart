@@ -1,12 +1,18 @@
+import 'dart:async';
+
+import 'package:q_r_checkin/alert_notif/ticket_loggged/ticket_loggged_widget.dart';
+import 'package:q_r_checkin/pages/home_page/home_page_model.dart';
+
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'ticket_detected_model.dart';
-export 'ticket_detected_model.dart';
 
 class TicketDetectedWidget extends StatefulWidget {
-  const TicketDetectedWidget({super.key});
+  final HomePageModel model;
+
+  const TicketDetectedWidget(this.model, {super.key});
 
   @override
   State<TicketDetectedWidget> createState() => _TicketDetectedWidgetState();
@@ -14,6 +20,7 @@ class TicketDetectedWidget extends StatefulWidget {
 
 class _TicketDetectedWidgetState extends State<TicketDetectedWidget> {
   late TicketDetectedModel _model;
+  late HomePageModel _home_model;
 
   @override
   void setState(VoidCallback callback) {
@@ -25,13 +32,43 @@ class _TicketDetectedWidgetState extends State<TicketDetectedWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => TicketDetectedModel());
+    _home_model = widget.model;
+    fetchingTicket();
   }
 
   @override
   void dispose() {
-    _model.maybeDispose();
-
+    _model.dispose();
+    _home_model.dispose();
     super.dispose();
+  }
+
+  void fetchingTicket() {
+    Timer(const Duration(seconds: 2), () {
+      showModalBottomSheet(
+        isScrollControlled: true,
+        backgroundColor: Colors.transparent,
+        useSafeArea: true,
+        context: context,
+        builder: (context) {
+          return GestureDetector(
+            onTap: () => _home_model.unfocusNode.canRequestFocus
+                ? FocusScope.of(context).requestFocus(_home_model.unfocusNode)
+                : FocusScope.of(context).unfocus(),
+            child: Padding(
+              padding: MediaQuery.viewInsetsOf(context),
+              child: SizedBox(
+                height: MediaQuery.sizeOf(context).height * 1.0,
+                child: const TicketLogggedWidget(),
+              ),
+            ),
+          );
+        },
+      ).then((value) => safeSetState(() {}));
+      Timer(const Duration(seconds: 1), () {
+        context.pushNamed('TicketInfo');
+      });
+    });
   }
 
   @override
@@ -72,8 +109,8 @@ class _TicketDetectedWidgetState extends State<TicketDetectedWidget> {
                       size: 128.0,
                     ),
                     Padding(
-                      padding:
-                          const EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),
+                      padding: const EdgeInsetsDirectional.fromSTEB(
+                          0.0, 16.0, 0.0, 0.0),
                       child: Text(
                         'Ticket Detected',
                         style: FlutterFlowTheme.of(context)
@@ -88,8 +125,8 @@ class _TicketDetectedWidgetState extends State<TicketDetectedWidget> {
                       ),
                     ),
                     Padding(
-                      padding:
-                          const EdgeInsetsDirectional.fromSTEB(0.0, 4.0, 0.0, 0.0),
+                      padding: const EdgeInsetsDirectional.fromSTEB(
+                          0.0, 4.0, 0.0, 0.0),
                       child: Text(
                         'Please wait while our system logs your ticket to the event',
                         style:

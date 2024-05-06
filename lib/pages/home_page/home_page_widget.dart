@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'package:http/http.dart';
 
 import '/alert_notif/ticket_detected/ticket_detected_widget.dart';
-import '/alert_notif/ticket_loggged/ticket_loggged_widget.dart';
 import '/components/drawer/drawer_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -251,44 +250,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                               hoverColor: Colors.transparent,
                                               highlightColor:
                                                   Colors.transparent,
-                                              onTap: () async {
-                                                showModalBottomSheet(
-                                                  isScrollControlled: true,
-                                                  backgroundColor:
-                                                      Colors.transparent,
-                                                  useSafeArea: true,
-                                                  context: context,
-                                                  builder: (context) {
-                                                    return GestureDetector(
-                                                      onTap: () => _model
-                                                              .unfocusNode
-                                                              .canRequestFocus
-                                                          ? FocusScope.of(
-                                                                  context)
-                                                              .requestFocus(_model
-                                                                  .unfocusNode)
-                                                          : FocusScope.of(
-                                                                  context)
-                                                              .unfocus(),
-                                                      child: Padding(
-                                                        padding: MediaQuery
-                                                            .viewInsetsOf(
-                                                                context),
-                                                        child: SizedBox(
-                                                          height:
-                                                              MediaQuery.sizeOf(
-                                                                          context)
-                                                                      .height *
-                                                                  1.0,
-                                                          child:
-                                                              const TicketLogggedWidget(),
-                                                        ),
-                                                      ),
-                                                    );
-                                                  },
-                                                ).then((value) =>
-                                                    safeSetState(() {}));
-                                              },
+                                              onTap: () async {},
                                               child: AutoSizeText(
                                                 ' TO CHECK IN TO THE EVENT ',
                                                 textAlign: TextAlign.start,
@@ -666,7 +628,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                   padding: MediaQuery.viewInsetsOf(context),
                   child: SizedBox(
                     height: MediaQuery.sizeOf(context).height * 1.0,
-                    child: const TicketDetectedWidget(),
+                    child: TicketDetectedWidget(_model),
                   ),
                 ),
               );
