@@ -9,6 +9,10 @@ class HomePageModel extends FlutterFlowModel<HomePageWidget> {
   final unfocusNode = FocusNode();
   // Model for Drawer component.
   late DrawerModel drawerModel;
+  // State field(s) for TextField widget.
+  FocusNode? textFieldFocusNode;
+  TextEditingController? textController;
+  String? Function(BuildContext, String?)? textControllerValidator;
 
   @override
   void initState(BuildContext context) {
@@ -19,5 +23,7 @@ class HomePageModel extends FlutterFlowModel<HomePageWidget> {
   void dispose() {
     unfocusNode.dispose();
     drawerModel.dispose();
+    textFieldFocusNode?.dispose();
+    textController?.dispose();
   }
 }
