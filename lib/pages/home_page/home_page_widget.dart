@@ -610,10 +610,11 @@ class _HomePageWidgetState extends State<HomePageWidget>
     try {
       Response response = await http.get(Uri.parse(apiUrl));
       if (response.statusCode == 200) {
-        final data = json.decode(response.body);
+        final Map<String, dynamic> data = json.decode(response.body);
 
         // Check if the "success" key exists and its value is true
         if (data.containsKey("success") && data["success"] && mounted) {
+          _model.ticket = data;
           showModalBottomSheet(
             isScrollControlled: true,
             backgroundColor: Colors.transparent,

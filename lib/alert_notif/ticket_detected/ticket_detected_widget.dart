@@ -20,7 +20,7 @@ class TicketDetectedWidget extends StatefulWidget {
 
 class _TicketDetectedWidgetState extends State<TicketDetectedWidget> {
   late TicketDetectedModel _model;
-  late HomePageModel _home_model;
+  late HomePageModel _homeModel;
 
   @override
   void setState(VoidCallback callback) {
@@ -32,14 +32,14 @@ class _TicketDetectedWidgetState extends State<TicketDetectedWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => TicketDetectedModel());
-    _home_model = widget.model;
+    _homeModel = widget.model;
     fetchingTicket();
   }
 
   @override
   void dispose() {
     _model.dispose();
-    _home_model.dispose();
+    // _homeModel.dispose();
     super.dispose();
   }
 
@@ -52,8 +52,8 @@ class _TicketDetectedWidgetState extends State<TicketDetectedWidget> {
         context: context,
         builder: (context) {
           return GestureDetector(
-            onTap: () => _home_model.unfocusNode.canRequestFocus
-                ? FocusScope.of(context).requestFocus(_home_model.unfocusNode)
+            onTap: () => _homeModel.unfocusNode.canRequestFocus
+                ? FocusScope.of(context).requestFocus(_homeModel.unfocusNode)
                 : FocusScope.of(context).unfocus(),
             child: Padding(
               padding: MediaQuery.viewInsetsOf(context),
@@ -65,8 +65,8 @@ class _TicketDetectedWidgetState extends State<TicketDetectedWidget> {
           );
         },
       ).then((value) => safeSetState(() {}));
-      Timer(const Duration(seconds: 1), () {
-        context.pushNamed('TicketInfo');
+      Timer(const Duration(milliseconds: 500), () {
+        context.pushNamed('TicketInfo', extra: _homeModel.ticket);
       });
     });
   }

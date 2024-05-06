@@ -12,8 +12,21 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'ticket_info_model.dart';
 export 'ticket_info_model.dart';
 
+class HistoryItem {
+  final String dateUsed;
+  final int type;
+  final String timeUsed;
+
+  HistoryItem({
+    required this.dateUsed,
+    required this.type,
+    required this.timeUsed,
+  });
+}
+
 class TicketInfoWidget extends StatefulWidget {
-  const TicketInfoWidget({super.key});
+  final Map<String, dynamic> ticket;
+  const TicketInfoWidget({super.key, required this.ticket});
 
   @override
   State<TicketInfoWidget> createState() => _TicketInfoWidgetState();
@@ -24,6 +37,8 @@ class _TicketInfoWidgetState extends State<TicketInfoWidget>
   late TicketInfoModel _model;
   late String _currentTime;
   late Timer _timer;
+  late Map<String, dynamic> ticket;
+  late List<dynamic> history;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -35,7 +50,8 @@ class _TicketInfoWidgetState extends State<TicketInfoWidget>
     _model = createModel(context, () => TicketInfoModel());
     _currentTime = _getCurrentTime();
     _startTimer();
-
+    ticket = widget.ticket;
+    history = ticket['history'];
     animationsMap.addAll({
       'columnOnPageLoadAnimation1': AnimationInfo(
         trigger: AnimationTrigger.onPageLoad,
@@ -372,7 +388,10 @@ class _TicketInfoWidgetState extends State<TicketInfoWidget>
                                                         children: [
                                                           // Write the Ticker code/no. here, the logic only has to change the ticket no. per scan
                                                           Text(
-                                                            '[Write Ticket Code Here Logic here]',
+                                                            ticket['id']
+                                                                .toString()
+                                                                .padLeft(
+                                                                    4, '0'),
                                                             style: FlutterFlowTheme
                                                                     .of(context)
                                                                 .bodyMedium
@@ -410,7 +429,8 @@ class _TicketInfoWidgetState extends State<TicketInfoWidget>
                                                         setState(() {}),
                                                     child:
                                                         UpperCardContentWidget(
-                                                      info: '2  [Sample]',
+                                                      info: history.length
+                                                          .toString(),
                                                       subInfo: 'Times Used',
                                                       cardicon: Icon(
                                                         Icons.av_timer_outlined,
@@ -432,7 +452,10 @@ class _TicketInfoWidgetState extends State<TicketInfoWidget>
                                                     updateOnChange: true,
                                                     child:
                                                         UpperCardContentWidget(
-                                                      info: '5:08 PM [Sample]',
+                                                      info: DateFormat('h:mm a')
+                                                          .format(DateTime
+                                                              .parse(ticket[
+                                                                  "check_in"])),
                                                       subInfo: 'Check-in Time',
                                                       cardicon: Icon(
                                                         Icons.login_rounded,
@@ -453,7 +476,10 @@ class _TicketInfoWidgetState extends State<TicketInfoWidget>
                                                         setState(() {}),
                                                     child:
                                                         UpperCardContentWidget(
-                                                      info: '1:32 AM [Sample]',
+                                                      info: DateFormat('h:mm a')
+                                                          .format(DateTime
+                                                              .parse(ticket[
+                                                                  "check_out"])),
                                                       subInfo: 'Check-Out Time',
                                                       cardicon: Icon(
                                                         Icons.logout_rounded,

@@ -5,8 +5,10 @@ import 'package:flutter/material.dart';
 
 class HomePageModel extends FlutterFlowModel<HomePageWidget> {
   ///  State fields for stateful widgets in this page.
-
   final unfocusNode = FocusNode();
+
+  /// Property for Ticket Class
+  late Map<String, dynamic> ticket;
   // Model for Drawer component.
   late DrawerModel drawerModel;
   // State field(s) for TextField widget.
