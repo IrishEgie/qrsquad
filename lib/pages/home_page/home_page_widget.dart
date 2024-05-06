@@ -22,6 +22,8 @@ class HomePageWidget extends StatefulWidget {
 class _HomePageWidgetState extends State<HomePageWidget>
     with TickerProviderStateMixin {
   late HomePageModel _model;
+  late String _currentTime;
+  late Timer _timer;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -31,6 +33,8 @@ class _HomePageWidgetState extends State<HomePageWidget>
   void initState() {
     super.initState();
     _model = createModel(context, () => HomePageModel());
+    _currentTime = _getCurrentTime();
+    _startTimer();
 
     animationsMap.addAll({
       'containerOnPageLoadAnimation': AnimationInfo(
@@ -65,8 +69,21 @@ class _HomePageWidgetState extends State<HomePageWidget>
   @override
   void dispose() {
     _model.dispose();
-
+    _timer.cancel();
     super.dispose();
+  }
+
+  void _startTimer() {
+    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      setState(() {
+        _currentTime = _getCurrentTime();
+      });
+    });
+  }
+
+  String _getCurrentTime() {
+    // return DateFormat('h:mm a').format(DateTime.now());
+    return DateFormat('M/d h:mm a').format(DateTime.now());
   }
 
   @override
@@ -136,8 +153,9 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
-                                          36.0, 0.0, 0.0, 0.0),
+                                      padding:
+                                          const EdgeInsetsDirectional.fromSTEB(
+                                              36.0, 0.0, 0.0, 0.0),
                                       child: Row(
                                         mainAxisSize: MainAxisSize.max,
                                         children: [
@@ -148,15 +166,10 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                             size: 32.0,
                                           ),
                                           Padding(
-                                            padding:
-                                                const EdgeInsetsDirectional.fromSTEB(
-                                                    12.0, 0.0, 0.0, 0.0),
+                                            padding: const EdgeInsetsDirectional
+                                                .fromSTEB(12.0, 0.0, 0.0, 0.0),
                                             child: AutoSizeText(
-                                              dateTimeFormat(
-                                                  'M/d h:mm a',
-                                                  dateTimeFromSecondsSinceEpoch(
-                                                      getCurrentTimestamp
-                                                          .secondsSinceEpoch)),
+                                              _currentTime,
                                               maxLines: 1,
                                               style: FlutterFlowTheme.of(
                                                       context)
@@ -177,8 +190,9 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                       ),
                                     ),
                                     Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
-                                          0.0, 0.0, 0.0, 36.0),
+                                      padding:
+                                          const EdgeInsetsDirectional.fromSTEB(
+                                              0.0, 0.0, 0.0, 36.0),
                                       child: Wrap(
                                         spacing: 0.0,
                                         runSpacing: 0.0,
@@ -192,9 +206,8 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                         clipBehavior: Clip.none,
                                         children: [
                                           Padding(
-                                            padding:
-                                                const EdgeInsetsDirectional.fromSTEB(
-                                                    36.0, 0.0, 36.0, 0.0),
+                                            padding: const EdgeInsetsDirectional
+                                                .fromSTEB(36.0, 0.0, 36.0, 0.0),
                                             child: InkWell(
                                               splashColor: Colors.transparent,
                                               focusColor: Colors.transparent,
@@ -260,9 +273,9 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                             ),
                                           ),
                                           Padding(
-                                            padding:
-                                                const EdgeInsetsDirectional.fromSTEB(
-                                                    36.0, 12.0, 36.0, 0.0),
+                                            padding: const EdgeInsetsDirectional
+                                                .fromSTEB(
+                                                36.0, 12.0, 36.0, 0.0),
                                             child: InkWell(
                                               splashColor: Colors.transparent,
                                               focusColor: Colors.transparent,
