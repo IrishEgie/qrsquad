@@ -338,7 +338,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                           Padding(
                                             padding:
                                                 const EdgeInsetsDirectional.fromSTEB(
-                                                    36.0, 0.0, 36.0, 0.0),
+                                                    36.0, 12.0, 36.0, 0.0),
                                             child: TextFormField(
                                               controller: _model.textController,
                                               focusNode:
