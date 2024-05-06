@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'package:http/http.dart';
+
 import '/alert_notif/ticket_detected/ticket_detected_widget.dart';
 import '/alert_notif/ticket_loggged/ticket_loggged_widget.dart';
 import '/components/drawer/drawer_widget.dart';
@@ -5,6 +8,7 @@ import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'dart:async';
+import 'package:http/http.dart' as http;
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -216,44 +220,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                               hoverColor: Colors.transparent,
                                               highlightColor:
                                                   Colors.transparent,
-                                              onTap: () async {
-                                                showModalBottomSheet(
-                                                  isScrollControlled: true,
-                                                  backgroundColor:
-                                                      Colors.transparent,
-                                                  useSafeArea: true,
-                                                  context: context,
-                                                  builder: (context) {
-                                                    return GestureDetector(
-                                                      onTap: () => _model
-                                                              .unfocusNode
-                                                              .canRequestFocus
-                                                          ? FocusScope.of(
-                                                                  context)
-                                                              .requestFocus(_model
-                                                                  .unfocusNode)
-                                                          : FocusScope.of(
-                                                                  context)
-                                                              .unfocus(),
-                                                      child: Padding(
-                                                        padding: MediaQuery
-                                                            .viewInsetsOf(
-                                                                context),
-                                                        child: SizedBox(
-                                                          height:
-                                                              MediaQuery.sizeOf(
-                                                                          context)
-                                                                      .height *
-                                                                  1.0,
-                                                          child:
-                                                              const TicketDetectedWidget(),
-                                                        ),
-                                                      ),
-                                                    );
-                                                  },
-                                                ).then((value) =>
-                                                    safeSetState(() {}));
-                                              },
+                                              onTap: () async {},
                                               child: AutoSizeText(
                                                 'SCAN YOUR TICKET',
                                                 textAlign: TextAlign.start,
@@ -346,11 +313,10 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                           ),
 
                                           // here is the keyboard func to put the qr's code - ej
-                                          //
                                           Padding(
-                                            padding:
-                                                const EdgeInsetsDirectional.fromSTEB(
-                                                    36.0, 12.0, 36.0, 0.0),
+                                            padding: const EdgeInsetsDirectional
+                                                .fromSTEB(
+                                                36.0, 12.0, 36.0, 0.0),
                                             child: TextFormField(
                                               controller: _model.textController,
                                               focusNode:
@@ -435,6 +401,11 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                               validator: _model
                                                   .textControllerValidator
                                                   .asValidator(context),
+                                              onFieldSubmitted: (value) async {
+                                                await authenticateTicket(
+                                                    value, context);
+                                                _model.textController!.clear();
+                                              },
                                             ),
                                           ),
                                         ],
@@ -669,5 +640,46 @@ class _HomePageWidgetState extends State<HomePageWidget>
         ),
       ),
     );
+  }
+
+  // Authenticate if Ticket exists in Database
+  Future<void> authenticateTicket(String value, BuildContext context) async {
+    final String apiUrl = 'http://127.0.0.1:5000/api/ticket/$value';
+    try {
+      Response response = await http.get(Uri.parse(apiUrl));
+      if (response.statusCode == 200) {
+        final data = json.decode(response.body);
+
+        // Check if the "success" key exists and its value is true
+        if (data.containsKey("success") && data["success"] && mounted) {
+          showModalBottomSheet(
+            isScrollControlled: true,
+            backgroundColor: Colors.transparent,
+            useSafeArea: true,
+            context: context,
+            builder: (context) {
+              return GestureDetector(
+                onTap: () => _model.unfocusNode.canRequestFocus
+                    ? FocusScope.of(context).requestFocus(_model.unfocusNode)
+                    : FocusScope.of(context).unfocus(),
+                child: Padding(
+                  padding: MediaQuery.viewInsetsOf(context),
+                  child: SizedBox(
+                    height: MediaQuery.sizeOf(context).height * 1.0,
+                    child: const TicketDetectedWidget(),
+                  ),
+                ),
+              );
+            },
+          ).then((value) => safeSetState(() {}));
+        }
+      } else {
+        // Handle API error
+        print("Failed to fetch data. Status code: ${response.statusCode}");
+      }
+    } catch (error) {
+      // Handle network error
+      print("Error: " + error.toString());
+    }
   }
 }
