@@ -1,0 +1,26 @@
+# IDE/Editor Files
+/.idea/
+/.vscode/
+
+# Build Directories 
+/build/
+
+# Flutter/Dart Generated Files
+**/.dart_tool/
+**/.flutter-plugins
+**/.flutter-plugins-dependencies
+**/.packages
+**/.pub-cache/
+**/pubspec.lock
+
+# Local/Machine-Specific Environment/Config
+/ios/.pods/
+/ios/Podfile.lock
+/android/.gradle/
+/local.properties
+
+# MacOS 
+.DS_Store
+
+# Windows
+Thumbs.db
