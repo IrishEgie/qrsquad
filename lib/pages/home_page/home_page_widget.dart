@@ -82,7 +82,6 @@ class _HomePageWidgetState extends State<HomePageWidget>
   }
 
   String _getCurrentTime() {
-    // return DateFormat('h:mm a').format(DateTime.now());
     return DateFormat('M/d h:mm a').format(DateTime.now());
   }
 

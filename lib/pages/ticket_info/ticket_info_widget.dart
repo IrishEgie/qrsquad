@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import '/components/drawer/drawer_widget.dart';
 import '/components/ticket_log/ticket_log_widget.dart';
 import '/components/upper_card_content/upper_card_content_widget.dart';
@@ -20,6 +22,8 @@ class TicketInfoWidget extends StatefulWidget {
 class _TicketInfoWidgetState extends State<TicketInfoWidget>
     with TickerProviderStateMixin {
   late TicketInfoModel _model;
+  late String _currentTime;
+  late Timer _timer;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -29,6 +33,8 @@ class _TicketInfoWidgetState extends State<TicketInfoWidget>
   void initState() {
     super.initState();
     _model = createModel(context, () => TicketInfoModel());
+    _currentTime = _getCurrentTime();
+    _startTimer();
 
     animationsMap.addAll({
       'columnOnPageLoadAnimation1': AnimationInfo(
@@ -89,8 +95,20 @@ class _TicketInfoWidgetState extends State<TicketInfoWidget>
   @override
   void dispose() {
     _model.dispose();
-
+    _timer.cancel();
     super.dispose();
+  }
+
+  void _startTimer() {
+    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      setState(() {
+        _currentTime = _getCurrentTime();
+      });
+    });
+  }
+
+  String _getCurrentTime() {
+    return DateFormat('M/d h:mm a').format(DateTime.now());
   }
 
   @override
@@ -693,11 +711,7 @@ class _TicketInfoWidgetState extends State<TicketInfoWidget>
                                   ),
                                 ),
                                 Text(
-                                  dateTimeFormat(
-                                      'M/d h:mm a',
-                                      dateTimeFromSecondsSinceEpoch(
-                                          getCurrentTimestamp
-                                              .secondsSinceEpoch)),
+                                  _currentTime,
                                   style: FlutterFlowTheme.of(context)
                                       .bodyMedium
                                       .override(
