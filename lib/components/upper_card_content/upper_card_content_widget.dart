@@ -68,6 +68,8 @@ class _UpperCardContentWidgetState extends State<UpperCardContentWidget>
         ],
       ),
     });
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override

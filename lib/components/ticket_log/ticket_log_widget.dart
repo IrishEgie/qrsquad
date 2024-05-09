@@ -60,6 +60,8 @@ class _TicketLogWidgetState extends State<TicketLogWidget>
         ],
       ),
     });
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override

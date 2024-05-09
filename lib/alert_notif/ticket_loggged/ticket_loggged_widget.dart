@@ -25,6 +25,8 @@ class _TicketLogggedWidgetState extends State<TicketLogggedWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => TicketLogggedModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override

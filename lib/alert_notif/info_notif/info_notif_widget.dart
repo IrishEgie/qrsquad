@@ -25,6 +25,8 @@ class _InfoNotifWidgetState extends State<InfoNotifWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => InfoNotifModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override

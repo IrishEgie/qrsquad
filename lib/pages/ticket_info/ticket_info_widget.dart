@@ -84,6 +84,8 @@ class _TicketInfoWidgetState extends State<TicketInfoWidget>
         ],
       ),
     });
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override
