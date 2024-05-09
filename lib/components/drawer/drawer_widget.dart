@@ -1,5 +1,7 @@
 import '/alert_notif/info_notif/info_notif_widget.dart';
 import '/components/dark_light_switch_small/dark_light_switch_small_widget.dart';
+import '/components/db_connection_control/db_connection_control_widget.dart';
+import '/components/log_switch/log_switch_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
@@ -157,7 +159,21 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                   hoverColor: Colors.transparent,
                   highlightColor: Colors.transparent,
                   onTap: () async {
-                    context.pushNamed('TicketInfo');
+                    await showModalBottomSheet(
+                      isScrollControlled: true,
+                      backgroundColor: Colors.transparent,
+                      useSafeArea: true,
+                      context: context,
+                      builder: (context) {
+                        return Padding(
+                          padding: MediaQuery.viewInsetsOf(context),
+                          child: SizedBox(
+                            height: MediaQuery.sizeOf(context).height * 1.0,
+                            child: const DbConnectionControlWidget(),
+                          ),
+                        );
+                      },
+                    ).then((value) => safeSetState(() {}));
                   },
                   child: AnimatedContainer(
                     duration: const Duration(milliseconds: 150),
@@ -179,7 +195,7 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                             padding: const EdgeInsetsDirectional.fromSTEB(
                                 12.0, 0.0, 0.0, 0.0),
                             child: Icon(
-                              Icons.airplane_ticket_outlined,
+                              Icons.admin_panel_settings_outlined,
                               color: FlutterFlowTheme.of(context).primaryText,
                               size: 20.0,
                             ),
@@ -189,7 +205,7 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                               padding: const EdgeInsetsDirectional.fromSTEB(
                                   12.0, 0.0, 0.0, 0.0),
                               child: Text(
-                                'Ticket Page',
+                                'Network',
                                 style: FlutterFlowTheme.of(context)
                                     .bodyMedium
                                     .override(
@@ -223,6 +239,86 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                   hoverColor: Colors.transparent,
                   highlightColor: Colors.transparent,
                   onTap: () async {
+                    await showModalBottomSheet(
+                      isScrollControlled: true,
+                      backgroundColor: Colors.transparent,
+                      useSafeArea: true,
+                      context: context,
+                      builder: (context) {
+                        return Padding(
+                          padding: MediaQuery.viewInsetsOf(context),
+                          child: SizedBox(
+                            height: MediaQuery.sizeOf(context).height * 1.0,
+                            child: const LogSwitchWidget(),
+                          ),
+                        );
+                      },
+                    ).then((value) => safeSetState(() {}));
+                  },
+                  child: AnimatedContainer(
+                    duration: const Duration(milliseconds: 150),
+                    curve: Curves.easeInOut,
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      color: _model.mouseRegionHovered3
+                          ? FlutterFlowTheme.of(context).primaryBackground
+                          : FlutterFlowTheme.of(context).secondaryBackground,
+                      borderRadius: BorderRadius.circular(8.0),
+                    ),
+                    child: Padding(
+                      padding:
+                          const EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 8.0),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
+                                12.0, 0.0, 0.0, 0.0),
+                            child: Icon(
+                              Icons.switch_left_rounded,
+                              color: FlutterFlowTheme.of(context).primaryText,
+                              size: 20.0,
+                            ),
+                          ),
+                          Expanded(
+                            child: Padding(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
+                                  12.0, 0.0, 0.0, 0.0),
+                              child: Text(
+                                'Log Switch',
+                                style: FlutterFlowTheme.of(context)
+                                    .bodyMedium
+                                    .override(
+                                      fontFamily: 'Readex Pro',
+                                      letterSpacing: 0.0,
+                                    ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 8.0, 4.0),
+              child: MouseRegion(
+                opaque: false,
+                cursor: MouseCursor.defer ?? MouseCursor.defer,
+                onEnter: ((event) async {
+                  setState(() => _model.mouseRegionHovered4 = true);
+                }),
+                onExit: ((event) async {
+                  setState(() => _model.mouseRegionHovered4 = false);
+                }),
+                child: InkWell(
+                  splashColor: Colors.transparent,
+                  focusColor: Colors.transparent,
+                  hoverColor: Colors.transparent,
+                  highlightColor: Colors.transparent,
+                  onTap: () async {
                     showModalBottomSheet(
                       isScrollControlled: true,
                       backgroundColor: Colors.transparent,
@@ -244,7 +340,7 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                     curve: Curves.easeInOut,
                     width: double.infinity,
                     decoration: BoxDecoration(
-                      color: _model.mouseRegionHovered3
+                      color: _model.mouseRegionHovered4
                           ? FlutterFlowTheme.of(context).primaryBackground
                           : FlutterFlowTheme.of(context).secondaryBackground,
                       borderRadius: BorderRadius.circular(8.0),
