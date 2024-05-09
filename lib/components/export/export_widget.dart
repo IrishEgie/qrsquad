@@ -7,19 +7,19 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'log_switch_model.dart';
-export 'log_switch_model.dart';
+import 'export_model.dart';
+export 'export_model.dart';
 
-class LogSwitchWidget extends StatefulWidget {
-  const LogSwitchWidget({super.key});
+class ExportWidget extends StatefulWidget {
+  const ExportWidget({super.key});
 
   @override
-  State<LogSwitchWidget> createState() => _LogSwitchWidgetState();
+  State<ExportWidget> createState() => _ExportWidgetState();
 }
 
-class _LogSwitchWidgetState extends State<LogSwitchWidget>
+class _ExportWidgetState extends State<ExportWidget>
     with TickerProviderStateMixin {
-  late LogSwitchModel _model;
+  late ExportModel _model;
 
   final animationsMap = <String, AnimationInfo>{};
 
@@ -32,7 +32,7 @@ class _LogSwitchWidgetState extends State<LogSwitchWidget>
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => LogSwitchModel());
+    _model = createModel(context, () => ExportModel());
 
     animationsMap.addAll({
       'containerOnPageLoadAnimation': AnimationInfo(
@@ -172,7 +172,7 @@ class _LogSwitchWidgetState extends State<LogSwitchWidget>
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      'Login/Logout Switch',
+                                      'Export',
                                       style: FlutterFlowTheme.of(context)
                                           .headlineLarge
                                           .override(
@@ -190,7 +190,7 @@ class _LogSwitchWidgetState extends State<LogSwitchWidget>
                                       padding: const EdgeInsetsDirectional.fromSTEB(
                                           0.0, 4.0, 0.0, 0.0),
                                       child: Text(
-                                        'Update the logging function of your application from selecting one of the options below.',
+                                        'Export Attendance Data from the system either from the Client Side or the Server Side. Don\'t forget to \'Save & Close\' to execute the desired type of export.',
                                         style: FlutterFlowTheme.of(context)
                                             .labelLarge
                                             .override(
@@ -343,7 +343,7 @@ class _LogSwitchWidgetState extends State<LogSwitchWidget>
                                                                             0.0,
                                                                             4.0),
                                                                 child: Text(
-                                                                  'Login',
+                                                                  'Client',
                                                                   style: FlutterFlowTheme.of(
                                                                           context)
                                                                       .titleLarge
@@ -392,7 +392,7 @@ class _LogSwitchWidgetState extends State<LogSwitchWidget>
                                                                           8.0),
                                                               child:
                                                                   Image.asset(
-                                                                'assets/images/Login.png',
+                                                                'assets/images/client_side.png',
                                                                 width: 172.0,
                                                                 fit: BoxFit
                                                                     .cover,
@@ -500,7 +500,7 @@ class _LogSwitchWidgetState extends State<LogSwitchWidget>
                                                                           0.0,
                                                                           4.0),
                                                               child: Text(
-                                                                'Logout',
+                                                                'Server',
                                                                 style: FlutterFlowTheme.of(
                                                                         context)
                                                                     .titleLarge
@@ -552,7 +552,7 @@ class _LogSwitchWidgetState extends State<LogSwitchWidget>
                                                                     .circular(
                                                                         8.0),
                                                             child: Image.asset(
-                                                              'assets/images/Logout.png',
+                                                              'assets/images/server_side.png',
                                                               width: 172.0,
                                                               fit: BoxFit.cover,
                                                             ),

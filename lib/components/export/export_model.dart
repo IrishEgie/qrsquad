@@ -1,8 +1,8 @@
 import '/flutter_flow/flutter_flow_util.dart';
-import 'log_switch_widget.dart' show LogSwitchWidget;
+import 'export_widget.dart' show ExportWidget;
 import 'package:flutter/material.dart';
 
-class LogSwitchModel extends FlutterFlowModel<LogSwitchWidget> {
+class ExportModel extends FlutterFlowModel<ExportWidget> {
   ///  State fields for stateful widgets in this component.
 
   // State field(s) for MouseRegion widget.
