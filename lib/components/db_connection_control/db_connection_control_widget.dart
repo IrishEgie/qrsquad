@@ -7,6 +7,7 @@ import '/flutter_flow/form_field_controller.dart';
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'db_connection_control_model.dart';
 export 'db_connection_control_model.dart';
 
@@ -228,10 +229,15 @@ class _DbConnectionControlWidgetState extends State<DbConnectionControlWidget>
                                 style: FlutterFlowTheme.of(context)
                                     .headlineMedium
                                     .override(
-                                      fontFamily: 'Outfit',
+                                      fontFamily: FlutterFlowTheme.of(context)
+                                          .headlineMediumFamily,
                                       fontSize: 32.0,
                                       letterSpacing: 0.0,
                                       fontWeight: FontWeight.bold,
+                                      useGoogleFonts: GoogleFonts.asMap()
+                                          .containsKey(
+                                              FlutterFlowTheme.of(context)
+                                                  .headlineMediumFamily),
                                     ),
                               ),
                             ),
@@ -245,8 +251,12 @@ class _DbConnectionControlWidgetState extends State<DbConnectionControlWidget>
                             style: FlutterFlowTheme.of(context)
                                 .labelMedium
                                 .override(
-                                  fontFamily: 'Readex Pro',
+                                  fontFamily: FlutterFlowTheme.of(context)
+                                      .labelMediumFamily,
                                   letterSpacing: 0.0,
+                                  useGoogleFonts: GoogleFonts.asMap()
+                                      .containsKey(FlutterFlowTheme.of(context)
+                                          .labelMediumFamily),
                                 ),
                           ),
                         ),
@@ -284,10 +294,19 @@ class _DbConnectionControlWidgetState extends State<DbConnectionControlWidget>
                                             style: FlutterFlowTheme.of(context)
                                                 .displaySmall
                                                 .override(
-                                                  fontFamily: 'Outfit',
+                                                  fontFamily:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .displaySmallFamily,
                                                   fontSize: 24.0,
                                                   letterSpacing: 0.0,
                                                   fontWeight: FontWeight.normal,
+                                                  useGoogleFonts: GoogleFonts
+                                                          .asMap()
+                                                      .containsKey(
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .displaySmallFamily),
                                                 ),
                                           ),
                                           Padding(
@@ -296,16 +315,26 @@ class _DbConnectionControlWidgetState extends State<DbConnectionControlWidget>
                                                     0.0, 4.0, 0.0, 0.0),
                                             child: Text(
                                               'Database Connection',
-                                              style: FlutterFlowTheme.of(
-                                                      context)
-                                                  .labelLarge
-                                                  .override(
-                                                    fontFamily: 'Readex Pro',
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .primary,
-                                                    letterSpacing: 0.0,
-                                                  ),
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .labelLarge
+                                                      .override(
+                                                        fontFamily:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .labelLargeFamily,
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .primary,
+                                                        letterSpacing: 0.0,
+                                                        useGoogleFonts: GoogleFonts
+                                                                .asMap()
+                                                            .containsKey(
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .labelLargeFamily),
+                                                      ),
                                             ),
                                           ),
                                         ],
@@ -322,8 +351,13 @@ class _DbConnectionControlWidgetState extends State<DbConnectionControlWidget>
                                   style: FlutterFlowTheme.of(context)
                                       .labelMedium
                                       .override(
-                                        fontFamily: 'Readex Pro',
+                                        fontFamily: FlutterFlowTheme.of(context)
+                                            .labelMediumFamily,
                                         letterSpacing: 0.0,
+                                        useGoogleFonts: GoogleFonts.asMap()
+                                            .containsKey(
+                                                FlutterFlowTheme.of(context)
+                                                    .labelMediumFamily),
                                       ),
                                 ),
                               ),
@@ -367,9 +401,17 @@ class _DbConnectionControlWidgetState extends State<DbConnectionControlWidget>
                                                       .bodyLarge
                                                       .override(
                                                         fontFamily:
-                                                            'Readex Pro',
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyLargeFamily,
                                                         fontSize: 20.0,
                                                         letterSpacing: 0.0,
+                                                        useGoogleFonts: GoogleFonts
+                                                                .asMap()
+                                                            .containsKey(
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyLargeFamily),
                                                       ),
                                                 ),
                                               ),
@@ -391,8 +433,16 @@ class _DbConnectionControlWidgetState extends State<DbConnectionControlWidget>
                                                         .bodyMedium
                                                         .override(
                                                           fontFamily:
-                                                              'Readex Pro',
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .bodyMediumFamily,
                                                           letterSpacing: 0.0,
+                                                          useGoogleFonts: GoogleFonts
+                                                                  .asMap()
+                                                              .containsKey(
+                                                                  FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMediumFamily),
                                                         ),
                                                 hintText: 'Please select...',
                                                 icon: Icon(
@@ -471,9 +521,17 @@ class _DbConnectionControlWidgetState extends State<DbConnectionControlWidget>
                                                       .bodyLarge
                                                       .override(
                                                         fontFamily:
-                                                            'Readex Pro',
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyLargeFamily,
                                                         fontSize: 20.0,
                                                         letterSpacing: 0.0,
+                                                        useGoogleFonts: GoogleFonts
+                                                                .asMap()
+                                                            .containsKey(
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyLargeFamily),
                                                       ),
                                                 ),
                                               ),
@@ -497,20 +555,32 @@ class _DbConnectionControlWidgetState extends State<DbConnectionControlWidget>
                                                                   context)
                                                               .labelMedium
                                                               .override(
-                                                                fontFamily:
-                                                                    'Readex Pro',
+                                                                fontFamily: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .labelMediumFamily,
                                                                 letterSpacing:
                                                                     0.0,
+                                                                useGoogleFonts: GoogleFonts
+                                                                        .asMap()
+                                                                    .containsKey(
+                                                                        FlutterFlowTheme.of(context)
+                                                                            .labelMediumFamily),
                                                               ),
                                                       hintStyle:
                                                           FlutterFlowTheme.of(
                                                                   context)
                                                               .labelMedium
                                                               .override(
-                                                                fontFamily:
-                                                                    'Readex Pro',
+                                                                fontFamily: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .labelMediumFamily,
                                                                 letterSpacing:
                                                                     0.0,
+                                                                useGoogleFonts: GoogleFonts
+                                                                        .asMap()
+                                                                    .containsKey(
+                                                                        FlutterFlowTheme.of(context)
+                                                                            .labelMediumFamily),
                                                               ),
                                                       enabledBorder:
                                                           UnderlineInputBorder(
@@ -566,8 +636,16 @@ class _DbConnectionControlWidgetState extends State<DbConnectionControlWidget>
                                                         .bodyMedium
                                                         .override(
                                                           fontFamily:
-                                                              'Readex Pro',
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .bodyMediumFamily,
                                                           letterSpacing: 0.0,
+                                                          useGoogleFonts: GoogleFonts
+                                                                  .asMap()
+                                                              .containsKey(
+                                                                  FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMediumFamily),
                                                         ),
                                                     validator: _model
                                                         .textControllerValidator
@@ -610,9 +688,17 @@ class _DbConnectionControlWidgetState extends State<DbConnectionControlWidget>
                                                           .titleSmall
                                                           .override(
                                                             fontFamily:
-                                                                'Readex Pro',
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .titleSmallFamily,
                                                             color: Colors.white,
                                                             letterSpacing: 0.0,
+                                                            useGoogleFonts: GoogleFonts
+                                                                    .asMap()
+                                                                .containsKey(
+                                                                    FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .titleSmallFamily),
                                                           ),
                                                   elevation: 3.0,
                                                   borderSide: const BorderSide(
@@ -652,9 +738,17 @@ class _DbConnectionControlWidgetState extends State<DbConnectionControlWidget>
                                                           .titleSmall
                                                           .override(
                                                             fontFamily:
-                                                                'Readex Pro',
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .titleSmallFamily,
                                                             color: Colors.white,
                                                             letterSpacing: 0.0,
+                                                            useGoogleFonts: GoogleFonts
+                                                                    .asMap()
+                                                                .containsKey(
+                                                                    FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .titleSmallFamily),
                                                           ),
                                                   elevation: 3.0,
                                                   borderSide: const BorderSide(
@@ -680,12 +774,21 @@ class _DbConnectionControlWidgetState extends State<DbConnectionControlWidget>
                                                       context)
                                                   .bodyMedium
                                                   .override(
-                                                    fontFamily: 'Readex Pro',
+                                                    fontFamily:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .bodyMediumFamily,
                                                     color: FlutterFlowTheme.of(
                                                             context)
                                                         .secondaryText,
                                                     letterSpacing: 0.0,
                                                     fontWeight: FontWeight.w300,
+                                                    useGoogleFonts: GoogleFonts
+                                                            .asMap()
+                                                        .containsKey(
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyMediumFamily),
                                                   ),
                                             ),
                                           ],
@@ -719,8 +822,16 @@ class _DbConnectionControlWidgetState extends State<DbConnectionControlWidget>
                                                         .bodyMedium
                                                         .override(
                                                           fontFamily:
-                                                              'Readex Pro',
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .bodyMediumFamily,
                                                           letterSpacing: 0.0,
+                                                          useGoogleFonts: GoogleFonts
+                                                                  .asMap()
+                                                              .containsKey(
+                                                                  FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMediumFamily),
                                                         ),
                                               ),
                                             ],
@@ -755,8 +866,16 @@ class _DbConnectionControlWidgetState extends State<DbConnectionControlWidget>
                                                         .bodyMedium
                                                         .override(
                                                           fontFamily:
-                                                              'Readex Pro',
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .bodyMediumFamily,
                                                           letterSpacing: 0.0,
+                                                          useGoogleFonts: GoogleFonts
+                                                                  .asMap()
+                                                              .containsKey(
+                                                                  FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMediumFamily),
                                                         ),
                                               ),
                                             ],
@@ -791,8 +910,16 @@ class _DbConnectionControlWidgetState extends State<DbConnectionControlWidget>
                                                         .bodyMedium
                                                         .override(
                                                           fontFamily:
-                                                              'Readex Pro',
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .bodyMediumFamily,
                                                           letterSpacing: 0.0,
+                                                          useGoogleFonts: GoogleFonts
+                                                                  .asMap()
+                                                              .containsKey(
+                                                                  FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMediumFamily),
                                                         ),
                                               ),
                                             ],
@@ -828,8 +955,16 @@ class _DbConnectionControlWidgetState extends State<DbConnectionControlWidget>
                                                         .bodyMedium
                                                         .override(
                                                           fontFamily:
-                                                              'Readex Pro',
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .bodyMediumFamily,
                                                           letterSpacing: 0.0,
+                                                          useGoogleFonts: GoogleFonts
+                                                                  .asMap()
+                                                              .containsKey(
+                                                                  FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMediumFamily),
                                                         ),
                                               ),
                                             ],
@@ -870,8 +1005,14 @@ class _DbConnectionControlWidgetState extends State<DbConnectionControlWidget>
                                     textStyle: FlutterFlowTheme.of(context)
                                         .titleSmall
                                         .override(
-                                          fontFamily: 'Readex Pro',
+                                          fontFamily:
+                                              FlutterFlowTheme.of(context)
+                                                  .titleSmallFamily,
                                           letterSpacing: 0.0,
+                                          useGoogleFonts: GoogleFonts.asMap()
+                                              .containsKey(
+                                                  FlutterFlowTheme.of(context)
+                                                      .titleSmallFamily),
                                         ),
                                     elevation: 3.0,
                                     borderSide: const BorderSide(

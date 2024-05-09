@@ -5,6 +5,7 @@ import '/components/log_switch/log_switch_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'drawer_model.dart';
 export 'drawer_model.dart';
 
@@ -68,8 +69,10 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                 'Quick Help Menu',
                 textAlign: TextAlign.start,
                 style: FlutterFlowTheme.of(context).bodyLarge.override(
-                      fontFamily: 'Readex Pro',
+                      fontFamily: FlutterFlowTheme.of(context).bodyLargeFamily,
                       letterSpacing: 0.0,
+                      useGoogleFonts: GoogleFonts.asMap().containsKey(
+                          FlutterFlowTheme.of(context).bodyLargeFamily),
                     ),
               ),
             ),
@@ -79,8 +82,11 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                 'Find quick resources below.',
                 textAlign: TextAlign.start,
                 style: FlutterFlowTheme.of(context).labelMedium.override(
-                      fontFamily: 'Readex Pro',
+                      fontFamily:
+                          FlutterFlowTheme.of(context).labelMediumFamily,
                       letterSpacing: 0.0,
+                      useGoogleFonts: GoogleFonts.asMap().containsKey(
+                          FlutterFlowTheme.of(context).labelMediumFamily),
                     ),
               ),
             ),
@@ -130,8 +136,13 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                               style: FlutterFlowTheme.of(context)
                                   .bodyMedium
                                   .override(
-                                    fontFamily: 'Readex Pro',
+                                    fontFamily: FlutterFlowTheme.of(context)
+                                        .bodyMediumFamily,
                                     letterSpacing: 0.0,
+                                    useGoogleFonts: GoogleFonts.asMap()
+                                        .containsKey(
+                                            FlutterFlowTheme.of(context)
+                                                .bodyMediumFamily),
                                   ),
                             ),
                           ),
@@ -209,8 +220,13 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                                 style: FlutterFlowTheme.of(context)
                                     .bodyMedium
                                     .override(
-                                      fontFamily: 'Readex Pro',
+                                      fontFamily: FlutterFlowTheme.of(context)
+                                          .bodyMediumFamily,
                                       letterSpacing: 0.0,
+                                      useGoogleFonts: GoogleFonts.asMap()
+                                          .containsKey(
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyMediumFamily),
                                     ),
                               ),
                             ),
@@ -289,8 +305,13 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                                 style: FlutterFlowTheme.of(context)
                                     .bodyMedium
                                     .override(
-                                      fontFamily: 'Readex Pro',
+                                      fontFamily: FlutterFlowTheme.of(context)
+                                          .bodyMediumFamily,
                                       letterSpacing: 0.0,
+                                      useGoogleFonts: GoogleFonts.asMap()
+                                          .containsKey(
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyMediumFamily),
                                     ),
                               ),
                             ),
@@ -369,8 +390,13 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                                 style: FlutterFlowTheme.of(context)
                                     .bodyMedium
                                     .override(
-                                      fontFamily: 'Readex Pro',
+                                      fontFamily: FlutterFlowTheme.of(context)
+                                          .bodyMediumFamily,
                                       letterSpacing: 0.0,
+                                      useGoogleFonts: GoogleFonts.asMap()
+                                          .containsKey(
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyMediumFamily),
                                     ),
                               ),
                             ),
@@ -392,8 +418,11 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                 'Theme',
                 textAlign: TextAlign.start,
                 style: FlutterFlowTheme.of(context).labelMedium.override(
-                      fontFamily: 'Readex Pro',
+                      fontFamily:
+                          FlutterFlowTheme.of(context).labelMediumFamily,
                       letterSpacing: 0.0,
+                      useGoogleFonts: GoogleFonts.asMap().containsKey(
+                          FlutterFlowTheme.of(context).labelMediumFamily),
                     ),
               ),
             ),

@@ -6,6 +6,7 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'log_switch_model.dart';
 export 'log_switch_model.dart';
 
@@ -175,8 +176,14 @@ class _LogSwitchWidgetState extends State<LogSwitchWidget>
                                       style: FlutterFlowTheme.of(context)
                                           .headlineLarge
                                           .override(
-                                            fontFamily: 'Outfit',
+                                            fontFamily:
+                                                FlutterFlowTheme.of(context)
+                                                    .headlineLargeFamily,
                                             letterSpacing: 0.0,
+                                            useGoogleFonts: GoogleFonts.asMap()
+                                                .containsKey(
+                                                    FlutterFlowTheme.of(context)
+                                                        .headlineLargeFamily),
                                           ),
                                     ),
                                     Padding(
@@ -187,8 +194,16 @@ class _LogSwitchWidgetState extends State<LogSwitchWidget>
                                         style: FlutterFlowTheme.of(context)
                                             .labelLarge
                                             .override(
-                                              fontFamily: 'Readex Pro',
+                                              fontFamily:
+                                                  FlutterFlowTheme.of(context)
+                                                      .labelLargeFamily,
                                               letterSpacing: 0.0,
+                                              useGoogleFonts: GoogleFonts
+                                                      .asMap()
+                                                  .containsKey(
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .labelLargeFamily),
                                             ),
                                       ),
                                     ),
@@ -291,13 +306,19 @@ class _LogSwitchWidgetState extends State<LogSwitchWidget>
                                                                   .of(context)
                                                               .titleLarge
                                                               .override(
-                                                                fontFamily:
-                                                                    'Outfit',
+                                                                fontFamily: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .titleLargeFamily,
                                                                 color: FlutterFlowTheme.of(
                                                                         context)
                                                                     .info,
                                                                 letterSpacing:
                                                                     0.0,
+                                                                useGoogleFonts: GoogleFonts
+                                                                        .asMap()
+                                                                    .containsKey(
+                                                                        FlutterFlowTheme.of(context)
+                                                                            .titleLargeFamily),
                                                               ),
                                                         ),
                                                       ),
@@ -410,12 +431,18 @@ class _LogSwitchWidgetState extends State<LogSwitchWidget>
                                                                   .of(context)
                                                               .titleLarge
                                                               .override(
-                                                                fontFamily:
-                                                                    'Outfit',
+                                                                fontFamily: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .titleLargeFamily,
                                                                 color: const Color(
                                                                     0xFF1B1D27),
                                                                 letterSpacing:
                                                                     0.0,
+                                                                useGoogleFonts: GoogleFonts
+                                                                        .asMap()
+                                                                    .containsKey(
+                                                                        FlutterFlowTheme.of(context)
+                                                                            .titleLargeFamily),
                                                               ),
                                                         ),
                                                       ),
@@ -491,8 +518,14 @@ class _LogSwitchWidgetState extends State<LogSwitchWidget>
                                     textStyle: FlutterFlowTheme.of(context)
                                         .labelLarge
                                         .override(
-                                          fontFamily: 'Readex Pro',
+                                          fontFamily:
+                                              FlutterFlowTheme.of(context)
+                                                  .labelLargeFamily,
                                           letterSpacing: 0.0,
+                                          useGoogleFonts: GoogleFonts.asMap()
+                                              .containsKey(
+                                                  FlutterFlowTheme.of(context)
+                                                      .labelLargeFamily),
                                         ),
                                     elevation: 0.0,
                                     borderSide: BorderSide(
@@ -517,9 +550,14 @@ class _LogSwitchWidgetState extends State<LogSwitchWidget>
                                   textStyle: FlutterFlowTheme.of(context)
                                       .titleSmall
                                       .override(
-                                        fontFamily: 'Readex Pro',
+                                        fontFamily: FlutterFlowTheme.of(context)
+                                            .titleSmallFamily,
                                         color: Colors.white,
                                         letterSpacing: 0.0,
+                                        useGoogleFonts: GoogleFonts.asMap()
+                                            .containsKey(
+                                                FlutterFlowTheme.of(context)
+                                                    .titleSmallFamily),
                                       ),
                                   elevation: 1.0,
                                   borderSide: const BorderSide(

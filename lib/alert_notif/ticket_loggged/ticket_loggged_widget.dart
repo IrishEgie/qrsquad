@@ -2,6 +2,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'ticket_loggged_model.dart';
 export 'ticket_loggged_model.dart';
 
@@ -86,6 +87,8 @@ class _TicketLogggedWidgetState extends State<TicketLogggedWidget> {
                               fontSize: 24.0,
                               letterSpacing: 0.0,
                               fontWeight: FontWeight.w500,
+                              useGoogleFonts:
+                                  GoogleFonts.asMap().containsKey('Outfit'),
                             ),
                       ),
                     ),
@@ -101,6 +104,8 @@ class _TicketLogggedWidgetState extends State<TicketLogggedWidget> {
                                   fontSize: 14.0,
                                   letterSpacing: 0.0,
                                   fontWeight: FontWeight.w500,
+                                  useGoogleFonts: GoogleFonts.asMap()
+                                      .containsKey('Plus Jakarta Sans'),
                                 ),
                       ),
                     ),
