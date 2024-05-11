@@ -2,6 +2,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'ticket_error_model.dart';
 export 'ticket_error_model.dart';
 
@@ -25,6 +26,8 @@ class _TicketErrorWidgetState extends State<TicketErrorWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => TicketErrorModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override
@@ -84,6 +87,8 @@ class _TicketErrorWidgetState extends State<TicketErrorWidget> {
                               fontSize: 24.0,
                               letterSpacing: 0.0,
                               fontWeight: FontWeight.w500,
+                              useGoogleFonts:
+                                  GoogleFonts.asMap().containsKey('Outfit'),
                             ),
                       ),
                     ),
@@ -99,6 +104,8 @@ class _TicketErrorWidgetState extends State<TicketErrorWidget> {
                                   fontSize: 14.0,
                                   letterSpacing: 0.0,
                                   fontWeight: FontWeight.w500,
+                                  useGoogleFonts: GoogleFonts.asMap()
+                                      .containsKey('Plus Jakarta Sans'),
                                 ),
                       ),
                     ),
@@ -146,6 +153,9 @@ class _TicketErrorWidgetState extends State<TicketErrorWidget> {
                                             fontSize: 24.0,
                                             letterSpacing: 0.0,
                                             fontWeight: FontWeight.w800,
+                                            useGoogleFonts: GoogleFonts.asMap()
+                                                .containsKey(
+                                                    'Plus Jakarta Sans'),
                                           ),
                                     ),
                                   ),

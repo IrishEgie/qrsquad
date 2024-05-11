@@ -9,6 +9,7 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'ticket_info_model.dart';
 export 'ticket_info_model.dart';
 
@@ -106,6 +107,8 @@ class _TicketInfoWidgetState extends State<TicketInfoWidget>
         ],
       ),
     });
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override
@@ -199,9 +202,17 @@ class _TicketInfoWidgetState extends State<TicketInfoWidget>
                                         textStyle: FlutterFlowTheme.of(context)
                                             .titleSmall
                                             .override(
-                                              fontFamily: 'Readex Pro',
+                                              fontFamily:
+                                                  FlutterFlowTheme.of(context)
+                                                      .titleSmallFamily,
                                               color: Colors.white,
                                               letterSpacing: 0.0,
+                                              useGoogleFonts: GoogleFonts
+                                                      .asMap()
+                                                  .containsKey(
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .titleSmallFamily),
                                             ),
                                         elevation: 3.0,
                                         borderSide: const BorderSide(
@@ -275,8 +286,9 @@ class _TicketInfoWidgetState extends State<TicketInfoWidget>
                                                                   .of(context)
                                                               .titleMedium
                                                               .override(
-                                                                fontFamily:
-                                                                    'Readex Pro',
+                                                                fontFamily: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .titleMediumFamily,
                                                                 color: FlutterFlowTheme.of(
                                                                         context)
                                                                     .primaryText,
@@ -286,6 +298,11 @@ class _TicketInfoWidgetState extends State<TicketInfoWidget>
                                                                 fontWeight:
                                                                     FontWeight
                                                                         .bold,
+                                                                useGoogleFonts: GoogleFonts
+                                                                        .asMap()
+                                                                    .containsKey(
+                                                                        FlutterFlowTheme.of(context)
+                                                                            .titleMediumFamily),
                                                               ),
                                                         ),
                                                       ),
@@ -321,9 +338,17 @@ class _TicketInfoWidgetState extends State<TicketInfoWidget>
                                                         .titleSmall
                                                         .override(
                                                           fontFamily:
-                                                              'Readex Pro',
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .titleSmallFamily,
                                                           color: Colors.white,
                                                           letterSpacing: 0.0,
+                                                          useGoogleFonts: GoogleFonts
+                                                                  .asMap()
+                                                              .containsKey(
+                                                                  FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .titleSmallFamily),
                                                         ),
                                                     elevation: 3.0,
                                                     borderSide:
@@ -375,12 +400,18 @@ class _TicketInfoWidgetState extends State<TicketInfoWidget>
                                                                     .of(context)
                                                                 .bodyMedium
                                                                 .override(
-                                                                  fontFamily:
-                                                                      'Readex Pro',
+                                                                  fontFamily: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMediumFamily,
                                                                   fontSize:
                                                                       18.0,
                                                                   letterSpacing:
                                                                       0.0,
+                                                                  useGoogleFonts: GoogleFonts
+                                                                          .asMap()
+                                                                      .containsKey(
+                                                                          FlutterFlowTheme.of(context)
+                                                                              .bodyMediumFamily),
                                                                 ),
                                                           ),
                                                         ],
@@ -399,13 +430,19 @@ class _TicketInfoWidgetState extends State<TicketInfoWidget>
                                                                     .of(context)
                                                                 .bodyMedium
                                                                 .override(
-                                                                  fontFamily:
-                                                                      'Readex Pro',
+                                                                  fontFamily: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMediumFamily,
                                                                   color: FlutterFlowTheme.of(
                                                                           context)
                                                                       .secondaryText,
                                                                   letterSpacing:
                                                                       0.0,
+                                                                  useGoogleFonts: GoogleFonts
+                                                                          .asMap()
+                                                                      .containsKey(
+                                                                          FlutterFlowTheme.of(context)
+                                                                              .bodyMediumFamily),
                                                                 ),
                                                           ),
                                                         ],
@@ -555,7 +592,9 @@ class _TicketInfoWidgetState extends State<TicketInfoWidget>
                                                         .titleMedium
                                                         .override(
                                                           fontFamily:
-                                                              'Readex Pro',
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .titleMediumFamily,
                                                           color: FlutterFlowTheme
                                                                   .of(context)
                                                               .primaryText,
@@ -563,6 +602,12 @@ class _TicketInfoWidgetState extends State<TicketInfoWidget>
                                                           letterSpacing: 0.0,
                                                           fontWeight:
                                                               FontWeight.bold,
+                                                          useGoogleFonts: GoogleFonts
+                                                                  .asMap()
+                                                              .containsKey(
+                                                                  FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .titleMediumFamily),
                                                         ),
                                                   ),
                                                 ),
@@ -570,515 +615,554 @@ class _TicketInfoWidgetState extends State<TicketInfoWidget>
                                             ),
                                           ),
                                           Flexible(
-                                            child: Padding(
-                                              padding:
-                                                  const EdgeInsetsDirectional
-                                                      .fromSTEB(
-                                                      0.0, 0.0, 0.0, 36.0),
-                                              child: SingleChildScrollView(
-                                                child: Column(
-                                                  mainAxisSize:
-                                                      MainAxisSize.min,
-                                                  children: [
-                                                    SingleChildScrollView(
-                                                      scrollDirection:
-                                                          Axis.horizontal,
-                                                      child: Row(
+                                            child: Stack(
+                                              children: [
+                                                Align(
+                                                  alignment:
+                                                      const AlignmentDirectional(
+                                                          0.0, 0.0),
+                                                  child: Padding(
+                                                    padding:
+                                                        const EdgeInsetsDirectional
+                                                            .fromSTEB(0.0, 0.0,
+                                                                0.0, 36.0),
+                                                    child:
+                                                        SingleChildScrollView(
+                                                      child: Column(
                                                         mainAxisSize:
                                                             MainAxisSize.min,
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .spaceEvenly,
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .center,
                                                         children: [
-                                                          Column(
-                                                            mainAxisSize:
-                                                                MainAxisSize
-                                                                    .max,
-                                                            mainAxisAlignment:
-                                                                MainAxisAlignment
-                                                                    .center,
-                                                            children: [
-                                                              Container(
-                                                                width: MediaQuery.sizeOf(
-                                                                            context)
-                                                                        .width *
-                                                                    0.25,
-                                                                decoration:
-                                                                    const BoxDecoration(),
-                                                                child:
-                                                                    wrapWithModel(
-                                                                  model: _model
-                                                                      .ticketLogModel1,
-                                                                  updateCallback:
-                                                                      () => setState(
-                                                                          () {}),
-                                                                  child:
-                                                                      const TicketLogWidget(),
+                                                          SingleChildScrollView(
+                                                            scrollDirection:
+                                                                Axis.horizontal,
+                                                            child: Row(
+                                                              mainAxisSize:
+                                                                  MainAxisSize
+                                                                      .min,
+                                                              mainAxisAlignment:
+                                                                  MainAxisAlignment
+                                                                      .spaceEvenly,
+                                                              crossAxisAlignment:
+                                                                  CrossAxisAlignment
+                                                                      .center,
+                                                              children: [
+                                                                Column(
+                                                                  mainAxisSize:
+                                                                      MainAxisSize
+                                                                          .max,
+                                                                  mainAxisAlignment:
+                                                                      MainAxisAlignment
+                                                                          .center,
+                                                                  children: [
+                                                                    Container(
+                                                                      width: MediaQuery.sizeOf(context)
+                                                                              .width *
+                                                                          0.25,
+                                                                      decoration:
+                                                                          const BoxDecoration(),
+                                                                      child:
+                                                                          wrapWithModel(
+                                                                        model: _model
+                                                                            .ticketLogModel1,
+                                                                        updateCallback:
+                                                                            () =>
+                                                                                setState(() {}),
+                                                                        child:
+                                                                            const TicketLogWidget(),
+                                                                      ),
+                                                                    ),
+                                                                    Container(
+                                                                      width: MediaQuery.sizeOf(context)
+                                                                              .width *
+                                                                          0.25,
+                                                                      decoration:
+                                                                          const BoxDecoration(),
+                                                                    ),
+                                                                  ],
                                                                 ),
-                                                              ),
-                                                              Container(
-                                                                width: MediaQuery.sizeOf(
-                                                                            context)
-                                                                        .width *
-                                                                    0.25,
-                                                                decoration:
-                                                                    const BoxDecoration(),
-                                                              ),
-                                                            ],
+                                                                Column(
+                                                                  mainAxisSize:
+                                                                      MainAxisSize
+                                                                          .max,
+                                                                  mainAxisAlignment:
+                                                                      MainAxisAlignment
+                                                                          .center,
+                                                                  children: [
+                                                                    Container(
+                                                                      width: MediaQuery.sizeOf(context)
+                                                                              .width *
+                                                                          0.25,
+                                                                      decoration:
+                                                                          const BoxDecoration(),
+                                                                      child:
+                                                                          wrapWithModel(
+                                                                        model: _model
+                                                                            .ticketLogModel2,
+                                                                        updateCallback:
+                                                                            () =>
+                                                                                setState(() {}),
+                                                                        child:
+                                                                            const TicketLogWidget(),
+                                                                      ),
+                                                                    ),
+                                                                    Container(
+                                                                      width: MediaQuery.sizeOf(context)
+                                                                              .width *
+                                                                          0.25,
+                                                                      decoration:
+                                                                          const BoxDecoration(),
+                                                                    ),
+                                                                  ],
+                                                                ),
+                                                                Column(
+                                                                  mainAxisSize:
+                                                                      MainAxisSize
+                                                                          .max,
+                                                                  mainAxisAlignment:
+                                                                      MainAxisAlignment
+                                                                          .center,
+                                                                  children: [
+                                                                    Container(
+                                                                      width: MediaQuery.sizeOf(context)
+                                                                              .width *
+                                                                          0.25,
+                                                                      decoration:
+                                                                          const BoxDecoration(),
+                                                                      child:
+                                                                          wrapWithModel(
+                                                                        model: _model
+                                                                            .ticketLogModel3,
+                                                                        updateCallback:
+                                                                            () =>
+                                                                                setState(() {}),
+                                                                        child:
+                                                                            const TicketLogWidget(),
+                                                                      ),
+                                                                    ),
+                                                                    Container(
+                                                                      width: MediaQuery.sizeOf(context)
+                                                                              .width *
+                                                                          0.25,
+                                                                      decoration:
+                                                                          const BoxDecoration(),
+                                                                    ),
+                                                                  ],
+                                                                ),
+                                                              ],
+                                                            ),
                                                           ),
-                                                          Column(
-                                                            mainAxisSize:
-                                                                MainAxisSize
-                                                                    .max,
-                                                            mainAxisAlignment:
-                                                                MainAxisAlignment
-                                                                    .center,
-                                                            children: [
-                                                              Container(
-                                                                width: MediaQuery.sizeOf(
-                                                                            context)
-                                                                        .width *
-                                                                    0.25,
-                                                                decoration:
-                                                                    const BoxDecoration(),
-                                                                child:
-                                                                    wrapWithModel(
-                                                                  model: _model
-                                                                      .ticketLogModel2,
-                                                                  updateCallback:
-                                                                      () => setState(
-                                                                          () {}),
-                                                                  child:
-                                                                      const TicketLogWidget(),
+                                                          SingleChildScrollView(
+                                                            scrollDirection:
+                                                                Axis.horizontal,
+                                                            child: Row(
+                                                              mainAxisSize:
+                                                                  MainAxisSize
+                                                                      .min,
+                                                              mainAxisAlignment:
+                                                                  MainAxisAlignment
+                                                                      .spaceEvenly,
+                                                              crossAxisAlignment:
+                                                                  CrossAxisAlignment
+                                                                      .center,
+                                                              children: [
+                                                                Column(
+                                                                  mainAxisSize:
+                                                                      MainAxisSize
+                                                                          .max,
+                                                                  mainAxisAlignment:
+                                                                      MainAxisAlignment
+                                                                          .center,
+                                                                  children: [
+                                                                    Container(
+                                                                      width: MediaQuery.sizeOf(context)
+                                                                              .width *
+                                                                          0.25,
+                                                                      decoration:
+                                                                          const BoxDecoration(),
+                                                                      child:
+                                                                          wrapWithModel(
+                                                                        model: _model
+                                                                            .ticketLogModel4,
+                                                                        updateCallback:
+                                                                            () =>
+                                                                                setState(() {}),
+                                                                        child:
+                                                                            const TicketLogWidget(),
+                                                                      ),
+                                                                    ),
+                                                                    Container(
+                                                                      width: MediaQuery.sizeOf(context)
+                                                                              .width *
+                                                                          0.25,
+                                                                      decoration:
+                                                                          const BoxDecoration(),
+                                                                    ),
+                                                                  ],
                                                                 ),
-                                                              ),
-                                                              Container(
-                                                                width: MediaQuery.sizeOf(
-                                                                            context)
-                                                                        .width *
-                                                                    0.25,
-                                                                decoration:
-                                                                    const BoxDecoration(),
-                                                              ),
-                                                            ],
+                                                                Column(
+                                                                  mainAxisSize:
+                                                                      MainAxisSize
+                                                                          .max,
+                                                                  mainAxisAlignment:
+                                                                      MainAxisAlignment
+                                                                          .center,
+                                                                  children: [
+                                                                    Container(
+                                                                      width: MediaQuery.sizeOf(context)
+                                                                              .width *
+                                                                          0.25,
+                                                                      decoration:
+                                                                          const BoxDecoration(),
+                                                                      child:
+                                                                          wrapWithModel(
+                                                                        model: _model
+                                                                            .ticketLogModel5,
+                                                                        updateCallback:
+                                                                            () =>
+                                                                                setState(() {}),
+                                                                        child:
+                                                                            const TicketLogWidget(),
+                                                                      ),
+                                                                    ),
+                                                                    Container(
+                                                                      width: MediaQuery.sizeOf(context)
+                                                                              .width *
+                                                                          0.25,
+                                                                      decoration:
+                                                                          const BoxDecoration(),
+                                                                    ),
+                                                                  ],
+                                                                ),
+                                                                Column(
+                                                                  mainAxisSize:
+                                                                      MainAxisSize
+                                                                          .max,
+                                                                  mainAxisAlignment:
+                                                                      MainAxisAlignment
+                                                                          .center,
+                                                                  children: [
+                                                                    Container(
+                                                                      width: MediaQuery.sizeOf(context)
+                                                                              .width *
+                                                                          0.25,
+                                                                      decoration:
+                                                                          const BoxDecoration(),
+                                                                      child:
+                                                                          wrapWithModel(
+                                                                        model: _model
+                                                                            .ticketLogModel6,
+                                                                        updateCallback:
+                                                                            () =>
+                                                                                setState(() {}),
+                                                                        child:
+                                                                            const TicketLogWidget(),
+                                                                      ),
+                                                                    ),
+                                                                    Container(
+                                                                      width: MediaQuery.sizeOf(context)
+                                                                              .width *
+                                                                          0.25,
+                                                                      decoration:
+                                                                          const BoxDecoration(),
+                                                                    ),
+                                                                  ],
+                                                                ),
+                                                              ],
+                                                            ),
                                                           ),
-                                                          Column(
-                                                            mainAxisSize:
-                                                                MainAxisSize
-                                                                    .max,
-                                                            mainAxisAlignment:
-                                                                MainAxisAlignment
-                                                                    .center,
-                                                            children: [
-                                                              Container(
-                                                                width: MediaQuery.sizeOf(
-                                                                            context)
-                                                                        .width *
-                                                                    0.25,
-                                                                decoration:
-                                                                    const BoxDecoration(),
-                                                                child:
-                                                                    wrapWithModel(
-                                                                  model: _model
-                                                                      .ticketLogModel3,
-                                                                  updateCallback:
-                                                                      () => setState(
-                                                                          () {}),
-                                                                  child:
-                                                                      const TicketLogWidget(),
+                                                          SingleChildScrollView(
+                                                            scrollDirection:
+                                                                Axis.horizontal,
+                                                            child: Row(
+                                                              mainAxisSize:
+                                                                  MainAxisSize
+                                                                      .min,
+                                                              mainAxisAlignment:
+                                                                  MainAxisAlignment
+                                                                      .spaceEvenly,
+                                                              crossAxisAlignment:
+                                                                  CrossAxisAlignment
+                                                                      .center,
+                                                              children: [
+                                                                Column(
+                                                                  mainAxisSize:
+                                                                      MainAxisSize
+                                                                          .max,
+                                                                  mainAxisAlignment:
+                                                                      MainAxisAlignment
+                                                                          .center,
+                                                                  children: [
+                                                                    Container(
+                                                                      width: MediaQuery.sizeOf(context)
+                                                                              .width *
+                                                                          0.25,
+                                                                      decoration:
+                                                                          const BoxDecoration(),
+                                                                      child:
+                                                                          wrapWithModel(
+                                                                        model: _model
+                                                                            .ticketLogModel7,
+                                                                        updateCallback:
+                                                                            () =>
+                                                                                setState(() {}),
+                                                                        child:
+                                                                            const TicketLogWidget(),
+                                                                      ),
+                                                                    ),
+                                                                    Container(
+                                                                      width: MediaQuery.sizeOf(context)
+                                                                              .width *
+                                                                          0.25,
+                                                                      decoration:
+                                                                          const BoxDecoration(),
+                                                                    ),
+                                                                  ],
                                                                 ),
-                                                              ),
-                                                              Container(
-                                                                width: MediaQuery.sizeOf(
-                                                                            context)
-                                                                        .width *
-                                                                    0.25,
-                                                                decoration:
-                                                                    const BoxDecoration(),
-                                                              ),
-                                                            ],
+                                                                Column(
+                                                                  mainAxisSize:
+                                                                      MainAxisSize
+                                                                          .max,
+                                                                  mainAxisAlignment:
+                                                                      MainAxisAlignment
+                                                                          .center,
+                                                                  children: [
+                                                                    Container(
+                                                                      width: MediaQuery.sizeOf(context)
+                                                                              .width *
+                                                                          0.25,
+                                                                      decoration:
+                                                                          const BoxDecoration(),
+                                                                      child:
+                                                                          wrapWithModel(
+                                                                        model: _model
+                                                                            .ticketLogModel8,
+                                                                        updateCallback:
+                                                                            () =>
+                                                                                setState(() {}),
+                                                                        child:
+                                                                            const TicketLogWidget(),
+                                                                      ),
+                                                                    ),
+                                                                    Container(
+                                                                      width: MediaQuery.sizeOf(context)
+                                                                              .width *
+                                                                          0.25,
+                                                                      decoration:
+                                                                          const BoxDecoration(),
+                                                                    ),
+                                                                  ],
+                                                                ),
+                                                                Column(
+                                                                  mainAxisSize:
+                                                                      MainAxisSize
+                                                                          .max,
+                                                                  mainAxisAlignment:
+                                                                      MainAxisAlignment
+                                                                          .center,
+                                                                  children: [
+                                                                    Container(
+                                                                      width: MediaQuery.sizeOf(context)
+                                                                              .width *
+                                                                          0.25,
+                                                                      decoration:
+                                                                          const BoxDecoration(),
+                                                                      child:
+                                                                          wrapWithModel(
+                                                                        model: _model
+                                                                            .ticketLogModel9,
+                                                                        updateCallback:
+                                                                            () =>
+                                                                                setState(() {}),
+                                                                        child:
+                                                                            const TicketLogWidget(),
+                                                                      ),
+                                                                    ),
+                                                                    Container(
+                                                                      width: MediaQuery.sizeOf(context)
+                                                                              .width *
+                                                                          0.25,
+                                                                      decoration:
+                                                                          const BoxDecoration(),
+                                                                    ),
+                                                                  ],
+                                                                ),
+                                                              ],
+                                                            ),
+                                                          ),
+                                                          SingleChildScrollView(
+                                                            scrollDirection:
+                                                                Axis.horizontal,
+                                                            child: Row(
+                                                              mainAxisSize:
+                                                                  MainAxisSize
+                                                                      .min,
+                                                              mainAxisAlignment:
+                                                                  MainAxisAlignment
+                                                                      .spaceEvenly,
+                                                              crossAxisAlignment:
+                                                                  CrossAxisAlignment
+                                                                      .center,
+                                                              children: [
+                                                                Column(
+                                                                  mainAxisSize:
+                                                                      MainAxisSize
+                                                                          .max,
+                                                                  mainAxisAlignment:
+                                                                      MainAxisAlignment
+                                                                          .center,
+                                                                  children: [
+                                                                    Container(
+                                                                      width: MediaQuery.sizeOf(context)
+                                                                              .width *
+                                                                          0.25,
+                                                                      decoration:
+                                                                          const BoxDecoration(),
+                                                                      child:
+                                                                          wrapWithModel(
+                                                                        model: _model
+                                                                            .ticketLogModel10,
+                                                                        updateCallback:
+                                                                            () =>
+                                                                                setState(() {}),
+                                                                        child:
+                                                                            const TicketLogWidget(),
+                                                                      ),
+                                                                    ),
+                                                                    Container(
+                                                                      width: MediaQuery.sizeOf(context)
+                                                                              .width *
+                                                                          0.25,
+                                                                      decoration:
+                                                                          const BoxDecoration(),
+                                                                    ),
+                                                                  ],
+                                                                ),
+                                                                Column(
+                                                                  mainAxisSize:
+                                                                      MainAxisSize
+                                                                          .max,
+                                                                  mainAxisAlignment:
+                                                                      MainAxisAlignment
+                                                                          .center,
+                                                                  children: [
+                                                                    Container(
+                                                                      width: MediaQuery.sizeOf(context)
+                                                                              .width *
+                                                                          0.25,
+                                                                      decoration:
+                                                                          const BoxDecoration(),
+                                                                      child:
+                                                                          wrapWithModel(
+                                                                        model: _model
+                                                                            .ticketLogModel11,
+                                                                        updateCallback:
+                                                                            () =>
+                                                                                setState(() {}),
+                                                                        child:
+                                                                            const TicketLogWidget(),
+                                                                      ),
+                                                                    ),
+                                                                    Container(
+                                                                      width: MediaQuery.sizeOf(context)
+                                                                              .width *
+                                                                          0.25,
+                                                                      decoration:
+                                                                          const BoxDecoration(),
+                                                                    ),
+                                                                  ],
+                                                                ),
+                                                                Column(
+                                                                  mainAxisSize:
+                                                                      MainAxisSize
+                                                                          .max,
+                                                                  mainAxisAlignment:
+                                                                      MainAxisAlignment
+                                                                          .center,
+                                                                  children: [
+                                                                    Container(
+                                                                      width: MediaQuery.sizeOf(context)
+                                                                              .width *
+                                                                          0.25,
+                                                                      decoration:
+                                                                          const BoxDecoration(),
+                                                                      child:
+                                                                          wrapWithModel(
+                                                                        model: _model
+                                                                            .ticketLogModel12,
+                                                                        updateCallback:
+                                                                            () =>
+                                                                                setState(() {}),
+                                                                        child:
+                                                                            const TicketLogWidget(),
+                                                                      ),
+                                                                    ),
+                                                                    Container(
+                                                                      width: MediaQuery.sizeOf(context)
+                                                                              .width *
+                                                                          0.25,
+                                                                      decoration:
+                                                                          const BoxDecoration(),
+                                                                    ),
+                                                                  ],
+                                                                ),
+                                                              ],
+                                                            ),
                                                           ),
                                                         ],
                                                       ),
                                                     ),
-                                                    SingleChildScrollView(
-                                                      scrollDirection:
-                                                          Axis.horizontal,
-                                                      child: Row(
-                                                        mainAxisSize:
-                                                            MainAxisSize.min,
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .spaceEvenly,
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .center,
-                                                        children: [
-                                                          Column(
-                                                            mainAxisSize:
-                                                                MainAxisSize
-                                                                    .max,
-                                                            mainAxisAlignment:
-                                                                MainAxisAlignment
-                                                                    .center,
-                                                            children: [
-                                                              Container(
-                                                                width: MediaQuery.sizeOf(
-                                                                            context)
-                                                                        .width *
-                                                                    0.25,
-                                                                decoration:
-                                                                    const BoxDecoration(),
-                                                                child:
-                                                                    wrapWithModel(
-                                                                  model: _model
-                                                                      .ticketLogModel4,
-                                                                  updateCallback:
-                                                                      () => setState(
-                                                                          () {}),
-                                                                  child:
-                                                                      const TicketLogWidget(),
-                                                                ),
-                                                              ),
-                                                              Container(
-                                                                width: MediaQuery.sizeOf(
-                                                                            context)
-                                                                        .width *
-                                                                    0.25,
-                                                                decoration:
-                                                                    const BoxDecoration(),
-                                                              ),
-                                                            ],
-                                                          ),
-                                                          Column(
-                                                            mainAxisSize:
-                                                                MainAxisSize
-                                                                    .max,
-                                                            mainAxisAlignment:
-                                                                MainAxisAlignment
-                                                                    .center,
-                                                            children: [
-                                                              Container(
-                                                                width: MediaQuery.sizeOf(
-                                                                            context)
-                                                                        .width *
-                                                                    0.25,
-                                                                decoration:
-                                                                    const BoxDecoration(),
-                                                                child:
-                                                                    wrapWithModel(
-                                                                  model: _model
-                                                                      .ticketLogModel5,
-                                                                  updateCallback:
-                                                                      () => setState(
-                                                                          () {}),
-                                                                  child:
-                                                                      const TicketLogWidget(),
-                                                                ),
-                                                              ),
-                                                              Container(
-                                                                width: MediaQuery.sizeOf(
-                                                                            context)
-                                                                        .width *
-                                                                    0.25,
-                                                                decoration:
-                                                                    const BoxDecoration(),
-                                                              ),
-                                                            ],
-                                                          ),
-                                                          Column(
-                                                            mainAxisSize:
-                                                                MainAxisSize
-                                                                    .max,
-                                                            mainAxisAlignment:
-                                                                MainAxisAlignment
-                                                                    .center,
-                                                            children: [
-                                                              Container(
-                                                                width: MediaQuery.sizeOf(
-                                                                            context)
-                                                                        .width *
-                                                                    0.25,
-                                                                decoration:
-                                                                    const BoxDecoration(),
-                                                                child:
-                                                                    wrapWithModel(
-                                                                  model: _model
-                                                                      .ticketLogModel6,
-                                                                  updateCallback:
-                                                                      () => setState(
-                                                                          () {}),
-                                                                  child:
-                                                                      const TicketLogWidget(),
-                                                                ),
-                                                              ),
-                                                              Container(
-                                                                width: MediaQuery.sizeOf(
-                                                                            context)
-                                                                        .width *
-                                                                    0.25,
-                                                                decoration:
-                                                                    const BoxDecoration(),
-                                                              ),
-                                                            ],
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ),
-                                                    SingleChildScrollView(
-                                                      scrollDirection:
-                                                          Axis.horizontal,
-                                                      child: Row(
-                                                        mainAxisSize:
-                                                            MainAxisSize.min,
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .spaceEvenly,
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .center,
-                                                        children: [
-                                                          Column(
-                                                            mainAxisSize:
-                                                                MainAxisSize
-                                                                    .max,
-                                                            mainAxisAlignment:
-                                                                MainAxisAlignment
-                                                                    .center,
-                                                            children: [
-                                                              Container(
-                                                                width: MediaQuery.sizeOf(
-                                                                            context)
-                                                                        .width *
-                                                                    0.25,
-                                                                decoration:
-                                                                    const BoxDecoration(),
-                                                                child:
-                                                                    wrapWithModel(
-                                                                  model: _model
-                                                                      .ticketLogModel7,
-                                                                  updateCallback:
-                                                                      () => setState(
-                                                                          () {}),
-                                                                  child:
-                                                                      const TicketLogWidget(),
-                                                                ),
-                                                              ),
-                                                              Container(
-                                                                width: MediaQuery.sizeOf(
-                                                                            context)
-                                                                        .width *
-                                                                    0.25,
-                                                                decoration:
-                                                                    const BoxDecoration(),
-                                                              ),
-                                                            ],
-                                                          ),
-                                                          Column(
-                                                            mainAxisSize:
-                                                                MainAxisSize
-                                                                    .max,
-                                                            mainAxisAlignment:
-                                                                MainAxisAlignment
-                                                                    .center,
-                                                            children: [
-                                                              Container(
-                                                                width: MediaQuery.sizeOf(
-                                                                            context)
-                                                                        .width *
-                                                                    0.25,
-                                                                decoration:
-                                                                    const BoxDecoration(),
-                                                                child:
-                                                                    wrapWithModel(
-                                                                  model: _model
-                                                                      .ticketLogModel8,
-                                                                  updateCallback:
-                                                                      () => setState(
-                                                                          () {}),
-                                                                  child:
-                                                                      const TicketLogWidget(),
-                                                                ),
-                                                              ),
-                                                              Container(
-                                                                width: MediaQuery.sizeOf(
-                                                                            context)
-                                                                        .width *
-                                                                    0.25,
-                                                                decoration:
-                                                                    const BoxDecoration(),
-                                                              ),
-                                                            ],
-                                                          ),
-                                                          Column(
-                                                            mainAxisSize:
-                                                                MainAxisSize
-                                                                    .max,
-                                                            mainAxisAlignment:
-                                                                MainAxisAlignment
-                                                                    .center,
-                                                            children: [
-                                                              Container(
-                                                                width: MediaQuery.sizeOf(
-                                                                            context)
-                                                                        .width *
-                                                                    0.25,
-                                                                decoration:
-                                                                    const BoxDecoration(),
-                                                                child:
-                                                                    wrapWithModel(
-                                                                  model: _model
-                                                                      .ticketLogModel9,
-                                                                  updateCallback:
-                                                                      () => setState(
-                                                                          () {}),
-                                                                  child:
-                                                                      const TicketLogWidget(),
-                                                                ),
-                                                              ),
-                                                              Container(
-                                                                width: MediaQuery.sizeOf(
-                                                                            context)
-                                                                        .width *
-                                                                    0.25,
-                                                                decoration:
-                                                                    const BoxDecoration(),
-                                                              ),
-                                                            ],
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ),
-                                                    SingleChildScrollView(
-                                                      scrollDirection:
-                                                          Axis.horizontal,
-                                                      child: Row(
-                                                        mainAxisSize:
-                                                            MainAxisSize.min,
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .spaceEvenly,
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .center,
-                                                        children: [
-                                                          Column(
-                                                            mainAxisSize:
-                                                                MainAxisSize
-                                                                    .max,
-                                                            mainAxisAlignment:
-                                                                MainAxisAlignment
-                                                                    .center,
-                                                            children: [
-                                                              Container(
-                                                                width: MediaQuery.sizeOf(
-                                                                            context)
-                                                                        .width *
-                                                                    0.25,
-                                                                decoration:
-                                                                    const BoxDecoration(),
-                                                                child:
-                                                                    wrapWithModel(
-                                                                  model: _model
-                                                                      .ticketLogModel10,
-                                                                  updateCallback:
-                                                                      () => setState(
-                                                                          () {}),
-                                                                  child:
-                                                                      const TicketLogWidget(),
-                                                                ),
-                                                              ),
-                                                              Container(
-                                                                width: MediaQuery.sizeOf(
-                                                                            context)
-                                                                        .width *
-                                                                    0.25,
-                                                                decoration:
-                                                                    const BoxDecoration(),
-                                                              ),
-                                                            ],
-                                                          ),
-                                                          Column(
-                                                            mainAxisSize:
-                                                                MainAxisSize
-                                                                    .max,
-                                                            mainAxisAlignment:
-                                                                MainAxisAlignment
-                                                                    .center,
-                                                            children: [
-                                                              Container(
-                                                                width: MediaQuery.sizeOf(
-                                                                            context)
-                                                                        .width *
-                                                                    0.25,
-                                                                decoration:
-                                                                    const BoxDecoration(),
-                                                                child:
-                                                                    wrapWithModel(
-                                                                  model: _model
-                                                                      .ticketLogModel11,
-                                                                  updateCallback:
-                                                                      () => setState(
-                                                                          () {}),
-                                                                  child:
-                                                                      const TicketLogWidget(),
-                                                                ),
-                                                              ),
-                                                              Container(
-                                                                width: MediaQuery.sizeOf(
-                                                                            context)
-                                                                        .width *
-                                                                    0.25,
-                                                                decoration:
-                                                                    const BoxDecoration(),
-                                                              ),
-                                                            ],
-                                                          ),
-                                                          Column(
-                                                            mainAxisSize:
-                                                                MainAxisSize
-                                                                    .max,
-                                                            mainAxisAlignment:
-                                                                MainAxisAlignment
-                                                                    .center,
-                                                            children: [
-                                                              Container(
-                                                                width: MediaQuery.sizeOf(
-                                                                            context)
-                                                                        .width *
-                                                                    0.25,
-                                                                decoration:
-                                                                    const BoxDecoration(),
-                                                                child:
-                                                                    wrapWithModel(
-                                                                  model: _model
-                                                                      .ticketLogModel12,
-                                                                  updateCallback:
-                                                                      () => setState(
-                                                                          () {}),
-                                                                  child:
-                                                                      const TicketLogWidget(),
-                                                                ),
-                                                              ),
-                                                              Container(
-                                                                width: MediaQuery.sizeOf(
-                                                                            context)
-                                                                        .width *
-                                                                    0.25,
-                                                                decoration:
-                                                                    const BoxDecoration(),
-                                                              ),
-                                                            ],
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ),
-                                                  ],
+                                                  ),
                                                 ),
-                                              ),
+                                                Align(
+                                                  alignment:
+                                                      const AlignmentDirectional(
+                                                          0.0, 1.0),
+                                                  child: Padding(
+                                                    padding:
+                                                        const EdgeInsetsDirectional
+                                                            .fromSTEB(0.0, 0.0,
+                                                                0.0, 38.0),
+                                                    child: Container(
+                                                      width: MediaQuery.sizeOf(
+                                                                  context)
+                                                              .width *
+                                                          0.75,
+                                                      height: 100.0,
+                                                      decoration: const BoxDecoration(
+                                                        gradient:
+                                                            LinearGradient(
+                                                          colors: [
+                                                            Color(0x008C81F2),
+                                                            Color(0x25000000)
+                                                          ],
+                                                          stops: [0.0, 1.0],
+                                                          begin:
+                                                              AlignmentDirectional(
+                                                                  0.0, -1.0),
+                                                          end:
+                                                              AlignmentDirectional(
+                                                                  0, 1.0),
+                                                        ),
+                                                        borderRadius:
+                                                            BorderRadius.only(
+                                                          bottomLeft:
+                                                              Radius.circular(
+                                                                  24.0),
+                                                          bottomRight:
+                                                              Radius.circular(
+                                                                  24.0),
+                                                          topLeft:
+                                                              Radius.circular(
+                                                                  0.0),
+                                                          topRight:
+                                                              Radius.circular(
+                                                                  0.0),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
                                             ),
                                           ),
                                         ],
@@ -1129,8 +1213,13 @@ class _TicketInfoWidgetState extends State<TicketInfoWidget>
                                   style: FlutterFlowTheme.of(context)
                                       .bodyMedium
                                       .override(
-                                        fontFamily: 'Readex Pro',
+                                        fontFamily: FlutterFlowTheme.of(context)
+                                            .bodyMediumFamily,
                                         letterSpacing: 0.0,
+                                        useGoogleFonts: GoogleFonts.asMap()
+                                            .containsKey(
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyMediumFamily),
                                       ),
                                 ),
                               ],
@@ -1139,13 +1228,18 @@ class _TicketInfoWidgetState extends State<TicketInfoWidget>
                         ),
                         Text(
                           'QUEEN SSU',
-                          style:
-                              FlutterFlowTheme.of(context).bodyMedium.override(
-                                    fontFamily: 'Readex Pro',
-                                    fontSize: 16.0,
-                                    letterSpacing: 0.0,
-                                    fontWeight: FontWeight.w800,
-                                  ),
+                          style: FlutterFlowTheme.of(context)
+                              .bodyMedium
+                              .override(
+                                fontFamily: FlutterFlowTheme.of(context)
+                                    .bodyMediumFamily,
+                                fontSize: 16.0,
+                                letterSpacing: 0.0,
+                                fontWeight: FontWeight.w800,
+                                useGoogleFonts: GoogleFonts.asMap().containsKey(
+                                    FlutterFlowTheme.of(context)
+                                        .bodyMediumFamily),
+                              ),
                         ),
                         Wrap(
                           spacing: 0.0,
@@ -1241,23 +1335,30 @@ class _TicketInfoWidgetState extends State<TicketInfoWidget>
                   ),
                 ],
               ),
-              Row(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Padding(
-                    padding: const EdgeInsetsDirectional.fromSTEB(
-                        0.0, 0.0, 0.0, 4.0),
-                    child: Text(
-                      'SYSTEM DESIGNED BY ICPEP.SE - SSU',
-                      style: FlutterFlowTheme.of(context).bodyMedium.override(
-                            fontFamily: 'Readex Pro',
-                            color: FlutterFlowTheme.of(context).secondaryText,
-                            fontSize: 12.0,
-                            letterSpacing: 0.0,
-                            fontWeight: FontWeight.w200,
-                          ),
+              Align(
+                alignment: const AlignmentDirectional(0.0, 1.0),
+                child: Row(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Padding(
+                      padding:
+                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 4.0),
+                      child: Text(
+                        'SYSTEM DESIGNED BY ICPEP.SE - SSU',
+                        style: FlutterFlowTheme.of(context).bodyMedium.override(
+                              fontFamily:
+                                  FlutterFlowTheme.of(context).bodyMediumFamily,
+                              color: FlutterFlowTheme.of(context).secondaryText,
+                              fontSize: 12.0,
+                              letterSpacing: 0.0,
+                              fontWeight: FontWeight.w200,
+                              useGoogleFonts: GoogleFonts.asMap().containsKey(
+                                  FlutterFlowTheme.of(context)
+                                      .bodyMediumFamily),
+                            ),
+                      ),
                     ),
                   ),
                   Wrap(

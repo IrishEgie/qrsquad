@@ -4,6 +4,7 @@ import '/flutter_flow/flutter_flow_util.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'upper_card_content_model.dart';
 export 'upper_card_content_model.dart';
 
@@ -68,6 +69,8 @@ class _UpperCardContentWidgetState extends State<UpperCardContentWidget>
         ],
       ),
     });
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override
@@ -123,9 +126,13 @@ class _UpperCardContentWidgetState extends State<UpperCardContentWidget>
                         widget.info!,
                         maxLines: 1,
                         style: FlutterFlowTheme.of(context).titleLarge.override(
-                              fontFamily: 'Outfit',
+                              fontFamily:
+                                  FlutterFlowTheme.of(context).titleLargeFamily,
                               fontSize: 14.0,
                               letterSpacing: 0.0,
+                              useGoogleFonts: GoogleFonts.asMap().containsKey(
+                                  FlutterFlowTheme.of(context)
+                                      .titleLargeFamily),
                             ),
                       ),
                       Padding(
@@ -142,9 +149,14 @@ class _UpperCardContentWidgetState extends State<UpperCardContentWidget>
                                 style: FlutterFlowTheme.of(context)
                                     .labelMedium
                                     .override(
-                                      fontFamily: 'Readex Pro',
+                                      fontFamily: FlutterFlowTheme.of(context)
+                                          .labelMediumFamily,
                                       fontSize: 12.0,
                                       letterSpacing: 0.0,
+                                      useGoogleFonts: GoogleFonts.asMap()
+                                          .containsKey(
+                                              FlutterFlowTheme.of(context)
+                                                  .labelMediumFamily),
                                     ),
                               ),
                             ),

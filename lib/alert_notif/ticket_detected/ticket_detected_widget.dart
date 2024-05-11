@@ -7,6 +7,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'ticket_detected_model.dart';
 
 class TicketDetectedWidget extends StatefulWidget {
@@ -32,6 +33,7 @@ class _TicketDetectedWidgetState extends State<TicketDetectedWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => TicketDetectedModel());
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
     _homeModel = widget.model;
     fetchingTicket();
   }
@@ -121,6 +123,8 @@ class _TicketDetectedWidgetState extends State<TicketDetectedWidget> {
                               fontSize: 32.0,
                               letterSpacing: 0.0,
                               fontWeight: FontWeight.w500,
+                              useGoogleFonts:
+                                  GoogleFonts.asMap().containsKey('Outfit'),
                             ),
                       ),
                     ),
@@ -136,6 +140,8 @@ class _TicketDetectedWidgetState extends State<TicketDetectedWidget> {
                                   fontSize: 14.0,
                                   letterSpacing: 0.0,
                                   fontWeight: FontWeight.w500,
+                                  useGoogleFonts: GoogleFonts.asMap()
+                                      .containsKey('Plus Jakarta Sans'),
                                 ),
                       ),
                     ),
