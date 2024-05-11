@@ -44,12 +44,15 @@ class TicketInfoModel extends FlutterFlowModel<TicketInfoWidget> {
 
   @override
   void initState(BuildContext context) {
+    // Ticket Details
     upperCardContentModel1 =
         createModel(context, () => UpperCardContentModel());
     upperCardContentModel2 =
         createModel(context, () => UpperCardContentModel());
     upperCardContentModel3 =
         createModel(context, () => UpperCardContentModel());
+
+    // Ticket History
     ticketLogModel1 = createModel(context, () => TicketLogModel());
     ticketLogModel2 = createModel(context, () => TicketLogModel());
     ticketLogModel3 = createModel(context, () => TicketLogModel());

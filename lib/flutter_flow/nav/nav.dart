@@ -42,10 +42,10 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => const HomePageWidget(),
         ),
         FFRoute(
-          name: 'TicketInfo',
-          path: '/ticketInfo',
-          builder: (context, params) => const TicketInfoWidget(),
-        )
+            name: 'TicketInfo',
+            path: '/ticketInfo',
+            builder: (context, params) => TicketInfoWidget(
+                ticket: params.state.extra as Map<String, dynamic>)),
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
 
@@ -208,7 +208,8 @@ class TransitionInfo {
   final Duration duration;
   final Alignment? alignment;
 
-  static TransitionInfo appDefault() => const TransitionInfo(hasTransition: false);
+  static TransitionInfo appDefault() =>
+      const TransitionInfo(hasTransition: false);
 }
 
 class RootPageContext {

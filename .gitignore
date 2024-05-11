@@ -24,3 +24,7 @@
 
 # Windows
 Thumbs.db
+
+# Server
+/server/api/node_modules
+/server/api/package-lock.json
