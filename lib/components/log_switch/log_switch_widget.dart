@@ -187,8 +187,9 @@ class _LogSwitchWidgetState extends State<LogSwitchWidget>
                                           ),
                                     ),
                                     Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
-                                          0.0, 4.0, 0.0, 0.0),
+                                      padding:
+                                          const EdgeInsetsDirectional.fromSTEB(
+                                              0.0, 4.0, 0.0, 0.0),
                                       child: Text(
                                         'Update the logging function of your application from selecting one of the options below.',
                                         style: FlutterFlowTheme.of(context)
@@ -250,12 +251,12 @@ class _LogSwitchWidgetState extends State<LogSwitchWidget>
                                 clipBehavior: Clip.none,
                                 children: [
                                   Padding(
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
-                                        8.0, 0.0, 8.0, 4.0),
+                                    padding:
+                                        const EdgeInsetsDirectional.fromSTEB(
+                                            8.0, 0.0, 8.0, 4.0),
                                     child: MouseRegion(
                                       opaque: false,
-                                      cursor: MouseCursor.defer ??
-                                          MouseCursor.defer,
+                                      cursor: MouseCursor.defer,
                                       onEnter: ((event) async {
                                         setState(() =>
                                             _model.mouseRegionHovered1 = true);
@@ -265,32 +266,33 @@ class _LogSwitchWidgetState extends State<LogSwitchWidget>
                                             _model.mouseRegionHovered1 = false);
                                       }),
                                       child: Align(
-                                        alignment:
-                                            const AlignmentDirectional(0.0, 0.0),
+                                        alignment: const AlignmentDirectional(
+                                            0.0, 0.0),
                                         child: Stack(
                                           children: [
                                             AnimatedContainer(
-                                              duration:
-                                                  const Duration(milliseconds: 150),
+                                              duration: const Duration(
+                                                  milliseconds: 150),
                                               curve: Curves.easeInOut,
                                               width: 250.0,
                                               decoration: BoxDecoration(
                                                 borderRadius:
                                                     BorderRadius.circular(12.0),
                                                 border: Border.all(
-                                                  color: _model
-                                                          .mouseRegionHovered1
-                                                      ? FlutterFlowTheme.of(
-                                                              context)
-                                                          .primary
-                                                      : FlutterFlowTheme.of(
-                                                              context)
-                                                          .alternate,
+                                                  color:
+                                                      _model.mouseRegionHovered1
+                                                          ? FlutterFlowTheme.of(
+                                                                  context)
+                                                              .primary
+                                                          : FlutterFlowTheme.of(
+                                                                  context)
+                                                              .alternate,
                                                   width: 2.0,
                                                 ),
                                               ),
                                               child: Padding(
-                                                padding: const EdgeInsets.all(4.0),
+                                                padding:
+                                                    const EdgeInsets.all(4.0),
                                                 child: Container(
                                                   height: 230.0,
                                                   decoration: BoxDecoration(
@@ -310,7 +312,7 @@ class _LogSwitchWidgetState extends State<LogSwitchWidget>
                                                     padding:
                                                         const EdgeInsetsDirectional
                                                             .fromSTEB(8.0, 12.0,
-                                                                8.0, 0.0),
+                                                            8.0, 0.0),
                                                     child: Column(
                                                       mainAxisSize:
                                                           MainAxisSize.max,
@@ -322,10 +324,10 @@ class _LogSwitchWidgetState extends State<LogSwitchWidget>
                                                           padding:
                                                               const EdgeInsetsDirectional
                                                                   .fromSTEB(
-                                                                      8.0,
-                                                                      0.0,
-                                                                      0.0,
-                                                                      0.0),
+                                                                  8.0,
+                                                                  0.0,
+                                                                  0.0,
+                                                                  0.0),
                                                           child: Row(
                                                             mainAxisSize:
                                                                 MainAxisSize
@@ -338,10 +340,10 @@ class _LogSwitchWidgetState extends State<LogSwitchWidget>
                                                                 padding:
                                                                     const EdgeInsetsDirectional
                                                                         .fromSTEB(
-                                                                            0.0,
-                                                                            4.0,
-                                                                            0.0,
-                                                                            4.0),
+                                                                        0.0,
+                                                                        4.0,
+                                                                        0.0,
+                                                                        4.0),
                                                                 child: Text(
                                                                   'Login',
                                                                   style: FlutterFlowTheme.of(
@@ -412,12 +414,12 @@ class _LogSwitchWidgetState extends State<LogSwitchWidget>
                                     ),
                                   ),
                                   Padding(
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
-                                        8.0, 0.0, 8.0, 4.0),
+                                    padding:
+                                        const EdgeInsetsDirectional.fromSTEB(
+                                            8.0, 0.0, 8.0, 4.0),
                                     child: MouseRegion(
                                       opaque: false,
-                                      cursor: MouseCursor.defer ??
-                                          MouseCursor.defer,
+                                      cursor: MouseCursor.defer,
                                       onEnter: ((event) async {
                                         setState(() =>
                                             _model.mouseRegionHovered2 = true);
@@ -429,8 +431,8 @@ class _LogSwitchWidgetState extends State<LogSwitchWidget>
                                       child: Stack(
                                         children: [
                                           AnimatedContainer(
-                                            duration:
-                                                const Duration(milliseconds: 150),
+                                            duration: const Duration(
+                                                milliseconds: 150),
                                             curve: Curves.easeInOut,
                                             decoration: BoxDecoration(
                                               borderRadius:
@@ -448,26 +450,28 @@ class _LogSwitchWidgetState extends State<LogSwitchWidget>
                                               ),
                                             ),
                                             child: Padding(
-                                              padding: const EdgeInsets.all(4.0),
+                                              padding:
+                                                  const EdgeInsets.all(4.0),
                                               child: Container(
                                                 width: 250.0,
                                                 height: 230.0,
                                                 decoration: BoxDecoration(
-                                                  color: _model
-                                                          .mouseRegionHovered2
-                                                      ? FlutterFlowTheme.of(
-                                                              context)
-                                                          .primary
-                                                      : FlutterFlowTheme.of(
-                                                              context)
-                                                          .alternate,
+                                                  color:
+                                                      _model.mouseRegionHovered2
+                                                          ? FlutterFlowTheme.of(
+                                                                  context)
+                                                              .primary
+                                                          : FlutterFlowTheme.of(
+                                                                  context)
+                                                              .alternate,
                                                   borderRadius:
                                                       BorderRadius.circular(
                                                           8.0),
                                                 ),
                                                 child: Padding(
-                                                  padding: const EdgeInsetsDirectional
-                                                      .fromSTEB(
+                                                  padding:
+                                                      const EdgeInsetsDirectional
+                                                          .fromSTEB(
                                                           8.0, 12.0, 8.0, 0.0),
                                                   child: Column(
                                                     mainAxisSize:
@@ -479,11 +483,8 @@ class _LogSwitchWidgetState extends State<LogSwitchWidget>
                                                       Padding(
                                                         padding:
                                                             const EdgeInsetsDirectional
-                                                                .fromSTEB(
-                                                                    8.0,
-                                                                    0.0,
-                                                                    0.0,
-                                                                    0.0),
+                                                                .fromSTEB(8.0,
+                                                                0.0, 0.0, 0.0),
                                                         child: Row(
                                                           mainAxisSize:
                                                               MainAxisSize.max,
@@ -495,10 +496,10 @@ class _LogSwitchWidgetState extends State<LogSwitchWidget>
                                                               padding:
                                                                   const EdgeInsetsDirectional
                                                                       .fromSTEB(
-                                                                          0.0,
-                                                                          4.0,
-                                                                          0.0,
-                                                                          4.0),
+                                                                      0.0,
+                                                                      4.0,
+                                                                      0.0,
+                                                                      4.0),
                                                               child: Text(
                                                                 'Logout',
                                                                 style: FlutterFlowTheme.of(
@@ -591,8 +592,9 @@ class _LogSwitchWidgetState extends State<LogSwitchWidget>
                                   text: 'Cancel',
                                   options: FFButtonOptions(
                                     padding: const EdgeInsets.all(24.0),
-                                    iconPadding: const EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 0.0, 0.0, 0.0),
+                                    iconPadding:
+                                        const EdgeInsetsDirectional.fromSTEB(
+                                            0.0, 0.0, 0.0, 0.0),
                                     color: FlutterFlowTheme.of(context)
                                         .secondaryBackground,
                                     textStyle: FlutterFlowTheme.of(context)
@@ -624,8 +626,9 @@ class _LogSwitchWidgetState extends State<LogSwitchWidget>
                                 text: 'Save & Close',
                                 options: FFButtonOptions(
                                   padding: const EdgeInsets.all(24.0),
-                                  iconPadding: const EdgeInsetsDirectional.fromSTEB(
-                                      0.0, 0.0, 0.0, 0.0),
+                                  iconPadding:
+                                      const EdgeInsetsDirectional.fromSTEB(
+                                          0.0, 0.0, 0.0, 0.0),
                                   color: FlutterFlowTheme.of(context).primary,
                                   textStyle: FlutterFlowTheme.of(context)
                                       .titleSmall

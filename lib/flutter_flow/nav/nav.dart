@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:q_r_checkin/pages/home_page/home_page_model.dart';
 
 import '/index.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -44,8 +45,8 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
             name: 'TicketInfo',
             path: '/ticketInfo',
-            builder: (context, params) => TicketInfoWidget(
-                ticket: params.state.extra as Map<String, dynamic>)),
+            builder: (context, params) =>
+                TicketInfoWidget(model: params.state.extra as HomePageModel)),
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
 

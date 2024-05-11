@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:q_r_checkin/pages/home_page/home_page_model.dart';
+
 import '/components/drawer/drawer_widget.dart';
 import '/components/ticket_log/ticket_log_widget.dart';
 import '/components/upper_card_content/upper_card_content_widget.dart';
@@ -26,8 +28,8 @@ class HistoryItem {
 }
 
 class TicketInfoWidget extends StatefulWidget {
-  final Map<String, dynamic> ticket;
-  const TicketInfoWidget({super.key, required this.ticket});
+  final HomePageModel model;
+  const TicketInfoWidget({super.key, required this.model});
 
   @override
   State<TicketInfoWidget> createState() => _TicketInfoWidgetState();
@@ -38,7 +40,7 @@ class _TicketInfoWidgetState extends State<TicketInfoWidget>
   late TicketInfoModel _model;
   late String _currentTime;
   late Timer _timer;
-  late Map<String, dynamic> ticket;
+  late HomePageModel _homeModel;
   late List<dynamic> history;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
@@ -51,8 +53,8 @@ class _TicketInfoWidgetState extends State<TicketInfoWidget>
     _model = createModel(context, () => TicketInfoModel());
     _currentTime = _getCurrentTime();
     _startTimer();
-    ticket = widget.ticket;
-    history = ticket['history'];
+    _homeModel = widget.model;
+    history = _homeModel.ticket['history'];
     animationsMap.addAll({
       'columnOnPageLoadAnimation1': AnimationInfo(
         trigger: AnimationTrigger.onPageLoad,
@@ -149,7 +151,7 @@ class _TicketInfoWidgetState extends State<TicketInfoWidget>
             child: wrapWithModel(
               model: _model.drawerModel,
               updateCallback: () => setState(() {}),
-              child: const DrawerWidget(),
+              child: DrawerWidget(_homeModel),
             ),
           ),
         ),
@@ -422,7 +424,8 @@ class _TicketInfoWidgetState extends State<TicketInfoWidget>
                                                         children: [
                                                           // Write the Ticker code/no. here, the logic only has to change the ticket no. per scan
                                                           Text(
-                                                            ticket['id']
+                                                            _homeModel
+                                                                .ticket['id']
                                                                 .toString()
                                                                 .padLeft(
                                                                     4, '0'),
@@ -494,7 +497,8 @@ class _TicketInfoWidgetState extends State<TicketInfoWidget>
                                                         UpperCardContentWidget(
                                                       info: DateFormat('h:mm a')
                                                           .format(DateTime
-                                                              .parse(ticket[
+                                                              .parse(_homeModel
+                                                                      .ticket[
                                                                   "check_in"])),
                                                       subInfo: 'Check-in Time',
                                                       cardicon: Icon(
@@ -518,7 +522,8 @@ class _TicketInfoWidgetState extends State<TicketInfoWidget>
                                                         UpperCardContentWidget(
                                                       info: DateFormat('h:mm a')
                                                           .format(DateTime
-                                                              .parse(ticket[
+                                                              .parse(_homeModel
+                                                                      .ticket[
                                                                   "check_out"])),
                                                       subInfo: 'Check-Out Time',
                                                       cardicon: Icon(

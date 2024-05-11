@@ -33,7 +33,10 @@ function getIPAddress() {
   return results;
 }
 
+app.get("/api/", (req, res) => {
 
+  res.status(200).send("Meow");
+});
 app.get("/api/ticket/:uid", (req, res) => {
 
   // Helper function to format the results
