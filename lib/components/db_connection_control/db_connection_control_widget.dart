@@ -114,6 +114,7 @@ class _DbConnectionControlWidgetState extends State<DbConnectionControlWidget>
     _homeModel = widget._homeModel;
     _model.textController ??= TextEditingController();
     _model.textFieldFocusNode ??= FocusNode();
+
     currentConnectionMessage = connectionStatus(_homeModel.connectionStatus);
 
     animationsMap.addAll({

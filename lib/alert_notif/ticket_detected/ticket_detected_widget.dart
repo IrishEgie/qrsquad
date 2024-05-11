@@ -48,37 +48,44 @@ class _TicketDetectedWidgetState extends State<TicketDetectedWidget> {
   void fetchingTicket() {
     if ((_homeModel.ticket["success"]) != Null) {
       if ((_homeModel.ticket["success"])) {
-        Timer(const Duration(seconds: 2), () {
-          showModalBottomSheet(
-            isScrollControlled: true,
-            backgroundColor: Colors.transparent,
-            useSafeArea: true,
-            context: context,
-            enableDrag: false,
-            builder: (context) {
-              return GestureDetector(
-                onTap: () => _homeModel.unfocusNode.canRequestFocus
-                    ? FocusScope.of(context)
-                        .requestFocus(_homeModel.unfocusNode)
-                    : FocusScope.of(context).unfocus(),
-                child: Padding(
-                  padding: MediaQuery.viewInsetsOf(context),
-                  child: SizedBox(
-                    height: MediaQuery.sizeOf(context).height * 1.0,
-                    child: const TicketLogggedWidget(),
-                  ),
-                ),
-              );
-            },
-          ).then((value) => safeSetState(() {
-                Timer(const Duration(milliseconds: 1), () {
-                  Navigator.pop(context); // Close the modal
-                });
-              }));
+        if (_homeModel.isDebug) {
           Timer(const Duration(milliseconds: 1000), () {
-            Navigator.pop(context);
+            // Navigator.pop(context);
+            context.goNamed("TicketInfo", extra: _homeModel);
           });
-        });
+        } else {
+          Timer(const Duration(seconds: 2), () {
+            showModalBottomSheet(
+              isScrollControlled: true,
+              backgroundColor: Colors.transparent,
+              useSafeArea: true,
+              context: context,
+              enableDrag: false,
+              builder: (context) {
+                return GestureDetector(
+                  onTap: () => _homeModel.unfocusNode.canRequestFocus
+                      ? FocusScope.of(context)
+                          .requestFocus(_homeModel.unfocusNode)
+                      : FocusScope.of(context).unfocus(),
+                  child: Padding(
+                    padding: MediaQuery.viewInsetsOf(context),
+                    child: SizedBox(
+                      height: MediaQuery.sizeOf(context).height * 1.0,
+                      child: const TicketLogggedWidget(),
+                    ),
+                  ),
+                );
+              },
+            ).then((value) => safeSetState(() {
+                  Timer(const Duration(milliseconds: 1), () {
+                    Navigator.pop(context); // Close the modal
+                  });
+                }));
+            Timer(const Duration(milliseconds: 1000), () {
+              Navigator.pop(context);
+            });
+          });
+        }
       } else {
         Timer(const Duration(milliseconds: 1000), () {
           Navigator.pop(context);

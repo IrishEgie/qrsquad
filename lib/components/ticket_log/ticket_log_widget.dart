@@ -30,7 +30,8 @@ class _TicketLogWidgetState extends State<TicketLogWidget>
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => TicketLogModel());
+    _model = createModel(context,
+        () => TicketLogModel(dateUsage: "", timeUsage: "", loggingType: ""));
 
     animationsMap.addAll({
       'containerOnPageLoadAnimation': AnimationInfo(
@@ -98,7 +99,8 @@ class _TicketLogWidgetState extends State<TicketLogWidget>
             mainAxisSize: MainAxisSize.max,
             children: [
               Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 0.0),
+                padding:
+                    const EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 0.0),
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -125,7 +127,7 @@ class _TicketLogWidgetState extends State<TicketLogWidget>
                               padding: const EdgeInsetsDirectional.fromSTEB(
                                   12.0, 0.0, 0.0, 0.0),
                               child: Text(
-                                '[Date of Usage]',
+                                _model.dateUsage,
                                 style: FlutterFlowTheme.of(context)
                                     .bodyMedium
                                     .override(
@@ -171,7 +173,8 @@ class _TicketLogWidgetState extends State<TicketLogWidget>
                 ),
               ),
               Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),
+                padding:
+                    const EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
                   children: [
@@ -183,7 +186,7 @@ class _TicketLogWidgetState extends State<TicketLogWidget>
                           padding: const EdgeInsetsDirectional.fromSTEB(
                               0.0, 12.0, 0.0, 0.0),
                           child: Text(
-                            'Check In/Out  Time',
+                            _model.loggingType,
                             style: FlutterFlowTheme.of(context)
                                 .bodyMedium
                                 .override(
@@ -203,7 +206,7 @@ class _TicketLogWidgetState extends State<TicketLogWidget>
                           padding: const EdgeInsetsDirectional.fromSTEB(
                               0.0, 12.0, 0.0, 0.0),
                           child: Text(
-                            '5:12 PM [Sample] Put [N/A] if None',
+                            _model.timeUsage,
                             style: FlutterFlowTheme.of(context)
                                 .bodyMedium
                                 .override(
