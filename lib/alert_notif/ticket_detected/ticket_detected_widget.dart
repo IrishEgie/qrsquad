@@ -46,31 +46,49 @@ class _TicketDetectedWidgetState extends State<TicketDetectedWidget> {
   }
 
   void fetchingTicket() {
-    Timer(const Duration(seconds: 2), () {
-      showModalBottomSheet(
-        isScrollControlled: true,
-        backgroundColor: Colors.transparent,
-        useSafeArea: true,
-        context: context,
-        builder: (context) {
-          return GestureDetector(
-            onTap: () => _homeModel.unfocusNode.canRequestFocus
-                ? FocusScope.of(context).requestFocus(_homeModel.unfocusNode)
-                : FocusScope.of(context).unfocus(),
-            child: Padding(
-              padding: MediaQuery.viewInsetsOf(context),
-              child: SizedBox(
-                height: MediaQuery.sizeOf(context).height * 1.0,
-                child: const TicketLogggedWidget(),
-              ),
-            ),
-          );
-        },
-      ).then((value) => safeSetState(() {}));
-      Timer(const Duration(milliseconds: 500), () {
-        context.pushNamed('TicketInfo', extra: _homeModel.ticket);
+    if ((_homeModel.ticket["success"]) != Null) {
+      if ((_homeModel.ticket["success"])) {
+        Timer(const Duration(seconds: 2), () {
+          showModalBottomSheet(
+            isScrollControlled: true,
+            backgroundColor: Colors.transparent,
+            useSafeArea: true,
+            context: context,
+            enableDrag: false,
+            builder: (context) {
+              return GestureDetector(
+                onTap: () => _homeModel.unfocusNode.canRequestFocus
+                    ? FocusScope.of(context)
+                        .requestFocus(_homeModel.unfocusNode)
+                    : FocusScope.of(context).unfocus(),
+                child: Padding(
+                  padding: MediaQuery.viewInsetsOf(context),
+                  child: SizedBox(
+                    height: MediaQuery.sizeOf(context).height * 1.0,
+                    child: const TicketLogggedWidget(),
+                  ),
+                ),
+              );
+            },
+          ).then((value) => safeSetState(() {
+                Timer(const Duration(milliseconds: 1), () {
+                  Navigator.pop(context); // Close the modal
+                });
+              }));
+          Timer(const Duration(milliseconds: 1000), () {
+            Navigator.pop(context);
+          });
+        });
+      } else {
+        Timer(const Duration(milliseconds: 1000), () {
+          Navigator.pop(context);
+        });
+      }
+    } else {
+      Timer(const Duration(milliseconds: 1000), () {
+        Navigator.pop(context);
       });
-    });
+    }
   }
 
   @override
@@ -106,7 +124,11 @@ class _TicketDetectedWidgetState extends State<TicketDetectedWidget> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Icon(
-                      Icons.qr_code_rounded,
+                      (_homeModel.ticket["success"] != Null)
+                          ? ((_homeModel.ticket["success"])
+                              ? Icons.qr_code_rounded
+                              : Icons.warning_amber_rounded)
+                          : Icons.pest_control_rounded,
                       color: FlutterFlowTheme.of(context).primary,
                       size: 128.0,
                     ),
@@ -114,7 +136,11 @@ class _TicketDetectedWidgetState extends State<TicketDetectedWidget> {
                       padding: const EdgeInsetsDirectional.fromSTEB(
                           0.0, 16.0, 0.0, 0.0),
                       child: Text(
-                        'Ticket Detected',
+                        (_homeModel.ticket["success"] != Null)
+                            ? ((_homeModel.ticket["success"])
+                                ? 'Ticket Detected'
+                                : 'Sorry, Ticket not Found!')
+                            : 'Database Connection Error',
                         style: FlutterFlowTheme.of(context)
                             .headlineMedium
                             .override(
@@ -132,7 +158,11 @@ class _TicketDetectedWidgetState extends State<TicketDetectedWidget> {
                       padding: const EdgeInsetsDirectional.fromSTEB(
                           0.0, 4.0, 0.0, 0.0),
                       child: Text(
-                        'Please wait while our system logs your ticket to the event',
+                        (_homeModel.ticket["success"] != Null)
+                            ? ((_homeModel.ticket["success"])
+                                ? 'Please wait while our system logs your ticket to the event'
+                                : 'Please try to use a valid ticket. Thank you!')
+                            : 'Please try to establish connection first in the Network Section from Quick Menu',
                         style:
                             FlutterFlowTheme.of(context).labelMedium.override(
                                   fontFamily: 'Plus Jakarta Sans',

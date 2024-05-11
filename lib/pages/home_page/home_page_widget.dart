@@ -452,8 +452,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                   child: Stack(
                                     children: [
                                       Image.asset(
-                                        // Use Image.asset for local images
-                                        'assets/images/background_splash.jpg', // Updated path
+                                        'assets/images/background_splash.jpg',
                                         width:
                                             MediaQuery.sizeOf(context).width *
                                                 1.0,
@@ -675,6 +674,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
             isScrollControlled: true,
             backgroundColor: Colors.transparent,
             useSafeArea: true,
+            enableDrag: false,
             context: context,
             builder: (context) {
               return GestureDetector(
@@ -693,12 +693,55 @@ class _HomePageWidgetState extends State<HomePageWidget>
           ).then((value) => safeSetState(() {}));
         }
       } else {
-        // Handle API error
-        print("Failed to fetch data. Status code: ${response.statusCode}");
+        // Handle API error / No ticket detected.
+        _model.ticket = <String, dynamic>{"success": false};
+        showModalBottomSheet(
+          isScrollControlled: true,
+          backgroundColor: Colors.transparent,
+          useSafeArea: true,
+          enableDrag: false,
+          context: context,
+          builder: (context) {
+            return GestureDetector(
+              onTap: () => _model.unfocusNode.canRequestFocus
+                  ? FocusScope.of(context).requestFocus(_model.unfocusNode)
+                  : FocusScope.of(context).unfocus(),
+              child: Padding(
+                padding: MediaQuery.viewInsetsOf(context),
+                child: SizedBox(
+                  height: MediaQuery.sizeOf(context).height * 1.0,
+                  child: TicketDetectedWidget(_model),
+                ),
+              ),
+            );
+          },
+        ).then((value) => safeSetState(() {}));
       }
     } catch (error) {
-      // Handle network error
-      print("Error: " + error.toString());
+      // Handle network error / No database selected.
+      _model.ticket = <String, dynamic>{"success": Null};
+      showModalBottomSheet(
+        isScrollControlled: true,
+        backgroundColor: Colors.transparent,
+        useSafeArea: true,
+        enableDrag: false,
+        context: context,
+        builder: (context) {
+          return GestureDetector(
+            onTap: () => _model.unfocusNode.canRequestFocus
+                ? FocusScope.of(context).requestFocus(_model.unfocusNode)
+                : FocusScope.of(context).unfocus(),
+            child: Padding(
+              padding: MediaQuery.viewInsetsOf(context),
+              child: SizedBox(
+                height: MediaQuery.sizeOf(context).height * 1.0,
+                child: TicketDetectedWidget(_model),
+              ),
+            ),
+          );
+        },
+      ).then((value) => safeSetState(() {}));
+      print("Error: " + error.toString() + "\nNo Database Server Connection");
     }
   }
 }
