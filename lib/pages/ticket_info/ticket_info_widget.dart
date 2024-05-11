@@ -625,7 +625,7 @@ class _TicketInfoWidgetState extends State<TicketInfoWidget>
                                                     padding:
                                                         const EdgeInsetsDirectional
                                                             .fromSTEB(0.0, 0.0,
-                                                                0.0, 36.0),
+                                                            0.0, 36.0),
                                                     child:
                                                         SingleChildScrollView(
                                                       child: Column(
@@ -1121,14 +1121,15 @@ class _TicketInfoWidgetState extends State<TicketInfoWidget>
                                                     padding:
                                                         const EdgeInsetsDirectional
                                                             .fromSTEB(0.0, 0.0,
-                                                                0.0, 38.0),
+                                                            0.0, 38.0),
                                                     child: Container(
                                                       width: MediaQuery.sizeOf(
                                                                   context)
                                                               .width *
                                                           0.75,
                                                       height: 100.0,
-                                                      decoration: const BoxDecoration(
+                                                      decoration:
+                                                          const BoxDecoration(
                                                         gradient:
                                                             LinearGradient(
                                                           colors: [
@@ -1343,8 +1344,8 @@ class _TicketInfoWidgetState extends State<TicketInfoWidget>
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Padding(
-                      padding:
-                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 4.0),
+                      padding: const EdgeInsetsDirectional.fromSTEB(
+                          0.0, 0.0, 0.0, 4.0),
                       child: Text(
                         'SYSTEM DESIGNED BY ICPEP.SE - SSU',
                         style: FlutterFlowTheme.of(context).bodyMedium.override(
@@ -1360,25 +1361,25 @@ class _TicketInfoWidgetState extends State<TicketInfoWidget>
                             ),
                       ),
                     ),
-                  ),
-                  Wrap(
-                    spacing: 0.0,
-                    runSpacing: 0.0,
-                    alignment: WrapAlignment.start,
-                    crossAxisAlignment: WrapCrossAlignment.start,
-                    direction: Axis.horizontal,
-                    runAlignment: WrapAlignment.start,
-                    verticalDirection: VerticalDirection.down,
-                    clipBehavior: Clip.none,
-                    children: [
-                      Container(
-                        width: 100.0,
-                        height: 30.0,
-                        decoration: const BoxDecoration(),
-                      ),
-                    ],
-                  ),
-                ],
+                    Wrap(
+                      spacing: 0.0,
+                      runSpacing: 0.0,
+                      alignment: WrapAlignment.start,
+                      crossAxisAlignment: WrapCrossAlignment.start,
+                      direction: Axis.horizontal,
+                      runAlignment: WrapAlignment.start,
+                      verticalDirection: VerticalDirection.down,
+                      clipBehavior: Clip.none,
+                      children: [
+                        Container(
+                          width: 100.0,
+                          height: 30.0,
+                          decoration: const BoxDecoration(),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ],
           ),

@@ -451,8 +451,9 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                   ),
                                   child: Stack(
                                     children: [
-                                      Image.network(
-                                        'https://images.unsplash.com/photo-1671865176105-5531335a9c59?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NTYyMDF8MHwxfHNlYXJjaHw5fHxtaXNzJTIwd29ybGR8ZW58MHx8fHwxNzE0ODAwMjIyfDA&ixlib=rb-4.0.3&q=80&w=400',
+                                      Image.asset(
+                                        // Use Image.asset for local images
+                                        'assets/images/background_splash.jpg', // Updated path
                                         width:
                                             MediaQuery.sizeOf(context).width *
                                                 1.0,
