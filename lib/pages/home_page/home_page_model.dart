@@ -1,11 +1,16 @@
+import 'package:q_r_checkin/index.dart';
+
 import '/components/drawer/drawer_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import 'home_page_widget.dart' show HomePageWidget;
 import 'package:flutter/material.dart';
 
 class HomePageModel extends FlutterFlowModel<HomePageWidget> {
   ///  State fields for stateful widgets in this page.
   final unfocusNode = FocusNode();
+
+  /// database connection
+  late String apiUrl = "";
+  late Connection connectionStatus = Connection.NULL;
 
   /// Property for Ticket Class
   late Map<String, dynamic> ticket;
