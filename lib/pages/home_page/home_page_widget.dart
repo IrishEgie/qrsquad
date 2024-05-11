@@ -661,9 +661,11 @@ class _HomePageWidgetState extends State<HomePageWidget>
 
   // Authenticate if Ticket exists in Database
   Future<void> authenticateTicket(String value, BuildContext context) async {
+    const Duration timeoutDuration = Duration(milliseconds: 500);
     final String apiUrl = 'http://127.0.0.1:5000/api/ticket/$value';
     try {
-      Response response = await http.get(Uri.parse(apiUrl));
+      Response response =
+          await http.get(Uri.parse(apiUrl)).timeout(timeoutDuration);
       if (response.statusCode == 200) {
         final Map<String, dynamic> data = json.decode(response.body);
 
@@ -717,6 +719,8 @@ class _HomePageWidgetState extends State<HomePageWidget>
           },
         ).then((value) => safeSetState(() {}));
       }
+    } on TimeoutException catch (_) {
+      print("Error: Request timed out after $timeoutDuration");
     } catch (error) {
       // Handle network error / No database selected.
       _model.ticket = <String, dynamic>{"success": Null};
