@@ -110,7 +110,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
             child: wrapWithModel(
               model: _model.drawerModel,
               updateCallback: () => setState(() {}),
-              child: const DrawerWidget(),
+              child: DrawerWidget(_model),
             ),
           ),
         ),
@@ -661,8 +661,10 @@ class _HomePageWidgetState extends State<HomePageWidget>
 
   // Authenticate if Ticket exists in Database
   Future<void> authenticateTicket(String value, BuildContext context) async {
+    // _model.apiUrl = '127.0.0.1:5000';
     const Duration timeoutDuration = Duration(milliseconds: 500);
-    final String apiUrl = 'http://127.0.0.1:5000/api/ticket/$value';
+    late String ipAddress = _model.apiUrl;
+    late String apiUrl = 'http://$ipAddress/api/ticket/$value';
     try {
       Response response =
           await http.get(Uri.parse(apiUrl)).timeout(timeoutDuration);
@@ -670,7 +672,8 @@ class _HomePageWidgetState extends State<HomePageWidget>
         final Map<String, dynamic> data = json.decode(response.body);
 
         // Check if the "success" key exists and its value is true
-        if (data.containsKey("success") && data["success"] && mounted) {
+        if (!mounted) return;
+        if (data.containsKey("success") && data["success"]) {
           _model.ticket = data;
           showModalBottomSheet(
             isScrollControlled: true,
@@ -697,6 +700,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
       } else {
         // Handle API error / No ticket detected.
         _model.ticket = <String, dynamic>{"success": false};
+        if (!mounted) return;
         showModalBottomSheet(
           isScrollControlled: true,
           backgroundColor: Colors.transparent,
@@ -720,9 +724,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
         ).then((value) => safeSetState(() {}));
       }
     } on TimeoutException catch (_) {
-      print("Error: Request timed out after $timeoutDuration");
-    } catch (error) {
-      // Handle network error / No database selected.
+      if (!mounted) return;
       _model.ticket = <String, dynamic>{"success": Null};
       showModalBottomSheet(
         isScrollControlled: true,
@@ -744,8 +746,36 @@ class _HomePageWidgetState extends State<HomePageWidget>
             ),
           );
         },
-      ).then((value) => safeSetState(() {}));
-      print("Error: " + error.toString() + "\nNo Database Server Connection");
+      ).then((value) {
+        safeSetState(() {});
+      });
+    } catch (error) {
+      // Handle network error / No database selected.
+      if (!mounted) return;
+      _model.ticket = <String, dynamic>{"success": Null};
+      showModalBottomSheet(
+        isScrollControlled: true,
+        backgroundColor: Colors.transparent,
+        useSafeArea: true,
+        enableDrag: false,
+        context: context,
+        builder: (context) {
+          return GestureDetector(
+            onTap: () => _model.unfocusNode.canRequestFocus
+                ? FocusScope.of(context).requestFocus(_model.unfocusNode)
+                : FocusScope.of(context).unfocus(),
+            child: Padding(
+              padding: MediaQuery.viewInsetsOf(context),
+              child: SizedBox(
+                height: MediaQuery.sizeOf(context).height * 1.0,
+                child: TicketDetectedWidget(_model),
+              ),
+            ),
+          );
+        },
+      ).then((value) {
+        safeSetState(() {});
+      });
     }
   }
 }

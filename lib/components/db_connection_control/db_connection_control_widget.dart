@@ -1,3 +1,9 @@
+import 'dart:async';
+
+import 'package:http/http.dart';
+import 'package:q_r_checkin/index.dart';
+import 'package:q_r_checkin/pages/home_page/home_page_model.dart';
+
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -5,6 +11,7 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
 import 'dart:ui';
+import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -12,7 +19,8 @@ import 'db_connection_control_model.dart';
 export 'db_connection_control_model.dart';
 
 class DbConnectionControlWidget extends StatefulWidget {
-  const DbConnectionControlWidget({super.key});
+  final HomePageModel _homeModel;
+  const DbConnectionControlWidget(this._homeModel, {super.key});
 
   @override
   State<DbConnectionControlWidget> createState() =>
@@ -22,7 +30,75 @@ class DbConnectionControlWidget extends StatefulWidget {
 class _DbConnectionControlWidgetState extends State<DbConnectionControlWidget>
     with TickerProviderStateMixin {
   late DbConnectionControlModel _model;
+  late HomePageModel _homeModel;
 
+  String connectionStatus(Connection iconName, {String periods = "..."}) {
+    String message = "Not connected to server";
+    switch (iconName) {
+      case Connection.NOTCONNECTED:
+        message = "Not connected to server";
+        break;
+      case Connection.CONNECTING:
+        message = 'Connecting to server$periods';
+        break;
+      case Connection.SUCCESSFUL:
+        message = "Successfully connected to server";
+        break;
+      case Connection.CONNECTED:
+        message = "Connected to server";
+        break;
+      default:
+        message = "Not connected to server";
+        break;
+    }
+    return message;
+  }
+
+  Icon connectionIcon(Connection iconName, {double size = 32.0}) {
+    late Icon icon = Icon(
+      Icons.wifi_tethering_error_rounded_rounded,
+      color: FlutterFlowTheme.of(context).error,
+      size: size,
+    );
+    switch (iconName) {
+      case Connection.NOTCONNECTED:
+        icon = Icon(
+          Icons.wifi_tethering_error_rounded_rounded,
+          color: FlutterFlowTheme.of(context).error,
+          size: size,
+        );
+        break;
+      case Connection.CONNECTING:
+        icon = Icon(
+          Icons.wifi_tethering_rounded,
+          color: FlutterFlowTheme.of(context).warning,
+          size: size,
+        );
+        break;
+      case Connection.SUCCESSFUL:
+        icon = Icon(
+          Icons.check_circle_outline_rounded,
+          color: FlutterFlowTheme.of(context).secondary,
+          size: size,
+        );
+        break;
+      case Connection.CONNECTED:
+        icon = Icon(Icons.wifi_rounded,
+            color: FlutterFlowTheme.of(context).secondary, size: size);
+        break;
+      default:
+        icon = Icon(
+          Icons.wifi_tethering_error_rounded_rounded,
+          color: FlutterFlowTheme.of(context).error,
+          size: size,
+        );
+        break;
+    }
+    return icon;
+  }
+
+  late String currentConnectionMessage;
+  late bool timerStillRunning = false;
   final animationsMap = <String, AnimationInfo>{};
 
   @override
@@ -35,9 +111,10 @@ class _DbConnectionControlWidgetState extends State<DbConnectionControlWidget>
   void initState() {
     super.initState();
     _model = createModel(context, () => DbConnectionControlModel());
-
+    _homeModel = widget._homeModel;
     _model.textController ??= TextEditingController();
     _model.textFieldFocusNode ??= FocusNode();
+    currentConnectionMessage = connectionStatus(_homeModel.connectionStatus);
 
     animationsMap.addAll({
       'containerOnPageLoadAnimation': AnimationInfo(
@@ -185,7 +262,8 @@ class _DbConnectionControlWidgetState extends State<DbConnectionControlWidget>
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(16.0, 2.0, 16.0, 16.0),
+                padding:
+                    const EdgeInsetsDirectional.fromSTEB(16.0, 2.0, 16.0, 16.0),
                 child: Container(
                   width: double.infinity,
                   constraints: const BoxConstraints(
@@ -273,15 +351,12 @@ class _DbConnectionControlWidgetState extends State<DbConnectionControlWidget>
                                 child: Row(
                                   mainAxisSize: MainAxisSize.max,
                                   children: [
-                                    Icon(
-                                      Icons.wifi_rounded,
-                                      color:
-                                          FlutterFlowTheme.of(context).primary,
-                                      size: 48.0,
-                                    ),
+                                    connectionIcon(_homeModel.connectionStatus,
+                                        size: 48.0),
                                     Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
-                                          16.0, 0.0, 0.0, 0.0),
+                                      padding:
+                                          const EdgeInsetsDirectional.fromSTEB(
+                                              16.0, 0.0, 0.0, 0.0),
                                       child: Column(
                                         mainAxisSize: MainAxisSize.max,
                                         mainAxisAlignment:
@@ -290,7 +365,9 @@ class _DbConnectionControlWidgetState extends State<DbConnectionControlWidget>
                                             CrossAxisAlignment.start,
                                         children: [
                                           Text(
-                                            'IP Address',
+                                            (_homeModel.apiUrl.isEmpty)
+                                                ? 'IP Address'
+                                                : _homeModel.apiUrl,
                                             style: FlutterFlowTheme.of(context)
                                                 .displaySmall
                                                 .override(
@@ -310,11 +387,10 @@ class _DbConnectionControlWidgetState extends State<DbConnectionControlWidget>
                                                 ),
                                           ),
                                           Padding(
-                                            padding:
-                                                const EdgeInsetsDirectional.fromSTEB(
-                                                    0.0, 4.0, 0.0, 0.0),
+                                            padding: const EdgeInsetsDirectional
+                                                .fromSTEB(0.0, 4.0, 0.0, 0.0),
                                             child: Text(
-                                              'Database Connection',
+                                              currentConnectionMessage,
                                               style:
                                                   FlutterFlowTheme.of(context)
                                                       .labelLarge
@@ -391,8 +467,9 @@ class _DbConnectionControlWidgetState extends State<DbConnectionControlWidget>
                                                 MainAxisAlignment.spaceBetween,
                                             children: [
                                               Padding(
-                                                padding: const EdgeInsetsDirectional
-                                                    .fromSTEB(
+                                                padding:
+                                                    const EdgeInsetsDirectional
+                                                        .fromSTEB(
                                                         0.0, 0.0, 24.0, 0.0),
                                                 child: Text(
                                                   'Set Log State',
@@ -462,8 +539,9 @@ class _DbConnectionControlWidgetState extends State<DbConnectionControlWidget>
                                                         .alternate,
                                                 borderWidth: 2.0,
                                                 borderRadius: 8.0,
-                                                margin: const EdgeInsetsDirectional
-                                                    .fromSTEB(
+                                                margin:
+                                                    const EdgeInsetsDirectional
+                                                        .fromSTEB(
                                                         16.0, 4.0, 16.0, 4.0),
                                                 hidesUnderline: true,
                                                 isOverButton: true,
@@ -511,8 +589,9 @@ class _DbConnectionControlWidgetState extends State<DbConnectionControlWidget>
                                                 MainAxisAlignment.spaceBetween,
                                             children: [
                                               Padding(
-                                                padding: const EdgeInsetsDirectional
-                                                    .fromSTEB(
+                                                padding:
+                                                    const EdgeInsetsDirectional
+                                                        .fromSTEB(
                                                         0.0, 0.0, 24.0, 0.0),
                                                 child: Text(
                                                   'Set IP address',
@@ -537,8 +616,9 @@ class _DbConnectionControlWidgetState extends State<DbConnectionControlWidget>
                                               ),
                                               Expanded(
                                                 child: Padding(
-                                                  padding: const EdgeInsetsDirectional
-                                                      .fromSTEB(
+                                                  padding:
+                                                      const EdgeInsetsDirectional
+                                                          .fromSTEB(
                                                           8.0, 0.0, 8.0, 0.0),
                                                   child: TextFormField(
                                                     controller:
@@ -650,6 +730,9 @@ class _DbConnectionControlWidgetState extends State<DbConnectionControlWidget>
                                                     validator: _model
                                                         .textControllerValidator
                                                         .asValidator(context),
+                                                    onChanged: (value) {
+                                                      _model.apiUrl = value;
+                                                    },
                                                   ),
                                                 ),
                                               ),
@@ -662,23 +745,23 @@ class _DbConnectionControlWidgetState extends State<DbConnectionControlWidget>
                                               MainAxisAlignment.end,
                                           children: [
                                             Padding(
-                                              padding: const EdgeInsetsDirectional
-                                                  .fromSTEB(
+                                              padding:
+                                                  const EdgeInsetsDirectional
+                                                      .fromSTEB(
                                                       0.0, 0.0, 24.0, 0.0),
                                               child: FFButtonWidget(
-                                                onPressed: () {
-                                                  print('Button pressed ...');
-                                                },
+                                                onPressed: () {},
                                                 text: 'Cancel',
                                                 options: FFButtonOptions(
                                                   height: 40.0,
-                                                  padding: const EdgeInsetsDirectional
-                                                      .fromSTEB(
+                                                  padding:
+                                                      const EdgeInsetsDirectional
+                                                          .fromSTEB(
                                                           24.0, 0.0, 24.0, 0.0),
                                                   iconPadding:
                                                       const EdgeInsetsDirectional
-                                                          .fromSTEB(0.0, 0.0,
-                                                              0.0, 0.0),
+                                                          .fromSTEB(
+                                                          0.0, 0.0, 0.0, 0.0),
                                                   color: FlutterFlowTheme.of(
                                                           context)
                                                       .alternate,
@@ -712,23 +795,31 @@ class _DbConnectionControlWidgetState extends State<DbConnectionControlWidget>
                                               ),
                                             ),
                                             Padding(
-                                              padding: const EdgeInsetsDirectional
-                                                  .fromSTEB(
+                                              padding:
+                                                  const EdgeInsetsDirectional
+                                                      .fromSTEB(
                                                       0.0, 0.0, 24.0, 0.0),
                                               child: FFButtonWidget(
                                                 onPressed: () {
-                                                  print('Button pressed ...');
+                                                  setState(() {
+                                                    _homeModel.apiUrl =
+                                                        _model.apiUrl;
+                                                  });
+
+                                                  checkConnection();
+                                                  // Check if connection is established.
                                                 },
                                                 text: 'Submit',
                                                 options: FFButtonOptions(
                                                   height: 40.0,
-                                                  padding: const EdgeInsetsDirectional
-                                                      .fromSTEB(
+                                                  padding:
+                                                      const EdgeInsetsDirectional
+                                                          .fromSTEB(
                                                           24.0, 0.0, 24.0, 0.0),
                                                   iconPadding:
                                                       const EdgeInsetsDirectional
-                                                          .fromSTEB(0.0, 0.0,
-                                                              0.0, 0.0),
+                                                          .fromSTEB(
+                                                          0.0, 0.0, 0.0, 0.0),
                                                   color: FlutterFlowTheme.of(
                                                           context)
                                                       .primary,
@@ -794,29 +885,24 @@ class _DbConnectionControlWidgetState extends State<DbConnectionControlWidget>
                                           ],
                                         ),
                                         Padding(
-                                          padding:
-                                              const EdgeInsetsDirectional.fromSTEB(
-                                                  0.0, 8.0, 0.0, 0.0),
+                                          padding: const EdgeInsetsDirectional
+                                              .fromSTEB(0.0, 8.0, 0.0, 0.0),
                                           child: Row(
                                             mainAxisSize: MainAxisSize.max,
                                             mainAxisAlignment:
                                                 MainAxisAlignment.start,
                                             children: [
                                               Padding(
-                                                padding: const EdgeInsetsDirectional
-                                                    .fromSTEB(
+                                                padding:
+                                                    const EdgeInsetsDirectional
+                                                        .fromSTEB(
                                                         0.0, 0.0, 12.0, 0.0),
-                                                child: Icon(
-                                                  Icons
-                                                      .wifi_tethering_error_rounded_rounded,
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .error,
-                                                  size: 32.0,
-                                                ),
+                                                child: connectionIcon(
+                                                    Connection.NOTCONNECTED),
                                               ),
                                               Text(
-                                                'Connection Error !',
+                                                connectionStatus(
+                                                    Connection.NOTCONNECTED),
                                                 style:
                                                     FlutterFlowTheme.of(context)
                                                         .bodyMedium
@@ -839,28 +925,24 @@ class _DbConnectionControlWidgetState extends State<DbConnectionControlWidget>
                                               'rowOnPageLoadAnimation1']!),
                                         ),
                                         Padding(
-                                          padding:
-                                              const EdgeInsetsDirectional.fromSTEB(
-                                                  0.0, 8.0, 0.0, 0.0),
+                                          padding: const EdgeInsetsDirectional
+                                              .fromSTEB(0.0, 8.0, 0.0, 0.0),
                                           child: Row(
                                             mainAxisSize: MainAxisSize.max,
                                             mainAxisAlignment:
                                                 MainAxisAlignment.start,
                                             children: [
                                               Padding(
-                                                padding: const EdgeInsetsDirectional
-                                                    .fromSTEB(
+                                                padding:
+                                                    const EdgeInsetsDirectional
+                                                        .fromSTEB(
                                                         0.0, 0.0, 12.0, 0.0),
-                                                child: Icon(
-                                                  Icons.wifi_tethering_rounded,
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .warning,
-                                                  size: 32.0,
-                                                ),
+                                                child: connectionIcon(
+                                                    Connection.CONNECTING),
                                               ),
                                               Text(
-                                                'Connecting ...',
+                                                connectionStatus(
+                                                    Connection.CONNECTING),
                                                 style:
                                                     FlutterFlowTheme.of(context)
                                                         .bodyMedium
@@ -883,28 +965,24 @@ class _DbConnectionControlWidgetState extends State<DbConnectionControlWidget>
                                               'rowOnPageLoadAnimation2']!),
                                         ),
                                         Padding(
-                                          padding:
-                                              const EdgeInsetsDirectional.fromSTEB(
-                                                  0.0, 8.0, 0.0, 0.0),
+                                          padding: const EdgeInsetsDirectional
+                                              .fromSTEB(0.0, 8.0, 0.0, 0.0),
                                           child: Row(
                                             mainAxisSize: MainAxisSize.max,
                                             mainAxisAlignment:
                                                 MainAxisAlignment.start,
                                             children: [
                                               Padding(
-                                                padding: const EdgeInsetsDirectional
-                                                    .fromSTEB(
+                                                padding:
+                                                    const EdgeInsetsDirectional
+                                                        .fromSTEB(
                                                         0.0, 0.0, 12.0, 0.0),
-                                                child: Icon(
-                                                  Icons.wifi_tethering_rounded,
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .primaryText,
-                                                  size: 32.0,
-                                                ),
+                                                child: connectionIcon(
+                                                    Connection.CONNECTED),
                                               ),
                                               Text(
-                                                'Connected  To Network',
+                                                connectionStatus(
+                                                    Connection.CONNECTED),
                                                 style:
                                                     FlutterFlowTheme.of(context)
                                                         .bodyMedium
@@ -927,29 +1005,24 @@ class _DbConnectionControlWidgetState extends State<DbConnectionControlWidget>
                                               'rowOnPageLoadAnimation3']!),
                                         ),
                                         Padding(
-                                          padding:
-                                              const EdgeInsetsDirectional.fromSTEB(
-                                                  0.0, 8.0, 0.0, 0.0),
+                                          padding: const EdgeInsetsDirectional
+                                              .fromSTEB(0.0, 8.0, 0.0, 0.0),
                                           child: Row(
                                             mainAxisSize: MainAxisSize.max,
                                             mainAxisAlignment:
                                                 MainAxisAlignment.start,
                                             children: [
                                               Padding(
-                                                padding: const EdgeInsetsDirectional
-                                                    .fromSTEB(
+                                                padding:
+                                                    const EdgeInsetsDirectional
+                                                        .fromSTEB(
                                                         0.0, 0.0, 12.0, 0.0),
-                                                child: Icon(
-                                                  Icons
-                                                      .check_circle_outline_rounded,
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .secondary,
-                                                  size: 32.0,
-                                                ),
+                                                child: connectionIcon(
+                                                    Connection.SUCCESSFUL),
                                               ),
                                               Text(
-                                                'Connection Succeeded !',
+                                                connectionStatus(
+                                                    Connection.SUCCESSFUL),
                                                 style:
                                                     FlutterFlowTheme.of(context)
                                                         .bodyMedium
@@ -989,18 +1062,25 @@ class _DbConnectionControlWidgetState extends State<DbConnectionControlWidget>
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
                               Align(
-                                alignment: const AlignmentDirectional(0.0, 0.05),
+                                alignment:
+                                    const AlignmentDirectional(0.0, 0.05),
                                 child: FFButtonWidget(
                                   onPressed: () async {
-                                    Navigator.pop(context);
+                                    if (!timerStillRunning) {
+                                      Navigator.pop(context);
+                                    }
                                   },
-                                  text: 'Close',
+                                  text: (!timerStillRunning)
+                                      ? 'Close'
+                                      : 'Running',
                                   options: FFButtonOptions(
                                     height: 44.0,
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
-                                        24.0, 0.0, 24.0, 0.0),
-                                    iconPadding: const EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 0.0, 0.0, 0.0),
+                                    padding:
+                                        const EdgeInsetsDirectional.fromSTEB(
+                                            24.0, 0.0, 24.0, 0.0),
+                                    iconPadding:
+                                        const EdgeInsetsDirectional.fromSTEB(
+                                            0.0, 0.0, 0.0, 0.0),
                                     color: FlutterFlowTheme.of(context).primary,
                                     textStyle: FlutterFlowTheme.of(context)
                                         .titleSmall
@@ -1047,5 +1127,61 @@ class _DbConnectionControlWidgetState extends State<DbConnectionControlWidget>
         ),
       ],
     );
+  }
+
+  void checkConnection() {
+    void connectionFailed(Timer timer) {
+      timerStillRunning = false;
+      if (_homeModel.connectionStatus == Connection.CONNECTED ||
+          _homeModel.connectionStatus == Connection.SUCCESSFUL) {
+        currentConnectionMessage =
+            connectionStatus(_homeModel.connectionStatus);
+        timer.cancel();
+        return;
+      }
+      _homeModel.connectionStatus = Connection.NOTCONNECTED;
+      currentConnectionMessage = connectionStatus(_homeModel.connectionStatus);
+      timer.cancel();
+    }
+
+    const int tickDuration = 20;
+    const Duration timeoutDuration = Duration(milliseconds: tickDuration * 100);
+    late String ipAddress = _model.apiUrl;
+    late String apiUrl = 'http://$ipAddress/api/';
+
+    bool hasStarted = true;
+    _homeModel.connectionStatus = Connection.CONNECTING;
+    Timer.periodic(const Duration(milliseconds: 100), (timer) {
+      timerStillRunning = true;
+      setState(() {
+        currentConnectionMessage = connectionStatus(_homeModel.connectionStatus,
+            periods: String.fromCharCodes(
+                Iterable.generate((timer.tick % 3) + 1, (_) => 46)));
+        if (timer.tick > tickDuration &&
+            (_homeModel.connectionStatus != Connection.CONNECTED ||
+                _homeModel.connectionStatus != Connection.SUCCESSFUL)) {
+          connectionFailed(timer);
+        }
+        if (hasStarted) {
+          hasStarted = false;
+          try {
+            (http.get(Uri.parse(apiUrl)).timeout(timeoutDuration))
+                .then((Response response) {
+              if (response.statusCode == 200) {
+                _homeModel.connectionStatus = Connection.SUCCESSFUL;
+                timerStillRunning = false;
+                Timer(const Duration(milliseconds: 500), () {
+                  _homeModel.connectionStatus = Connection.CONNECTED;
+                });
+              } else {
+                connectionFailed(timer);
+              }
+            });
+          } catch (error) {
+            connectionFailed(timer);
+          }
+        }
+      });
+    });
   }
 }

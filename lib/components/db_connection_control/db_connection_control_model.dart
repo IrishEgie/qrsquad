@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 class DbConnectionControlModel
     extends FlutterFlowModel<DbConnectionControlWidget> {
   ///  State fields for stateful widgets in this component.
+  late String apiUrl;
 
   // State field(s) for DropDown widget.
   String? dropDownValue;
