@@ -12,6 +12,8 @@ class DrawerModel extends FlutterFlowModel<DrawerWidget> {
   bool mouseRegionHovered2 = false;
   // State field(s) for MouseRegion widget.
   bool mouseRegionHovered3 = false;
+  // State field(s) for MouseRegion widget.
+  bool mouseRegionHovered4 = false;
   // Model for DarkLightSwitchSmall component.
   late DarkLightSwitchSmallModel darkLightSwitchSmallModel;
 
