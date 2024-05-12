@@ -141,17 +141,21 @@ class _HomePageWidgetState extends State<HomePageWidget>
                           ),
                           child: Stack(
                             children: [
-                              Align(
-                                alignment: const AlignmentDirectional(0.0, 0.0),
-                                child: Image.asset(
-                                  Theme.of(context).brightness ==
-                                          Brightness.dark
-                                      ? 'assets/images/queen-ssu-bg-dark.gif'
-                                      : 'assets/images/queen-ssu-bg-light.gif',
-                                  width: MediaQuery.sizeOf(context).width * 1.0,
-                                  height:
-                                      MediaQuery.sizeOf(context).height * 1.0,
-                                  fit: BoxFit.cover,
+                              Opacity(
+                                opacity: 0.2,
+                                child: Align(
+                                  alignment: const AlignmentDirectional(0.0, 0.0),
+                                  child: Image.asset(
+                                    Theme.of(context).brightness ==
+                                            Brightness.dark
+                                        ? 'assets/images/queen-ssu-bg-dark.gif'
+                                        : 'assets/images/queen-ssu-bg-light.gif',
+                                    width:
+                                        MediaQuery.sizeOf(context).width * 1.0,
+                                    height:
+                                        MediaQuery.sizeOf(context).height * 1.0,
+                                    fit: BoxFit.cover,
+                                  ),
                                 ),
                               ),
                               Align(
@@ -372,7 +376,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                     MediaQuery.sizeOf(context).height * 0.85,
                                 decoration: BoxDecoration(
                                   color: FlutterFlowTheme.of(context)
-                                      .secondaryBackground,
+                                      .primaryBackground,
                                   boxShadow: const [
                                     BoxShadow(
                                       blurRadius: 5.0,
@@ -745,7 +749,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                       height: 30.0,
                                       decoration: BoxDecoration(
                                         color: FlutterFlowTheme.of(context)
-                                            .secondaryBackground,
+                                            .primaryBackground,
                                       ),
                                     ),
                                   ],
