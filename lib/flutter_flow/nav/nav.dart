@@ -26,29 +26,33 @@ class AppStateNotifier extends ChangeNotifier {
   }
 }
 
-GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
-      initialLocation: '/',
-      debugLogDiagnostics: true,
-      refreshListenable: appStateNotifier,
-      errorBuilder: (context, state) => const HomePageWidget(),
-      routes: [
-        FFRoute(
-          name: '_initialize',
-          path: '/',
-          builder: (context, _) => const HomePageWidget(),
-        ),
-        FFRoute(
-          name: 'HomePage',
-          path: '/homePage',
-          builder: (context, params) => const HomePageWidget(),
-        ),
-        FFRoute(
-            name: 'TicketInfo',
-            path: '/ticketInfo',
-            builder: (context, params) =>
-                TicketInfoWidget(model: params.state.extra as HomePageModel)),
-      ].map((r) => r.toRoute(appStateNotifier)).toList(),
-    );
+GoRouter createRouter(AppStateNotifier appStateNotifier) {
+  return GoRouter(
+    initialLocation: '/',
+    debugLogDiagnostics: true,
+    refreshListenable: appStateNotifier,
+    errorBuilder: (context, state) => const HomePageWidget(),
+    routes: [
+      GoRoute(
+        name: '_initialize',
+        path: '/',
+        builder: (context, _) => const HomePageWidget(),
+      ),
+      GoRoute(
+        name: 'HomePage',
+        path: '/homePage',
+        builder: (context, _) => const HomePageWidget(),
+      ),
+      GoRoute(
+          name: 'TicketInfo',
+          path: '/ticketInfo',
+          builder: (context, state) {
+            HomePageModel model = state.extra as HomePageModel;
+            return TicketInfoWidget(model: model);
+          }),
+    ].toList(),
+  );
+}
 
 extension NavParamExtensions on Map<String, String?> {
   Map<String, String> get withoutNulls => Map.fromEntries(

@@ -39,7 +39,6 @@ class _HomePageWidgetState extends State<HomePageWidget>
     _model = createModel(context, () => HomePageModel());
     _currentTime = _getCurrentTime();
     _startTimer();
-
     _model.textController ??= TextEditingController();
     _model.textFieldFocusNode ??= FocusNode();
 
@@ -661,7 +660,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
 
   // Authenticate if Ticket exists in Database
   Future<void> authenticateTicket(String value, BuildContext context) async {
-    // _model.apiUrl = '127.0.0.1:5000';
+    _model.apiUrl = '127.0.0.1:5000';
     const Duration timeoutDuration = Duration(milliseconds: 500);
     late String ipAddress = _model.apiUrl;
     late String apiUrl = 'http://$ipAddress/api/ticket/$value';
