@@ -7,6 +7,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'log_switch_model.dart';
 export 'log_switch_model.dart';
 
@@ -115,6 +116,8 @@ class _LogSwitchWidgetState extends State<LogSwitchWidget>
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return ClipRRect(
       borderRadius: BorderRadius.circular(0.0),
       child: BackdropFilter(
@@ -268,19 +271,206 @@ class _LogSwitchWidgetState extends State<LogSwitchWidget>
                                       child: Align(
                                         alignment: const AlignmentDirectional(
                                             0.0, 0.0),
+                                        child: InkWell(
+                                          splashColor: Colors.transparent,
+                                          focusColor: Colors.transparent,
+                                          hoverColor: Colors.transparent,
+                                          highlightColor: Colors.transparent,
+                                          onTap: () async {
+                                            setState(() {
+                                              FFAppState().login = true;
+                                              FFAppState().logout = false;
+                                            });
+                                          },
+                                          child: Stack(
+                                            children: [
+                                              AnimatedContainer(
+                                                duration: const Duration(
+                                                    milliseconds: 150),
+                                                curve: Curves.easeInOut,
+                                                width: 250.0,
+                                                decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          12.0),
+                                                  border: Border.all(
+                                                    color: _model
+                                                            .mouseRegionHovered1
+                                                        ? FlutterFlowTheme.of(
+                                                                context)
+                                                            .primary
+                                                        : FlutterFlowTheme.of(
+                                                                context)
+                                                            .alternate,
+                                                    width: 2.0,
+                                                  ),
+                                                ),
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(4.0),
+                                                  child: Container(
+                                                    height: 230.0,
+                                                    decoration: BoxDecoration(
+                                                      color: _model
+                                                              .mouseRegionHovered1
+                                                          ? FlutterFlowTheme.of(
+                                                                  context)
+                                                              .primary
+                                                          : FlutterFlowTheme.of(
+                                                                  context)
+                                                              .alternate,
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              8.0),
+                                                    ),
+                                                    child: Padding(
+                                                      padding:
+                                                          const EdgeInsetsDirectional
+                                                              .fromSTEB(8.0,
+                                                              12.0, 8.0, 0.0),
+                                                      child: Column(
+                                                        mainAxisSize:
+                                                            MainAxisSize.max,
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .spaceBetween,
+                                                        children: [
+                                                          Padding(
+                                                            padding:
+                                                                const EdgeInsetsDirectional
+                                                                    .fromSTEB(
+                                                                    8.0,
+                                                                    0.0,
+                                                                    0.0,
+                                                                    0.0),
+                                                            child: Row(
+                                                              mainAxisSize:
+                                                                  MainAxisSize
+                                                                      .max,
+                                                              mainAxisAlignment:
+                                                                  MainAxisAlignment
+                                                                      .spaceBetween,
+                                                              children: [
+                                                                Padding(
+                                                                  padding:
+                                                                      const EdgeInsetsDirectional
+                                                                          .fromSTEB(
+                                                                          0.0,
+                                                                          4.0,
+                                                                          0.0,
+                                                                          4.0),
+                                                                  child: Text(
+                                                                    'Login',
+                                                                    style: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .titleLarge
+                                                                        .override(
+                                                                          fontFamily:
+                                                                              FlutterFlowTheme.of(context).titleLargeFamily,
+                                                                          color:
+                                                                              FlutterFlowTheme.of(context).info,
+                                                                          letterSpacing:
+                                                                              0.0,
+                                                                          useGoogleFonts:
+                                                                              GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).titleLargeFamily),
+                                                                        ),
+                                                                  ),
+                                                                ),
+                                                                if (FFAppState()
+                                                                    .login)
+                                                                  Align(
+                                                                    alignment:
+                                                                        const AlignmentDirectional(
+                                                                            1.0,
+                                                                            -1.0),
+                                                                    child: Icon(
+                                                                      Icons
+                                                                          .check_circle_rounded,
+                                                                      color: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .secondary,
+                                                                      size:
+                                                                          32.0,
+                                                                    ).animateOnPageLoad(
+                                                                        animationsMap[
+                                                                            'iconOnPageLoadAnimation1']!),
+                                                                  ),
+                                                              ],
+                                                            ),
+                                                          ),
+                                                          Row(
+                                                            mainAxisSize:
+                                                                MainAxisSize
+                                                                    .max,
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .center,
+                                                            children: [
+                                                              ClipRRect(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            8.0),
+                                                                child:
+                                                                    Image.asset(
+                                                                  'assets/images/Login.png',
+                                                                  width: 172.0,
+                                                                  fit: BoxFit
+                                                                      .cover,
+                                                                ),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding:
+                                        const EdgeInsetsDirectional.fromSTEB(
+                                            8.0, 0.0, 8.0, 4.0),
+                                    child: MouseRegion(
+                                      opaque: false,
+                                      cursor: MouseCursor.defer,
+                                      onEnter: ((event) async {
+                                        setState(() =>
+                                            _model.mouseRegionHovered2 = true);
+                                      }),
+                                      onExit: ((event) async {
+                                        setState(() =>
+                                            _model.mouseRegionHovered2 = false);
+                                      }),
+                                      child: InkWell(
+                                        splashColor: Colors.transparent,
+                                        focusColor: Colors.transparent,
+                                        hoverColor: Colors.transparent,
+                                        highlightColor: Colors.transparent,
+                                        onTap: () async {
+                                          setState(() {
+                                            FFAppState().login = false;
+                                            FFAppState().logout = true;
+                                          });
+                                        },
                                         child: Stack(
                                           children: [
                                             AnimatedContainer(
                                               duration: const Duration(
                                                   milliseconds: 150),
                                               curve: Curves.easeInOut,
-                                              width: 250.0,
                                               decoration: BoxDecoration(
                                                 borderRadius:
                                                     BorderRadius.circular(12.0),
                                                 border: Border.all(
                                                   color:
-                                                      _model.mouseRegionHovered1
+                                                      _model.mouseRegionHovered2
                                                           ? FlutterFlowTheme.of(
                                                                   context)
                                                               .primary
@@ -294,10 +484,11 @@ class _LogSwitchWidgetState extends State<LogSwitchWidget>
                                                 padding:
                                                     const EdgeInsets.all(4.0),
                                                 child: Container(
+                                                  width: 250.0,
                                                   height: 230.0,
                                                   decoration: BoxDecoration(
                                                     color: _model
-                                                            .mouseRegionHovered1
+                                                            .mouseRegionHovered2
                                                         ? FlutterFlowTheme.of(
                                                                 context)
                                                             .primary
@@ -345,7 +536,7 @@ class _LogSwitchWidgetState extends State<LogSwitchWidget>
                                                                         0.0,
                                                                         4.0),
                                                                 child: Text(
-                                                                  'Login',
+                                                                  'Logout',
                                                                   style: FlutterFlowTheme.of(
                                                                           context)
                                                                       .titleLarge
@@ -353,7 +544,7 @@ class _LogSwitchWidgetState extends State<LogSwitchWidget>
                                                                         fontFamily:
                                                                             FlutterFlowTheme.of(context).titleLargeFamily,
                                                                         color: FlutterFlowTheme.of(context)
-                                                                            .info,
+                                                                            .primaryText,
                                                                         letterSpacing:
                                                                             0.0,
                                                                         useGoogleFonts:
@@ -361,22 +552,24 @@ class _LogSwitchWidgetState extends State<LogSwitchWidget>
                                                                       ),
                                                                 ),
                                                               ),
-                                                              Align(
-                                                                alignment:
-                                                                    const AlignmentDirectional(
-                                                                        1.0,
-                                                                        -1.0),
-                                                                child: Icon(
-                                                                  Icons
-                                                                      .check_circle_rounded,
-                                                                  color: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .secondary,
-                                                                  size: 32.0,
-                                                                ).animateOnPageLoad(
-                                                                    animationsMap[
-                                                                        'iconOnPageLoadAnimation1']!),
-                                                              ),
+                                                              if (FFAppState()
+                                                                  .logout)
+                                                                Align(
+                                                                  alignment:
+                                                                      const AlignmentDirectional(
+                                                                          1.0,
+                                                                          -1.0),
+                                                                  child: Icon(
+                                                                    Icons
+                                                                        .check_circle_rounded,
+                                                                    color: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .secondary,
+                                                                    size: 32.0,
+                                                                  ).animateOnPageLoad(
+                                                                      animationsMap[
+                                                                          'iconOnPageLoadAnimation2']!),
+                                                                ),
                                                             ],
                                                           ),
                                                         ),
@@ -394,7 +587,7 @@ class _LogSwitchWidgetState extends State<LogSwitchWidget>
                                                                           8.0),
                                                               child:
                                                                   Image.asset(
-                                                                'assets/images/Login.png',
+                                                                'assets/images/Logout.png',
                                                                 width: 172.0,
                                                                 fit: BoxFit
                                                                     .cover,
@@ -410,163 +603,6 @@ class _LogSwitchWidgetState extends State<LogSwitchWidget>
                                             ),
                                           ],
                                         ),
-                                      ),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding:
-                                        const EdgeInsetsDirectional.fromSTEB(
-                                            8.0, 0.0, 8.0, 4.0),
-                                    child: MouseRegion(
-                                      opaque: false,
-                                      cursor: MouseCursor.defer,
-                                      onEnter: ((event) async {
-                                        setState(() =>
-                                            _model.mouseRegionHovered2 = true);
-                                      }),
-                                      onExit: ((event) async {
-                                        setState(() =>
-                                            _model.mouseRegionHovered2 = false);
-                                      }),
-                                      child: Stack(
-                                        children: [
-                                          AnimatedContainer(
-                                            duration: const Duration(
-                                                milliseconds: 150),
-                                            curve: Curves.easeInOut,
-                                            decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(12.0),
-                                              border: Border.all(
-                                                color:
-                                                    _model.mouseRegionHovered2
-                                                        ? FlutterFlowTheme.of(
-                                                                context)
-                                                            .primary
-                                                        : FlutterFlowTheme.of(
-                                                                context)
-                                                            .alternate,
-                                                width: 2.0,
-                                              ),
-                                            ),
-                                            child: Padding(
-                                              padding:
-                                                  const EdgeInsets.all(4.0),
-                                              child: Container(
-                                                width: 250.0,
-                                                height: 230.0,
-                                                decoration: BoxDecoration(
-                                                  color:
-                                                      _model.mouseRegionHovered2
-                                                          ? FlutterFlowTheme.of(
-                                                                  context)
-                                                              .primary
-                                                          : FlutterFlowTheme.of(
-                                                                  context)
-                                                              .alternate,
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          8.0),
-                                                ),
-                                                child: Padding(
-                                                  padding:
-                                                      const EdgeInsetsDirectional
-                                                          .fromSTEB(
-                                                          8.0, 12.0, 8.0, 0.0),
-                                                  child: Column(
-                                                    mainAxisSize:
-                                                        MainAxisSize.max,
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .spaceBetween,
-                                                    children: [
-                                                      Padding(
-                                                        padding:
-                                                            const EdgeInsetsDirectional
-                                                                .fromSTEB(8.0,
-                                                                0.0, 0.0, 0.0),
-                                                        child: Row(
-                                                          mainAxisSize:
-                                                              MainAxisSize.max,
-                                                          mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .spaceBetween,
-                                                          children: [
-                                                            Padding(
-                                                              padding:
-                                                                  const EdgeInsetsDirectional
-                                                                      .fromSTEB(
-                                                                      0.0,
-                                                                      4.0,
-                                                                      0.0,
-                                                                      4.0),
-                                                              child: Text(
-                                                                'Logout',
-                                                                style: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .titleLarge
-                                                                    .override(
-                                                                      fontFamily:
-                                                                          FlutterFlowTheme.of(context)
-                                                                              .titleLargeFamily,
-                                                                      color: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .primaryText,
-                                                                      letterSpacing:
-                                                                          0.0,
-                                                                      useGoogleFonts: GoogleFonts
-                                                                              .asMap()
-                                                                          .containsKey(
-                                                                              FlutterFlowTheme.of(context).titleLargeFamily),
-                                                                    ),
-                                                              ),
-                                                            ),
-                                                            Align(
-                                                              alignment:
-                                                                  const AlignmentDirectional(
-                                                                      1.0,
-                                                                      -1.0),
-                                                              child: Icon(
-                                                                Icons
-                                                                    .check_circle_rounded,
-                                                                color: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .secondary,
-                                                                size: 32.0,
-                                                              ).animateOnPageLoad(
-                                                                  animationsMap[
-                                                                      'iconOnPageLoadAnimation2']!),
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      ),
-                                                      Row(
-                                                        mainAxisSize:
-                                                            MainAxisSize.max,
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .center,
-                                                        children: [
-                                                          ClipRRect(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        8.0),
-                                                            child: Image.asset(
-                                                              'assets/images/Logout.png',
-                                                              width: 172.0,
-                                                              fit: BoxFit.cover,
-                                                            ),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ],
                                       ),
                                     ),
                                   ),

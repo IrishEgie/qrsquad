@@ -268,19 +268,206 @@ class _ExportWidgetState extends State<ExportWidget>
                                       child: Align(
                                         alignment: const AlignmentDirectional(
                                             0.0, 0.0),
+                                        child: InkWell(
+                                          splashColor: Colors.transparent,
+                                          focusColor: Colors.transparent,
+                                          hoverColor: Colors.transparent,
+                                          highlightColor: Colors.transparent,
+                                          onTap: () async {
+                                            setState(() {
+                                              _model.exportClient = true;
+                                              _model.exportServer = false;
+                                            });
+                                          },
+                                          child: Stack(
+                                            children: [
+                                              AnimatedContainer(
+                                                duration: const Duration(
+                                                    milliseconds: 150),
+                                                curve: Curves.easeInOut,
+                                                width: 250.0,
+                                                decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          12.0),
+                                                  border: Border.all(
+                                                    color: _model
+                                                            .mouseRegionHovered1
+                                                        ? FlutterFlowTheme.of(
+                                                                context)
+                                                            .primary
+                                                        : FlutterFlowTheme.of(
+                                                                context)
+                                                            .alternate,
+                                                    width: 2.0,
+                                                  ),
+                                                ),
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(4.0),
+                                                  child: Container(
+                                                    height: 230.0,
+                                                    decoration: BoxDecoration(
+                                                      color: _model
+                                                              .mouseRegionHovered1
+                                                          ? FlutterFlowTheme.of(
+                                                                  context)
+                                                              .primary
+                                                          : FlutterFlowTheme.of(
+                                                                  context)
+                                                              .alternate,
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              8.0),
+                                                    ),
+                                                    child: Padding(
+                                                      padding:
+                                                          const EdgeInsetsDirectional
+                                                              .fromSTEB(8.0,
+                                                              12.0, 8.0, 0.0),
+                                                      child: Column(
+                                                        mainAxisSize:
+                                                            MainAxisSize.max,
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .spaceBetween,
+                                                        children: [
+                                                          Padding(
+                                                            padding:
+                                                                const EdgeInsetsDirectional
+                                                                    .fromSTEB(
+                                                                    8.0,
+                                                                    0.0,
+                                                                    0.0,
+                                                                    0.0),
+                                                            child: Row(
+                                                              mainAxisSize:
+                                                                  MainAxisSize
+                                                                      .max,
+                                                              mainAxisAlignment:
+                                                                  MainAxisAlignment
+                                                                      .spaceBetween,
+                                                              children: [
+                                                                Padding(
+                                                                  padding:
+                                                                      const EdgeInsetsDirectional
+                                                                          .fromSTEB(
+                                                                          0.0,
+                                                                          4.0,
+                                                                          0.0,
+                                                                          4.0),
+                                                                  child: Text(
+                                                                    'Client',
+                                                                    style: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .titleLarge
+                                                                        .override(
+                                                                          fontFamily:
+                                                                              FlutterFlowTheme.of(context).titleLargeFamily,
+                                                                          color:
+                                                                              FlutterFlowTheme.of(context).info,
+                                                                          letterSpacing:
+                                                                              0.0,
+                                                                          useGoogleFonts:
+                                                                              GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).titleLargeFamily),
+                                                                        ),
+                                                                  ),
+                                                                ),
+                                                                if (_model
+                                                                    .exportClient)
+                                                                  Align(
+                                                                    alignment:
+                                                                        const AlignmentDirectional(
+                                                                            1.0,
+                                                                            -1.0),
+                                                                    child: Icon(
+                                                                      Icons
+                                                                          .check_circle_rounded,
+                                                                      color: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .secondary,
+                                                                      size:
+                                                                          32.0,
+                                                                    ).animateOnPageLoad(
+                                                                        animationsMap[
+                                                                            'iconOnPageLoadAnimation1']!),
+                                                                  ),
+                                                              ],
+                                                            ),
+                                                          ),
+                                                          Row(
+                                                            mainAxisSize:
+                                                                MainAxisSize
+                                                                    .max,
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .center,
+                                                            children: [
+                                                              ClipRRect(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            8.0),
+                                                                child:
+                                                                    Image.asset(
+                                                                  'assets/images/client_side.png',
+                                                                  width: 172.0,
+                                                                  fit: BoxFit
+                                                                      .cover,
+                                                                ),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding:
+                                        const EdgeInsetsDirectional.fromSTEB(
+                                            8.0, 0.0, 8.0, 4.0),
+                                    child: MouseRegion(
+                                      opaque: false,
+                                      cursor: MouseCursor.defer,
+                                      onEnter: ((event) async {
+                                        setState(() =>
+                                            _model.mouseRegionHovered2 = true);
+                                      }),
+                                      onExit: ((event) async {
+                                        setState(() =>
+                                            _model.mouseRegionHovered2 = false);
+                                      }),
+                                      child: InkWell(
+                                        splashColor: Colors.transparent,
+                                        focusColor: Colors.transparent,
+                                        hoverColor: Colors.transparent,
+                                        highlightColor: Colors.transparent,
+                                        onTap: () async {
+                                          setState(() {
+                                            _model.exportClient = false;
+                                            _model.exportServer = true;
+                                          });
+                                        },
                                         child: Stack(
                                           children: [
                                             AnimatedContainer(
                                               duration: const Duration(
                                                   milliseconds: 150),
                                               curve: Curves.easeInOut,
-                                              width: 250.0,
                                               decoration: BoxDecoration(
                                                 borderRadius:
                                                     BorderRadius.circular(12.0),
                                                 border: Border.all(
                                                   color:
-                                                      _model.mouseRegionHovered1
+                                                      _model.mouseRegionHovered2
                                                           ? FlutterFlowTheme.of(
                                                                   context)
                                                               .primary
@@ -294,10 +481,11 @@ class _ExportWidgetState extends State<ExportWidget>
                                                 padding:
                                                     const EdgeInsets.all(4.0),
                                                 child: Container(
+                                                  width: 250.0,
                                                   height: 230.0,
                                                   decoration: BoxDecoration(
                                                     color: _model
-                                                            .mouseRegionHovered1
+                                                            .mouseRegionHovered2
                                                         ? FlutterFlowTheme.of(
                                                                 context)
                                                             .primary
@@ -345,7 +533,7 @@ class _ExportWidgetState extends State<ExportWidget>
                                                                         0.0,
                                                                         4.0),
                                                                 child: Text(
-                                                                  'Client',
+                                                                  'Server',
                                                                   style: FlutterFlowTheme.of(
                                                                           context)
                                                                       .titleLarge
@@ -353,7 +541,7 @@ class _ExportWidgetState extends State<ExportWidget>
                                                                         fontFamily:
                                                                             FlutterFlowTheme.of(context).titleLargeFamily,
                                                                         color: FlutterFlowTheme.of(context)
-                                                                            .info,
+                                                                            .primaryText,
                                                                         letterSpacing:
                                                                             0.0,
                                                                         useGoogleFonts:
@@ -361,22 +549,24 @@ class _ExportWidgetState extends State<ExportWidget>
                                                                       ),
                                                                 ),
                                                               ),
-                                                              Align(
-                                                                alignment:
-                                                                    const AlignmentDirectional(
-                                                                        1.0,
-                                                                        -1.0),
-                                                                child: Icon(
-                                                                  Icons
-                                                                      .check_circle_rounded,
-                                                                  color: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .secondary,
-                                                                  size: 32.0,
-                                                                ).animateOnPageLoad(
-                                                                    animationsMap[
-                                                                        'iconOnPageLoadAnimation1']!),
-                                                              ),
+                                                              if (_model
+                                                                  .exportServer)
+                                                                Align(
+                                                                  alignment:
+                                                                      const AlignmentDirectional(
+                                                                          1.0,
+                                                                          -1.0),
+                                                                  child: Icon(
+                                                                    Icons
+                                                                        .check_circle_rounded,
+                                                                    color: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .secondary,
+                                                                    size: 32.0,
+                                                                  ).animateOnPageLoad(
+                                                                      animationsMap[
+                                                                          'iconOnPageLoadAnimation2']!),
+                                                                ),
                                                             ],
                                                           ),
                                                         ),
@@ -394,7 +584,7 @@ class _ExportWidgetState extends State<ExportWidget>
                                                                           8.0),
                                                               child:
                                                                   Image.asset(
-                                                                'assets/images/client_side.png',
+                                                                'assets/images/server_side.png',
                                                                 width: 172.0,
                                                                 fit: BoxFit
                                                                     .cover,
@@ -410,163 +600,6 @@ class _ExportWidgetState extends State<ExportWidget>
                                             ),
                                           ],
                                         ),
-                                      ),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding:
-                                        const EdgeInsetsDirectional.fromSTEB(
-                                            8.0, 0.0, 8.0, 4.0),
-                                    child: MouseRegion(
-                                      opaque: false,
-                                      cursor: MouseCursor.defer,
-                                      onEnter: ((event) async {
-                                        setState(() =>
-                                            _model.mouseRegionHovered2 = true);
-                                      }),
-                                      onExit: ((event) async {
-                                        setState(() =>
-                                            _model.mouseRegionHovered2 = false);
-                                      }),
-                                      child: Stack(
-                                        children: [
-                                          AnimatedContainer(
-                                            duration: const Duration(
-                                                milliseconds: 150),
-                                            curve: Curves.easeInOut,
-                                            decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(12.0),
-                                              border: Border.all(
-                                                color:
-                                                    _model.mouseRegionHovered2
-                                                        ? FlutterFlowTheme.of(
-                                                                context)
-                                                            .primary
-                                                        : FlutterFlowTheme.of(
-                                                                context)
-                                                            .alternate,
-                                                width: 2.0,
-                                              ),
-                                            ),
-                                            child: Padding(
-                                              padding:
-                                                  const EdgeInsets.all(4.0),
-                                              child: Container(
-                                                width: 250.0,
-                                                height: 230.0,
-                                                decoration: BoxDecoration(
-                                                  color:
-                                                      _model.mouseRegionHovered2
-                                                          ? FlutterFlowTheme.of(
-                                                                  context)
-                                                              .primary
-                                                          : FlutterFlowTheme.of(
-                                                                  context)
-                                                              .alternate,
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          8.0),
-                                                ),
-                                                child: Padding(
-                                                  padding:
-                                                      const EdgeInsetsDirectional
-                                                          .fromSTEB(
-                                                          8.0, 12.0, 8.0, 0.0),
-                                                  child: Column(
-                                                    mainAxisSize:
-                                                        MainAxisSize.max,
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .spaceBetween,
-                                                    children: [
-                                                      Padding(
-                                                        padding:
-                                                            const EdgeInsetsDirectional
-                                                                .fromSTEB(8.0,
-                                                                0.0, 0.0, 0.0),
-                                                        child: Row(
-                                                          mainAxisSize:
-                                                              MainAxisSize.max,
-                                                          mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .spaceBetween,
-                                                          children: [
-                                                            Padding(
-                                                              padding:
-                                                                  const EdgeInsetsDirectional
-                                                                      .fromSTEB(
-                                                                      0.0,
-                                                                      4.0,
-                                                                      0.0,
-                                                                      4.0),
-                                                              child: Text(
-                                                                'Server',
-                                                                style: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .titleLarge
-                                                                    .override(
-                                                                      fontFamily:
-                                                                          FlutterFlowTheme.of(context)
-                                                                              .titleLargeFamily,
-                                                                      color: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .primaryText,
-                                                                      letterSpacing:
-                                                                          0.0,
-                                                                      useGoogleFonts: GoogleFonts
-                                                                              .asMap()
-                                                                          .containsKey(
-                                                                              FlutterFlowTheme.of(context).titleLargeFamily),
-                                                                    ),
-                                                              ),
-                                                            ),
-                                                            Align(
-                                                              alignment:
-                                                                  const AlignmentDirectional(
-                                                                      1.0,
-                                                                      -1.0),
-                                                              child: Icon(
-                                                                Icons
-                                                                    .check_circle_rounded,
-                                                                color: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .secondary,
-                                                                size: 32.0,
-                                                              ).animateOnPageLoad(
-                                                                  animationsMap[
-                                                                      'iconOnPageLoadAnimation2']!),
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      ),
-                                                      Row(
-                                                        mainAxisSize:
-                                                            MainAxisSize.max,
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .center,
-                                                        children: [
-                                                          ClipRRect(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        8.0),
-                                                            child: Image.asset(
-                                                              'assets/images/server_side.png',
-                                                              width: 172.0,
-                                                              fit: BoxFit.cover,
-                                                            ),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ],
                                       ),
                                     ),
                                   ),

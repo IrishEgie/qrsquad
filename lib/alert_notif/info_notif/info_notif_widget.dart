@@ -68,7 +68,7 @@ class _InfoNotifWidgetState extends State<InfoNotifWidget> {
               children: [
                 Icon(
                   Icons.question_mark_rounded,
-                  color: FlutterFlowTheme.of(context).primary,
+                  color: FlutterFlowTheme.of(context).primaryText,
                   size: 128.0,
                 ),
                 Padding(
@@ -77,7 +77,7 @@ class _InfoNotifWidgetState extends State<InfoNotifWidget> {
                     'Need Help?',
                     style: FlutterFlowTheme.of(context).headlineMedium.override(
                           fontFamily: 'Outfit',
-                          color: FlutterFlowTheme.of(context).primary,
+                          color: FlutterFlowTheme.of(context).primaryText,
                           fontSize: 24.0,
                           letterSpacing: 0.0,
                           fontWeight: FontWeight.w500,
@@ -93,7 +93,7 @@ class _InfoNotifWidgetState extends State<InfoNotifWidget> {
                     textAlign: TextAlign.center,
                     style: FlutterFlowTheme.of(context).labelMedium.override(
                           fontFamily: 'Plus Jakarta Sans',
-                          color: FlutterFlowTheme.of(context).primary,
+                          color: FlutterFlowTheme.of(context).primaryText,
                           fontSize: 14.0,
                           letterSpacing: 0.0,
                           fontWeight: FontWeight.w500,
