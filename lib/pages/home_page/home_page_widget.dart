@@ -393,7 +393,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                   children: [
                                     Padding(
                                       padding: const EdgeInsetsDirectional.fromSTEB(
-                                          36.0, 36.0, 0.0, 12.0),
+                                          36.0, 36.0, 0.0, 24.0),
                                       child: Row(
                                         mainAxisSize: MainAxisSize.max,
                                         children: [
@@ -406,7 +406,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                           Padding(
                                             padding:
                                                 const EdgeInsetsDirectional.fromSTEB(
-                                                    12.0, 0.0, 0.0, 0.0),
+                                                    24.0, 0.0, 0.0, 0.0),
                                             child: AutoSizeText(
                                               dateTimeFormat(
                                                   'M/d h:mm a',
