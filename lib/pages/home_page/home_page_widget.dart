@@ -744,14 +744,6 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                         ],
                                       ),
                                     ),
-                                    Container(
-                                      width: 100.0,
-                                      height: 30.0,
-                                      decoration: BoxDecoration(
-                                        color: FlutterFlowTheme.of(context)
-                                            .primaryBackground,
-                                      ),
-                                    ),
                                   ],
                                 ),
                               ),
