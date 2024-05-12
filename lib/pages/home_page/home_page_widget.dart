@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'package:http/http.dart';
 
 import '/alert_notif/ticket_detected/ticket_detected_widget.dart';
-import '/alert_notif/ticket_loggged/ticket_loggged_widget.dart';
 import '/components/drawer/drawer_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
