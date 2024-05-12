@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 
 class HomePageModel extends FlutterFlowModel<HomePageWidget> {
   ///  State fields for stateful widgets in this page.
+
   final unfocusNode = FocusNode();
 
   /// database connection
@@ -19,10 +20,10 @@ class HomePageModel extends FlutterFlowModel<HomePageWidget> {
   late Map<String, dynamic> ticket;
   // Model for Drawer component.
   late DrawerModel drawerModel;
-  // State field(s) for TextField widget.
-  FocusNode? textFieldFocusNode;
-  TextEditingController? textController;
-  String? Function(BuildContext, String?)? textControllerValidator;
+  // State field(s) for qrInputField widget.
+  FocusNode? qrInputFieldFocusNode;
+  TextEditingController? qrInputFieldTextController;
+  String? Function(BuildContext, String?)? qrInputFieldTextControllerValidator;
 
   @override
   void initState(BuildContext context) {
@@ -33,7 +34,7 @@ class HomePageModel extends FlutterFlowModel<HomePageWidget> {
   void dispose() {
     unfocusNode.dispose();
     drawerModel.dispose();
-    textFieldFocusNode?.dispose();
-    textController?.dispose();
+    qrInputFieldFocusNode?.dispose();
+    qrInputFieldTextController?.dispose();
   }
 }
