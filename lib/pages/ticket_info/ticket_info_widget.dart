@@ -15,18 +15,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'ticket_info_model.dart';
 export 'ticket_info_model.dart';
 
-class HistoryItem {
-  final String dateUsed;
-  final int type;
-  final String timeUsed;
-
-  HistoryItem({
-    required this.dateUsed,
-    required this.type,
-    required this.timeUsed,
-  });
-}
-
 class TicketInfoWidget extends StatefulWidget {
   final HomePageModel? model;
   const TicketInfoWidget({super.key, this.model});
@@ -42,6 +30,8 @@ class _TicketInfoWidgetState extends State<TicketInfoWidget>
   late Timer _timer;
   late HomePageModel _homeModel;
   late List<dynamic> history;
+  late List<TicketLogModel> ticketLogs;
+  late List<Widget> ticketRows;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -55,6 +45,8 @@ class _TicketInfoWidgetState extends State<TicketInfoWidget>
     _startTimer();
     _homeModel = widget.model!;
     history = _homeModel.ticket['history'];
+    ticketLogs = [];
+    ticketRows = [];
 
     animationsMap.addAll({
       'columnOnPageLoadAnimation1': AnimationInfo(
@@ -111,13 +103,60 @@ class _TicketInfoWidgetState extends State<TicketInfoWidget>
       ),
     });
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      List<Widget> ticketLogWidgets = [];
+      for (var entry in history) {
+        TicketLogModel log = TicketLogModel(
+          dateUsage:
+              DateFormat('M/d/yyyy').format(DateTime.parse(entry['date_used'])),
+          timeUsage: entry['time_used'],
+          loggingType: entry['type'] == 0 ? "Log Out" : "Log In",
+        );
+        ticketLogs.add(log);
+        ticketLogWidgets.add(Column(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Container(
+              width: MediaQuery.sizeOf(context).width * 0.25,
+              decoration: const BoxDecoration(),
+              child: wrapWithModel(
+                model: log,
+                updateCallback: () => setState(() {}),
+                child: const TicketLogWidget(),
+              ),
+            ),
+            Container(
+              width: MediaQuery.sizeOf(context).width * 0.25,
+              decoration: const BoxDecoration(),
+            ),
+          ],
+        ));
+      }
+
+      for (var row in splitIntoChunks(ticketLogWidgets, 3)) {
+        List<Widget> ticketRowWidgets = [];
+        for (var element in row) {
+          ticketRowWidgets.add(element);
+        }
+        ticketRows.add(SingleChildScrollView(
+          // scrollDirection: Axis.horizontal,
+          child: Row(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.start,
+            // crossAxisAlignment: CrossAxisAlignment.center,
+            children: ticketRowWidgets,
+          ),
+        ));
+      }
+    });
   }
 
   @override
   void dispose() {
     _model.dispose();
     _timer.cancel();
+    ticketLogs.forEach((log) => log.dispose());
     super.dispose();
   }
 
@@ -133,59 +172,17 @@ class _TicketInfoWidgetState extends State<TicketInfoWidget>
     return DateFormat('M/d h:mm a').format(DateTime.now());
   }
 
+  List<List<T>> splitIntoChunks<T>(List<T> arr, int chunkSize) {
+    List<List<T>> result = [];
+    for (var i = 0; i < arr.length; i += chunkSize) {
+      result.add(arr.sublist(
+          i, i + chunkSize > arr.length ? arr.length : i + chunkSize));
+    }
+    return result;
+  }
+
   @override
   Widget build(BuildContext context) {
-    List<Widget> ticketLogWidgets = [];
-
-    // Iterate and build the widgets
-    for (var entry in history) {
-      TicketLogModel log = TicketLogModel(
-        dateUsage:
-            DateFormat('M/d/yyyy').format(DateTime.parse(entry['date_used'])),
-        timeUsage: entry['time_used'],
-        loggingType: entry['type'] == 0 ? "Log Out" : "Log In",
-      );
-
-      ticketLogWidgets.add(Column(
-        mainAxisSize: MainAxisSize.max,
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Container(
-            width: MediaQuery.sizeOf(context).width * 0.25,
-            decoration: const BoxDecoration(),
-            child: wrapWithModel(
-              model: log,
-              updateCallback: () => setState(() {}),
-              child: const TicketLogWidget(),
-            ),
-          ),
-          Container(
-            width: MediaQuery.sizeOf(context).width * 0.25,
-            decoration: const BoxDecoration(),
-          ),
-        ],
-      ));
-    }
-
-    List<Widget> ticketRowWidgets = [];
-    List<Widget> ticketRows = [];
-
-    for (int i = 0; i < ticketLogWidgets.length; i += 3) {
-      ticketRowWidgets = ticketLogWidgets.sublist(
-        i,
-        i + 3 > ticketLogWidgets.length ? ticketLogWidgets.length : i + 3,
-      );
-      ticketRows.add(SingleChildScrollView(
-        scrollDirection: Axis.horizontal,
-        child: Row(
-          mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.start,
-          // crossAxisAlignment: CrossAxisAlignment.center,
-          children: ticketRowWidgets,
-        ),
-      ));
-    }
-
     return GestureDetector(
       onTap: () => _model.unfocusNode.canRequestFocus
           ? FocusScope.of(context).requestFocus(_model.unfocusNode)
