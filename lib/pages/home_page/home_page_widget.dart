@@ -1,18 +1,17 @@
-import 'dart:convert';
-import 'package:http/http.dart';
-
 import '/alert_notif/ticket_detected/ticket_detected_widget.dart';
+import '/alert_notif/ticket_loggged/ticket_loggged_widget.dart';
 import '/components/drawer/drawer_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'dart:async';
-import 'package:http/http.dart' as http;
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'home_page_model.dart';
 export 'home_page_model.dart';
 
@@ -26,8 +25,6 @@ class HomePageWidget extends StatefulWidget {
 class _HomePageWidgetState extends State<HomePageWidget>
     with TickerProviderStateMixin {
   late HomePageModel _model;
-  late String _currentTime;
-  late Timer _timer;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -37,11 +34,17 @@ class _HomePageWidgetState extends State<HomePageWidget>
   void initState() {
     super.initState();
     _model = createModel(context, () => HomePageModel());
-    _currentTime = _getCurrentTime();
-    _startTimer();
 
-    _model.textController ??= TextEditingController();
-    _model.textFieldFocusNode ??= FocusNode();
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      FFAppState().update(() {
+        FFAppState().StandardMode = true;
+        FFAppState().DebugMode = false;
+      });
+    });
+
+    _model.qrInputFieldTextController ??= TextEditingController();
+    _model.qrInputFieldFocusNode ??= FocusNode();
 
     animationsMap.addAll({
       'containerOnPageLoadAnimation': AnimationInfo(
@@ -70,6 +73,18 @@ class _HomePageWidgetState extends State<HomePageWidget>
           ),
         ],
       ),
+      'textFieldOnPageLoadAnimation': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          FadeEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 600.0.ms,
+            begin: 0.0,
+            end: 1.0,
+          ),
+        ],
+      ),
     });
 
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
@@ -78,24 +93,14 @@ class _HomePageWidgetState extends State<HomePageWidget>
   @override
   void dispose() {
     _model.dispose();
-    _timer.cancel();
+
     super.dispose();
-  }
-
-  void _startTimer() {
-    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
-      setState(() {
-        _currentTime = _getCurrentTime();
-      });
-    });
-  }
-
-  String _getCurrentTime() {
-    return DateFormat('M/d h:mm a').format(DateTime.now());
   }
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return GestureDetector(
       onTap: () => _model.unfocusNode.canRequestFocus
           ? FocusScope.of(context).requestFocus(_model.unfocusNode)
@@ -161,23 +166,27 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Padding(
-                                      padding:
-                                          const EdgeInsetsDirectional.fromSTEB(
-                                              36.0, 0.0, 0.0, 0.0),
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                          36.0, 36.0, 0.0, 12.0),
                                       child: Row(
                                         mainAxisSize: MainAxisSize.max,
                                         children: [
                                           FaIcon(
                                             FontAwesomeIcons.clock,
                                             color: FlutterFlowTheme.of(context)
-                                                .secondaryText,
+                                                .primary,
                                             size: 32.0,
                                           ),
                                           Padding(
-                                            padding: const EdgeInsetsDirectional
-                                                .fromSTEB(12.0, 0.0, 0.0, 0.0),
+                                            padding:
+                                                const EdgeInsetsDirectional.fromSTEB(
+                                                    12.0, 0.0, 0.0, 0.0),
                                             child: AutoSizeText(
-                                              _currentTime,
+                                              dateTimeFormat(
+                                                  'M/d h:mm a',
+                                                  dateTimeFromSecondsSinceEpoch(
+                                                      getCurrentTimestamp
+                                                          .secondsSinceEpoch)),
                                               maxLines: 1,
                                               style: FlutterFlowTheme.of(
                                                       context)
@@ -189,7 +198,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                             .bodyMediumFamily,
                                                     color: FlutterFlowTheme.of(
                                                             context)
-                                                        .secondaryText,
+                                                        .primary,
                                                     fontSize: 32.0,
                                                     letterSpacing: 0.0,
                                                     fontWeight: FontWeight.w100,
@@ -207,9 +216,8 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                       ),
                                     ),
                                     Padding(
-                                      padding:
-                                          const EdgeInsetsDirectional.fromSTEB(
-                                              0.0, 0.0, 0.0, 36.0),
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                          0.0, 0.0, 0.0, 36.0),
                                       child: Wrap(
                                         spacing: 0.0,
                                         runSpacing: 0.0,
@@ -223,14 +231,53 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                         clipBehavior: Clip.none,
                                         children: [
                                           Padding(
-                                            padding: const EdgeInsetsDirectional
-                                                .fromSTEB(36.0, 0.0, 36.0, 0.0),
+                                            padding:
+                                                const EdgeInsetsDirectional.fromSTEB(
+                                                    36.0, 0.0, 36.0, 0.0),
                                             child: InkWell(
                                               splashColor: Colors.transparent,
                                               focusColor: Colors.transparent,
                                               hoverColor: Colors.transparent,
                                               highlightColor:
                                                   Colors.transparent,
+                                              onTap: () async {
+                                                showModalBottomSheet(
+                                                  isScrollControlled: true,
+                                                  backgroundColor:
+                                                      Colors.transparent,
+                                                  useSafeArea: true,
+                                                  context: context,
+                                                  builder: (context) {
+                                                    return GestureDetector(
+                                                      onTap: () => _model
+                                                              .unfocusNode
+                                                              .canRequestFocus
+                                                          ? FocusScope.of(
+                                                                  context)
+                                                              .requestFocus(_model
+                                                                  .unfocusNode)
+                                                          : FocusScope.of(
+                                                                  context)
+                                                              .unfocus(),
+                                                      child: Padding(
+                                                        padding: MediaQuery
+                                                            .viewInsetsOf(
+                                                                context),
+                                                        child: SizedBox(
+                                                          height:
+                                                              MediaQuery.sizeOf(
+                                                                          context)
+                                                                      .height *
+                                                                  1.0,
+                                                          child:
+                                                              const TicketDetectedWidget(),
+                                                        ),
+                                                      ),
+                                                    );
+                                                  },
+                                                ).then((value) =>
+                                                    safeSetState(() {}));
+                                              },
                                               child: AutoSizeText(
                                                 'SCAN YOUR TICKET',
                                                 textAlign: TextAlign.start,
@@ -260,15 +307,53 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                             ),
                                           ),
                                           Padding(
-                                            padding: const EdgeInsetsDirectional
-                                                .fromSTEB(
-                                                36.0, 12.0, 36.0, 0.0),
+                                            padding:
+                                                const EdgeInsetsDirectional.fromSTEB(
+                                                    36.0, 12.0, 36.0, 0.0),
                                             child: InkWell(
                                               splashColor: Colors.transparent,
                                               focusColor: Colors.transparent,
                                               hoverColor: Colors.transparent,
                                               highlightColor:
                                                   Colors.transparent,
+                                              onTap: () async {
+                                                showModalBottomSheet(
+                                                  isScrollControlled: true,
+                                                  backgroundColor:
+                                                      Colors.transparent,
+                                                  useSafeArea: true,
+                                                  context: context,
+                                                  builder: (context) {
+                                                    return GestureDetector(
+                                                      onTap: () => _model
+                                                              .unfocusNode
+                                                              .canRequestFocus
+                                                          ? FocusScope.of(
+                                                                  context)
+                                                              .requestFocus(_model
+                                                                  .unfocusNode)
+                                                          : FocusScope.of(
+                                                                  context)
+                                                              .unfocus(),
+                                                      child: Padding(
+                                                        padding: MediaQuery
+                                                            .viewInsetsOf(
+                                                                context),
+                                                        child: SizedBox(
+                                                          height:
+                                                              MediaQuery.sizeOf(
+                                                                          context)
+                                                                      .height *
+                                                                  1.0,
+                                                          child:
+                                                              const TicketLogggedWidget(),
+                                                        ),
+                                                      ),
+                                                    );
+                                                  },
+                                                ).then((value) =>
+                                                    safeSetState(() {}));
+                                              },
                                               child: AutoSizeText(
                                                 ' TO CHECK IN TO THE EVENT ',
                                                 textAlign: TextAlign.start,
@@ -283,7 +368,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                                   .bodyMediumFamily,
                                                           color: FlutterFlowTheme
                                                                   .of(context)
-                                                              .secondaryText,
+                                                              .primary,
                                                           fontSize: 32.0,
                                                           letterSpacing: 0.0,
                                                           fontWeight:
@@ -301,125 +386,131 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                           ),
 
                                           // here is the keyboard func to put the qr's code - ej
-                                          Padding(
-                                            padding: const EdgeInsetsDirectional
-                                                .fromSTEB(
-                                                36.0, 12.0, 36.0, 0.0),
-                                            child: TextFormField(
-                                              controller: _model.textController,
-                                              focusNode:
-                                                  _model.textFieldFocusNode,
-                                              autofocus: true,
-                                              obscureText: false,
-                                              decoration: InputDecoration(
-                                                labelText: 'Enter QR Code here',
-                                                labelStyle:
-                                                    FlutterFlowTheme.of(context)
-                                                        .labelMedium
-                                                        .override(
-                                                          fontFamily:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .labelMediumFamily,
-                                                          letterSpacing: 0.0,
-                                                          useGoogleFonts: GoogleFonts
-                                                                  .asMap()
-                                                              .containsKey(
-                                                                  FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .labelMediumFamily),
-                                                        ),
-                                                hintStyle:
-                                                    FlutterFlowTheme.of(context)
-                                                        .labelMedium
-                                                        .override(
-                                                          fontFamily:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .labelMediumFamily,
-                                                          letterSpacing: 0.0,
-                                                          useGoogleFonts: GoogleFonts
-                                                                  .asMap()
-                                                              .containsKey(
-                                                                  FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .labelMediumFamily),
-                                                        ),
-                                                enabledBorder:
-                                                    UnderlineInputBorder(
-                                                  borderSide: BorderSide(
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .alternate,
-                                                    width: 2.0,
-                                                  ),
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          8.0),
-                                                ),
-                                                focusedBorder:
-                                                    UnderlineInputBorder(
-                                                  borderSide: BorderSide(
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .primary,
-                                                    width: 2.0,
-                                                  ),
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          8.0),
-                                                ),
-                                                errorBorder:
-                                                    UnderlineInputBorder(
-                                                  borderSide: BorderSide(
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .error,
-                                                    width: 2.0,
-                                                  ),
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          8.0),
-                                                ),
-                                                focusedErrorBorder:
-                                                    UnderlineInputBorder(
-                                                  borderSide: BorderSide(
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .error,
-                                                    width: 2.0,
-                                                  ),
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          8.0),
-                                                ),
-                                              ),
-                                              style:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyMedium
-                                                      .override(
-                                                        fontFamily:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodyMediumFamily,
-                                                        letterSpacing: 0.0,
-                                                        useGoogleFonts: GoogleFonts
-                                                                .asMap()
-                                                            .containsKey(
+                                          //
+                                          if (FFAppState().DebugMode)
+                                            Padding(
+                                              padding: const EdgeInsetsDirectional
+                                                  .fromSTEB(
+                                                      36.0, 12.0, 36.0, 0.0),
+                                              child: TextFormField(
+                                                controller: _model
+                                                    .qrInputFieldTextController,
+                                                focusNode: _model
+                                                    .qrInputFieldFocusNode,
+                                                autofocus: true,
+                                                obscureText: false,
+                                                decoration: InputDecoration(
+                                                  labelText:
+                                                      'Enter QR Code here',
+                                                  labelStyle:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .labelMedium
+                                                          .override(
+                                                            fontFamily:
                                                                 FlutterFlowTheme.of(
                                                                         context)
-                                                                    .bodyMediumFamily),
-                                                      ),
-                                              validator: _model
-                                                  .textControllerValidator
-                                                  .asValidator(context),
-                                              onFieldSubmitted: (value) async {
-                                                await authenticateTicket(
-                                                    value, context);
-                                                _model.textController!.clear();
-                                              },
+                                                                    .labelMediumFamily,
+                                                            letterSpacing: 0.0,
+                                                            useGoogleFonts: GoogleFonts
+                                                                    .asMap()
+                                                                .containsKey(
+                                                                    FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .labelMediumFamily),
+                                                          ),
+                                                  hintStyle:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .labelMedium
+                                                          .override(
+                                                            fontFamily:
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .labelMediumFamily,
+                                                            letterSpacing: 0.0,
+                                                            useGoogleFonts: GoogleFonts
+                                                                    .asMap()
+                                                                .containsKey(
+                                                                    FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .labelMediumFamily),
+                                                          ),
+                                                  enabledBorder:
+                                                      UnderlineInputBorder(
+                                                    borderSide: BorderSide(
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .alternate,
+                                                      width: 2.0,
+                                                    ),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            8.0),
+                                                  ),
+                                                  focusedBorder:
+                                                      UnderlineInputBorder(
+                                                    borderSide: BorderSide(
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .primary,
+                                                      width: 2.0,
+                                                    ),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            8.0),
+                                                  ),
+                                                  errorBorder:
+                                                      UnderlineInputBorder(
+                                                    borderSide: BorderSide(
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .error,
+                                                      width: 2.0,
+                                                    ),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            8.0),
+                                                  ),
+                                                  focusedErrorBorder:
+                                                      UnderlineInputBorder(
+                                                    borderSide: BorderSide(
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .error,
+                                                      width: 2.0,
+                                                    ),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            8.0),
+                                                  ),
+                                                ),
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .override(
+                                                          fontFamily:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .bodyMediumFamily,
+                                                          letterSpacing: 0.0,
+                                                          useGoogleFonts: GoogleFonts
+                                                                  .asMap()
+                                                              .containsKey(
+                                                                  FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMediumFamily),
+                                                        ),
+                                                validator: _model
+                                                    .qrInputFieldTextControllerValidator
+                                                    .asValidator(context),
+                                              ).animateOnPageLoad(animationsMap[
+                                                  'textFieldOnPageLoadAnimation']!),
                                             ),
-                                          ),
                                         ],
                                       ),
                                     ),
@@ -456,9 +547,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                         width:
                                             MediaQuery.sizeOf(context).width *
                                                 1.0,
-                                        height:
-                                            MediaQuery.sizeOf(context).height *
-                                                1.043,
+                                        height: double.infinity,
                                         fit: BoxFit.cover,
                                       ),
                                     ],
@@ -567,7 +656,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(8.0),
                                   child: Image.asset(
-                                    'assets/images/SSU_USC_Logo.png',
+                                    'assets/images/USC-Logo.png',
                                     width: 40.0,
                                     height: 40.0,
                                     fit: BoxFit.cover,
@@ -657,47 +746,5 @@ class _HomePageWidgetState extends State<HomePageWidget>
         ),
       ),
     );
-  }
-
-  // Authenticate if Ticket exists in Database
-  Future<void> authenticateTicket(String value, BuildContext context) async {
-    final String apiUrl = 'http://127.0.0.1:5000/api/ticket/$value';
-    try {
-      Response response = await http.get(Uri.parse(apiUrl));
-      if (response.statusCode == 200) {
-        final Map<String, dynamic> data = json.decode(response.body);
-
-        // Check if the "success" key exists and its value is true
-        if (data.containsKey("success") && data["success"] && mounted) {
-          _model.ticket = data;
-          showModalBottomSheet(
-            isScrollControlled: true,
-            backgroundColor: Colors.transparent,
-            useSafeArea: true,
-            context: context,
-            builder: (context) {
-              return GestureDetector(
-                onTap: () => _model.unfocusNode.canRequestFocus
-                    ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-                    : FocusScope.of(context).unfocus(),
-                child: Padding(
-                  padding: MediaQuery.viewInsetsOf(context),
-                  child: SizedBox(
-                    height: MediaQuery.sizeOf(context).height * 1.0,
-                    child: TicketDetectedWidget(_model),
-                  ),
-                ),
-              );
-            },
-          ).then((value) => safeSetState(() {}));
-        }
-      } else {
-        // Handle API error
-        print("Failed to fetch data. Status code: ${response.statusCode}");
-      }
-    } catch (error) {
-      // Handle network error
-      print("Error: " + error.toString());
-    }
   }
 }

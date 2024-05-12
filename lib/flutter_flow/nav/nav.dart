@@ -42,10 +42,10 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => const HomePageWidget(),
         ),
         FFRoute(
-            name: 'TicketInfo',
-            path: '/ticketInfo',
-            builder: (context, params) => TicketInfoWidget(
-                ticket: params.state.extra as Map<String, dynamic>)),
+          name: 'TicketInfo',
+          path: '/ticketInfo',
+          builder: (context, params) => const TicketInfoWidget(),
+        )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
 
@@ -208,8 +208,7 @@ class TransitionInfo {
   final Duration duration;
   final Alignment? alignment;
 
-  static TransitionInfo appDefault() =>
-      const TransitionInfo(hasTransition: false);
+  static TransitionInfo appDefault() => const TransitionInfo(hasTransition: false);
 }
 
 class RootPageContext {
@@ -230,4 +229,14 @@ class RootPageContext {
         value: RootPageContext(true, errorRoute),
         child: child,
       );
+}
+
+extension GoRouterLocationExtension on GoRouter {
+  String getCurrentLocation() {
+    final RouteMatch lastMatch = routerDelegate.currentConfiguration.last;
+    final RouteMatchList matchList = lastMatch is ImperativeRouteMatch
+        ? lastMatch.matches
+        : routerDelegate.currentConfiguration;
+    return matchList.uri.toString();
+  }
 }

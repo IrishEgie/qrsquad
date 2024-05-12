@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import '/components/drawer/drawer_widget.dart';
 import '/components/ticket_log/ticket_log_widget.dart';
 import '/components/upper_card_content/upper_card_content_widget.dart';
@@ -13,21 +11,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'ticket_info_model.dart';
 export 'ticket_info_model.dart';
 
-class HistoryItem {
-  final String dateUsed;
-  final int type;
-  final String timeUsed;
-
-  HistoryItem({
-    required this.dateUsed,
-    required this.type,
-    required this.timeUsed,
-  });
-}
-
 class TicketInfoWidget extends StatefulWidget {
-  final Map<String, dynamic> ticket;
-  const TicketInfoWidget({super.key, required this.ticket});
+  const TicketInfoWidget({super.key});
 
   @override
   State<TicketInfoWidget> createState() => _TicketInfoWidgetState();
@@ -36,10 +21,6 @@ class TicketInfoWidget extends StatefulWidget {
 class _TicketInfoWidgetState extends State<TicketInfoWidget>
     with TickerProviderStateMixin {
   late TicketInfoModel _model;
-  late String _currentTime;
-  late Timer _timer;
-  late Map<String, dynamic> ticket;
-  late List<dynamic> history;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -49,10 +30,7 @@ class _TicketInfoWidgetState extends State<TicketInfoWidget>
   void initState() {
     super.initState();
     _model = createModel(context, () => TicketInfoModel());
-    _currentTime = _getCurrentTime();
-    _startTimer();
-    ticket = widget.ticket;
-    history = ticket['history'];
+
     animationsMap.addAll({
       'columnOnPageLoadAnimation1': AnimationInfo(
         trigger: AnimationTrigger.onPageLoad,
@@ -114,23 +92,8 @@ class _TicketInfoWidgetState extends State<TicketInfoWidget>
   @override
   void dispose() {
     _model.dispose();
-    _timer.cancel();
+
     super.dispose();
-  }
-
-  void _startTimer() {
-    Timer(const Duration(seconds: 3), () {
-      context.pushNamed('HomePage');
-    });
-    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
-      setState(() {
-        _currentTime = _getCurrentTime();
-      });
-    });
-  }
-
-  String _getCurrentTime() {
-    return DateFormat('M/d h:mm a').format(DateTime.now());
   }
 
   @override
@@ -164,8 +127,8 @@ class _TicketInfoWidgetState extends State<TicketInfoWidget>
                   Align(
                     alignment: const AlignmentDirectional(0.0, 0.0),
                     child: Padding(
-                      padding: const EdgeInsetsDirectional.fromSTEB(
-                          0.0, 48.0, 0.0, 0.0),
+                      padding:
+                          const EdgeInsetsDirectional.fromSTEB(0.0, 48.0, 0.0, 0.0),
                       child: Container(
                         height: MediaQuery.sizeOf(context).height * 0.9,
                         decoration: const BoxDecoration(),
@@ -193,10 +156,11 @@ class _TicketInfoWidgetState extends State<TicketInfoWidget>
                                       ),
                                       options: FFButtonOptions(
                                         height: 40.0,
-                                        padding: const EdgeInsetsDirectional
-                                            .fromSTEB(24.0, 0.0, 24.0, 0.0),
-                                        iconPadding: const EdgeInsetsDirectional
-                                            .fromSTEB(0.0, 0.0, 0.0, 0.0),
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                            24.0, 0.0, 24.0, 0.0),
+                                        iconPadding:
+                                            const EdgeInsetsDirectional.fromSTEB(
+                                                0.0, 0.0, 0.0, 0.0),
                                         color: FlutterFlowTheme.of(context)
                                             .primary,
                                         textStyle: FlutterFlowTheme.of(context)
@@ -248,9 +212,9 @@ class _TicketInfoWidgetState extends State<TicketInfoWidget>
                                         mainAxisSize: MainAxisSize.max,
                                         children: [
                                           Padding(
-                                            padding: const EdgeInsetsDirectional
-                                                .fromSTEB(
-                                                36.0, 12.0, 36.0, 0.0),
+                                            padding:
+                                                const EdgeInsetsDirectional.fromSTEB(
+                                                    36.0, 12.0, 36.0, 0.0),
                                             child: Row(
                                               mainAxisSize: MainAxisSize.max,
                                               mainAxisAlignment:
@@ -260,8 +224,7 @@ class _TicketInfoWidgetState extends State<TicketInfoWidget>
                                                   CrossAxisAlignment.end,
                                               children: [
                                                 Container(
-                                                  decoration:
-                                                      const BoxDecoration(),
+                                                  decoration: const BoxDecoration(),
                                                   child: Row(
                                                     mainAxisSize:
                                                         MainAxisSize.max,
@@ -278,8 +241,11 @@ class _TicketInfoWidgetState extends State<TicketInfoWidget>
                                                       Padding(
                                                         padding:
                                                             const EdgeInsetsDirectional
-                                                                .fromSTEB(12.0,
-                                                                0.0, 0.0, 0.0),
+                                                                .fromSTEB(
+                                                                    12.0,
+                                                                    0.0,
+                                                                    0.0,
+                                                                    0.0),
                                                         child: Text(
                                                           'Ticket Detail',
                                                           style: FlutterFlowTheme
@@ -325,14 +291,14 @@ class _TicketInfoWidgetState extends State<TicketInfoWidget>
                                                     padding:
                                                         const EdgeInsetsDirectional
                                                             .fromSTEB(24.0, 0.0,
-                                                            24.0, 0.0),
+                                                                24.0, 0.0),
                                                     iconPadding:
                                                         const EdgeInsetsDirectional
-                                                            .fromSTEB(
-                                                            0.0, 0.0, 0.0, 0.0),
+                                                            .fromSTEB(0.0, 0.0,
+                                                                0.0, 0.0),
                                                     color: FlutterFlowTheme.of(
                                                             context)
-                                                        .secondary,
+                                                        .primary,
                                                     textStyle: FlutterFlowTheme
                                                             .of(context)
                                                         .titleSmall
@@ -351,8 +317,7 @@ class _TicketInfoWidgetState extends State<TicketInfoWidget>
                                                                       .titleSmallFamily),
                                                         ),
                                                     elevation: 3.0,
-                                                    borderSide:
-                                                        const BorderSide(
+                                                    borderSide: const BorderSide(
                                                       color: Colors.transparent,
                                                       width: 1.0,
                                                     ),
@@ -365,9 +330,9 @@ class _TicketInfoWidgetState extends State<TicketInfoWidget>
                                             ),
                                           ),
                                           Padding(
-                                            padding: const EdgeInsetsDirectional
-                                                .fromSTEB(
-                                                36.0, 16.0, 36.0, 0.0),
+                                            padding:
+                                                const EdgeInsetsDirectional.fromSTEB(
+                                                    36.0, 16.0, 36.0, 0.0),
                                             child: Row(
                                               mainAxisSize: MainAxisSize.max,
                                               children: [
@@ -379,9 +344,8 @@ class _TicketInfoWidgetState extends State<TicketInfoWidget>
                                                   size: 72.0,
                                                 ),
                                                 Padding(
-                                                  padding:
-                                                      const EdgeInsetsDirectional
-                                                          .fromSTEB(
+                                                  padding: const EdgeInsetsDirectional
+                                                      .fromSTEB(
                                                           24.0, 0.0, 0.0, 0.0),
                                                   child: Column(
                                                     mainAxisSize:
@@ -422,10 +386,7 @@ class _TicketInfoWidgetState extends State<TicketInfoWidget>
                                                         children: [
                                                           // Write the Ticker code/no. here, the logic only has to change the ticket no. per scan
                                                           Text(
-                                                            ticket['id']
-                                                                .toString()
-                                                                .padLeft(
-                                                                    4, '0'),
+                                                            '[Write Ticket Code Here Logic here]',
                                                             style: FlutterFlowTheme
                                                                     .of(context)
                                                                 .bodyMedium
@@ -454,9 +415,9 @@ class _TicketInfoWidgetState extends State<TicketInfoWidget>
                                             ),
                                           ),
                                           Padding(
-                                            padding: const EdgeInsetsDirectional
-                                                .fromSTEB(
-                                                36.0, 12.0, 36.0, 12.0),
+                                            padding:
+                                                const EdgeInsetsDirectional.fromSTEB(
+                                                    36.0, 12.0, 36.0, 12.0),
                                             child: Row(
                                               mainAxisSize: MainAxisSize.max,
                                               children: [
@@ -469,8 +430,7 @@ class _TicketInfoWidgetState extends State<TicketInfoWidget>
                                                         setState(() {}),
                                                     child:
                                                         UpperCardContentWidget(
-                                                      info: history.length
-                                                          .toString(),
+                                                      info: '2  [Sample]',
                                                       subInfo: 'Times Used',
                                                       cardicon: Icon(
                                                         Icons.av_timer_outlined,
@@ -492,10 +452,7 @@ class _TicketInfoWidgetState extends State<TicketInfoWidget>
                                                     updateOnChange: true,
                                                     child:
                                                         UpperCardContentWidget(
-                                                      info: DateFormat('h:mm a')
-                                                          .format(DateTime
-                                                              .parse(ticket[
-                                                                  "check_in"])),
+                                                      info: '5:08 PM [Sample]',
                                                       subInfo: 'Check-in Time',
                                                       cardicon: Icon(
                                                         Icons.login_rounded,
@@ -516,10 +473,7 @@ class _TicketInfoWidgetState extends State<TicketInfoWidget>
                                                         setState(() {}),
                                                     child:
                                                         UpperCardContentWidget(
-                                                      info: DateFormat('h:mm a')
-                                                          .format(DateTime
-                                                              .parse(ticket[
-                                                                  "check_out"])),
+                                                      info: '1:32 AM [Sample]',
                                                       subInfo: 'Check-Out Time',
                                                       cardicon: Icon(
                                                         Icons.logout_rounded,
@@ -562,9 +516,9 @@ class _TicketInfoWidgetState extends State<TicketInfoWidget>
                                             CrossAxisAlignment.center,
                                         children: [
                                           Padding(
-                                            padding: const EdgeInsetsDirectional
-                                                .fromSTEB(
-                                                36.0, 12.0, 36.0, 12.0),
+                                            padding:
+                                                const EdgeInsetsDirectional.fromSTEB(
+                                                    36.0, 12.0, 36.0, 12.0),
                                             child: Row(
                                               mainAxisSize: MainAxisSize.max,
                                               mainAxisAlignment:
@@ -581,9 +535,8 @@ class _TicketInfoWidgetState extends State<TicketInfoWidget>
                                                   size: 36.0,
                                                 ),
                                                 Padding(
-                                                  padding:
-                                                      const EdgeInsetsDirectional
-                                                          .fromSTEB(
+                                                  padding: const EdgeInsetsDirectional
+                                                      .fromSTEB(
                                                           12.0, 0.0, 0.0, 0.0),
                                                   child: Text(
                                                     'Ticket History',
@@ -1127,24 +1080,26 @@ class _TicketInfoWidgetState extends State<TicketInfoWidget>
                                                                   context)
                                                               .width *
                                                           0.75,
-                                                      height: 100.0,
-                                                      decoration: const BoxDecoration(
+                                                      height: 30.0,
+                                                      decoration: BoxDecoration(
                                                         gradient:
                                                             LinearGradient(
                                                           colors: [
-                                                            Color(0x008C81F2),
-                                                            Color(0x25000000)
+                                                            Colors.transparent,
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .accent1
                                                           ],
-                                                          stops: [0.0, 1.0],
+                                                          stops: const [0.0, 1.0],
                                                           begin:
-                                                              AlignmentDirectional(
+                                                              const AlignmentDirectional(
                                                                   0.0, -1.0),
                                                           end:
-                                                              AlignmentDirectional(
+                                                              const AlignmentDirectional(
                                                                   0, 1.0),
                                                         ),
                                                         borderRadius:
-                                                            BorderRadius.only(
+                                                            const BorderRadius.only(
                                                           bottomLeft:
                                                               Radius.circular(
                                                                   24.0),
@@ -1179,8 +1134,8 @@ class _TicketInfoWidgetState extends State<TicketInfoWidget>
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsetsDirectional.fromSTEB(
-                        36.0, 16.0, 36.0, 16.0),
+                    padding:
+                        const EdgeInsetsDirectional.fromSTEB(36.0, 16.0, 36.0, 16.0),
                     child: Row(
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -1209,7 +1164,11 @@ class _TicketInfoWidgetState extends State<TicketInfoWidget>
                                   ),
                                 ),
                                 Text(
-                                  _currentTime,
+                                  dateTimeFormat(
+                                      'M/d h:mm a',
+                                      dateTimeFromSecondsSinceEpoch(
+                                          getCurrentTimestamp
+                                              .secondsSinceEpoch)),
                                   style: FlutterFlowTheme.of(context)
                                       .bodyMedium
                                       .override(
@@ -1283,7 +1242,7 @@ class _TicketInfoWidgetState extends State<TicketInfoWidget>
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(8.0),
                                 child: Image.asset(
-                                  'assets/images/SSU_USC_Logo.png',
+                                  'assets/images/USC-Logo.png',
                                   width: 50.0,
                                   height: 50.0,
                                   fit: BoxFit.cover,
@@ -1360,25 +1319,8 @@ class _TicketInfoWidgetState extends State<TicketInfoWidget>
                             ),
                       ),
                     ),
-                  ),
-                  Wrap(
-                    spacing: 0.0,
-                    runSpacing: 0.0,
-                    alignment: WrapAlignment.start,
-                    crossAxisAlignment: WrapCrossAlignment.start,
-                    direction: Axis.horizontal,
-                    runAlignment: WrapAlignment.start,
-                    verticalDirection: VerticalDirection.down,
-                    clipBehavior: Clip.none,
-                    children: [
-                      Container(
-                        width: 100.0,
-                        height: 30.0,
-                        decoration: const BoxDecoration(),
-                      ),
-                    ],
-                  ),
-                ],
+                  ],
+                ),
               ),
             ],
           ),

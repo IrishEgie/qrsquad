@@ -71,7 +71,7 @@ class _TicketErrorWidgetState extends State<TicketErrorWidget> {
                   children: [
                     Icon(
                       Icons.warning_amber_rounded,
-                      color: FlutterFlowTheme.of(context).primary,
+                      color: FlutterFlowTheme.of(context).primaryText,
                       size: 128.0,
                     ),
                     Padding(
@@ -83,7 +83,7 @@ class _TicketErrorWidgetState extends State<TicketErrorWidget> {
                             .headlineMedium
                             .override(
                               fontFamily: 'Outfit',
-                              color: FlutterFlowTheme.of(context).primary,
+                              color: FlutterFlowTheme.of(context).primaryText,
                               fontSize: 24.0,
                               letterSpacing: 0.0,
                               fontWeight: FontWeight.w500,
@@ -97,16 +97,17 @@ class _TicketErrorWidgetState extends State<TicketErrorWidget> {
                           const EdgeInsetsDirectional.fromSTEB(0.0, 4.0, 0.0, 0.0),
                       child: Text(
                         ' An Error with you Ticket has Occured',
-                        style:
-                            FlutterFlowTheme.of(context).labelMedium.override(
-                                  fontFamily: 'Plus Jakarta Sans',
-                                  color: FlutterFlowTheme.of(context).primary,
-                                  fontSize: 14.0,
-                                  letterSpacing: 0.0,
-                                  fontWeight: FontWeight.w500,
-                                  useGoogleFonts: GoogleFonts.asMap()
-                                      .containsKey('Plus Jakarta Sans'),
-                                ),
+                        style: FlutterFlowTheme.of(context)
+                            .labelMedium
+                            .override(
+                              fontFamily: 'Plus Jakarta Sans',
+                              color: FlutterFlowTheme.of(context).primaryText,
+                              fontSize: 14.0,
+                              letterSpacing: 0.0,
+                              fontWeight: FontWeight.w500,
+                              useGoogleFonts: GoogleFonts.asMap()
+                                  .containsKey('Plus Jakarta Sans'),
+                            ),
                       ),
                     ),
                     Container(
