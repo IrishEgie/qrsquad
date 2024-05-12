@@ -13,9 +13,6 @@ class HomePageModel extends FlutterFlowModel<HomePageWidget> {
   late String apiUrl = "";
   late Connection connectionStatus = Connection.NULL;
 
-  /// Debug mode
-  late bool isDebug = true;
-
   /// Property for Ticket Class
   late Map<String, dynamic> ticket;
   // Model for Drawer component.

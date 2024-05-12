@@ -550,7 +550,6 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                               ),
                                             ),
                                           ),
-
                                           // here is the keyboard func to put the qr's code - ej
                                           //
                                           if (FFAppState().DebugMode)

@@ -60,10 +60,12 @@ app.get("/api/ticket/:uid", (req, res) => {
 
   const ticketId = req.params.uid;
   const query = `
-    SELECT t.*, h.date_used, h.type, h.time_used 
+    SELECT t.*, h.date_used, h.type, h.time_used
     FROM qticketdb t
     JOIN qticketdb_history h ON t.id = h.ticket_id
-    WHERE t.uid = ? 
+    WHERE t.uid = ?
+    ORDER BY h.date_used DESC, h.time_used DESC 
+    LIMIT 20 
   `;
 
   db.connection.query(query, [ticketId], (error, results) => {

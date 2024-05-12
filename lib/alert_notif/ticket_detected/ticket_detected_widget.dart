@@ -48,9 +48,8 @@ class _TicketDetectedWidgetState extends State<TicketDetectedWidget> {
   void fetchingTicket() {
     if ((_homeModel.ticket["success"]) != Null) {
       if ((_homeModel.ticket["success"])) {
-        if (_homeModel.isDebug) {
+        if (FFAppState().DebugMode) {
           Timer(const Duration(milliseconds: 1000), () {
-            // Navigator.pop(context);
             context.goNamed("TicketInfo", extra: _homeModel);
           });
         } else {
