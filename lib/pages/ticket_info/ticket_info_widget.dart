@@ -113,25 +113,24 @@ class _TicketInfoWidgetState extends State<TicketInfoWidget>
           loggingType: entry['type'] == 0 ? "Log Out" : "Log In",
         );
         ticketLogs.add(log);
-        ticketLogWidgets.add(Column(
-          mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Container(
-              width: MediaQuery.sizeOf(context).width * 0.25,
-              decoration: const BoxDecoration(),
+
+        ticketLogWidgets.add(
+          Padding(
+            padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 8, 0),
+            child: Container(
+              width: 300,
+              height: 120,
+              decoration: BoxDecoration(
+                color: FlutterFlowTheme.of(context).secondaryBackground,
+              ),
               child: wrapWithModel(
                 model: log,
                 updateCallback: () => setState(() {}),
                 child: const TicketLogWidget(),
               ),
             ),
-            Container(
-              width: MediaQuery.sizeOf(context).width * 0.25,
-              decoration: const BoxDecoration(),
-            ),
-          ],
-        ));
+          ),
+        );
       }
 
       for (var row in splitIntoChunks(ticketLogWidgets, 3)) {
@@ -139,15 +138,25 @@ class _TicketInfoWidgetState extends State<TicketInfoWidget>
         for (var element in row) {
           ticketRowWidgets.add(element);
         }
-        ticketRows.add(SingleChildScrollView(
-          // scrollDirection: Axis.horizontal,
-          child: Row(
+        ticketRows.add(
+          Row(
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.start,
-            // crossAxisAlignment: CrossAxisAlignment.center,
-            children: ticketRowWidgets,
+            children: [
+              Wrap(
+                spacing: 0,
+                runSpacing: 0,
+                alignment: WrapAlignment.start,
+                crossAxisAlignment: WrapCrossAlignment.start,
+                direction: Axis.horizontal,
+                runAlignment: WrapAlignment.start,
+                verticalDirection: VerticalDirection.down,
+                clipBehavior: Clip.none,
+                children: ticketRowWidgets,
+              ),
+            ],
           ),
-        ));
+        );
       }
     });
   }
