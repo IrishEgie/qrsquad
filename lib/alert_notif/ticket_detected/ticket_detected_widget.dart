@@ -1,5 +1,6 @@
 import 'dart:async';
-
+import 'package:http/http.dart';
+import 'package:http/http.dart' as http;
 import 'package:q_r_checkin/alert_notif/ticket_loggged/ticket_loggged_widget.dart';
 import 'package:q_r_checkin/pages/home_page/home_page_model.dart';
 
@@ -33,9 +34,10 @@ class _TicketDetectedWidgetState extends State<TicketDetectedWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => TicketDetectedModel());
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
     _homeModel = widget.model;
-    fetchingTicket();
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {
+          fetchingTicket();
+        }));
   }
 
   @override
@@ -45,15 +47,22 @@ class _TicketDetectedWidgetState extends State<TicketDetectedWidget> {
     super.dispose();
   }
 
-  void fetchingTicket() {
+  void fetchingTicket() async {
+    // Database connection is established.
     if ((_homeModel.ticket["success"]) != Null) {
+      // Ticket is authenticated
       if ((_homeModel.ticket["success"])) {
-        if (_homeModel.isDebug) {
+        // Get the first login, and last logout
+
+        // Debug Mode is ON
+        if (FFAppState().DebugMode) {
           Timer(const Duration(milliseconds: 1000), () {
-            // Navigator.pop(context);
             context.goNamed("TicketInfo", extra: _homeModel);
           });
-        } else {
+        }
+        // Debug Mode is OFF
+        else {
+          await updateTicketEntry();
           Timer(const Duration(seconds: 2), () {
             showModalBottomSheet(
               isScrollControlled: true,
@@ -81,17 +90,21 @@ class _TicketDetectedWidgetState extends State<TicketDetectedWidget> {
                     Navigator.pop(context); // Close the modal
                   });
                 }));
-            Timer(const Duration(milliseconds: 1000), () {
+            Timer(const Duration(milliseconds: 1000), () async {
               Navigator.pop(context);
             });
           });
         }
-      } else {
+      }
+      // No ticket detected. Authentication failed.
+      else {
         Timer(const Duration(milliseconds: 1000), () {
           Navigator.pop(context);
         });
       }
-    } else {
+    }
+    // Database connection not yet established.
+    else {
       Timer(const Duration(milliseconds: 1000), () {
         Navigator.pop(context);
       });
@@ -195,5 +208,35 @@ class _TicketDetectedWidgetState extends State<TicketDetectedWidget> {
         ),
       ],
     );
+  }
+
+  Future<void> updateTicketEntry() async {
+    final String apiUrl =
+        'http://${_homeModel.apiUrl}/api/insert_log/${_homeModel.ticket["id"]}';
+    // Login = 1, Logout = 0
+    final Map<String, dynamic> requestData = {
+      // 'type': 1,
+      'type': FFAppState().login ? 1 : 0,
+    };
+
+    try {
+      final Response response = await http
+          .post(
+            Uri.parse(apiUrl),
+            headers: <String, String>{
+              'Content-Type': 'application/json; charset=UTF-8',
+            },
+            body: jsonEncode(requestData),
+          )
+          .timeout(Duration(milliseconds: 5000));
+
+      if (response.statusCode == 200) {
+        print('Ticket entry updated successfully');
+      } else {
+        print('Failed to update ticket entry: ${response.statusCode}');
+      }
+    } catch (error) {
+      print('Error while updating ticket entry: $error');
+    }
   }
 }

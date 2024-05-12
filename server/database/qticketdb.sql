@@ -5,7 +5,7 @@ USE qticketdb;
 -- Create the 'qticketdb' table
 CREATE TABLE qticketdb (
    id INT PRIMARY KEY AUTO_INCREMENT,
-   uid VARCHAR(25) NOT NULL,
+   uid VARCHAR(16) NOT NULL,
    check_in DATETIME,
    check_out DATETIME
 );
@@ -14,26 +14,30 @@ CREATE TABLE qticketdb (
 CREATE TABLE qticketdb_history (
    id INT PRIMARY KEY AUTO_INCREMENT,
    ticket_id INT,
-   date_used DATE,
+   date_used DATETIME,
    type TINYINT,  
-   time_used TIME,
+   time_used DATETIME,
    FOREIGN KEY (ticket_id) REFERENCES qticketdb(id) 
 );
 
--- Insert a new ticket (sample data)
-INSERT INTO qticketdb (uid, check_in, check_out) 
-VALUES ('f6333a7b-9cb3-496f-a13f-861e51961884', NOW(), NOW());
+
+-- Delete all data
+DELETE FROM qticketdb;
+DELETE FROM qticketdb_history;
+
+-- Drop Tables
+DROP TABLE IF EXISTS qticketdb;
+DROP TABLE IF EXISTS qticketdb_history;
 
 -- Get the ID of the last inserted ticket
 SET @lastTicketId = LAST_INSERT_ID(); 
 
 -- Add a history entry for the new ticket 
 INSERT INTO qticketdb_history (ticket_id, date_used, type, time_used)
-VALUES (@lastTicketId, NOW(), 0, NOW());
+VALUES (1, NOW(), 0, NOW());
 
 -- Get ticket with full history
 SELECT t.*, h.date_used, h.type, h.time_used 
 FROM qticketdb t
 JOIN qticketdb_history h ON t.id = h.ticket_id
--- WHERE t.id = @lastTicketId; 
-WHERE t.id = 1; 
+WHERE t.id = 4; 

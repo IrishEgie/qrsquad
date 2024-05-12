@@ -148,7 +148,7 @@ class _DrawerWidgetState extends State<DrawerWidget>
               padding: const EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 8.0, 4.0),
               child: MouseRegion(
                 opaque: false,
-                cursor: MouseCursor.defer ?? MouseCursor.defer,
+                cursor: MouseCursor.defer,
                 onEnter: ((event) async {
                   setState(() => _model.mouseRegionHovered1 = true);
                 }),
@@ -352,7 +352,7 @@ class _DrawerWidgetState extends State<DrawerWidget>
                     const EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 8.0, 4.0),
                 child: MouseRegion(
                   opaque: false,
-                  cursor: MouseCursor.defer ?? MouseCursor.defer,
+                  cursor: MouseCursor.defer,
                   onEnter: ((event) async {
                     setState(() => _model.mouseRegionHovered3 = true);
                   }),
@@ -442,7 +442,7 @@ class _DrawerWidgetState extends State<DrawerWidget>
                     const EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 8.0, 4.0),
                 child: MouseRegion(
                   opaque: false,
-                  cursor: MouseCursor.defer ?? MouseCursor.defer,
+                  cursor: MouseCursor.defer,
                   onEnter: ((event) async {
                     setState(() => _model.mouseRegionHovered4 = true);
                   }),
@@ -514,7 +514,7 @@ class _DrawerWidgetState extends State<DrawerWidget>
               padding: const EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 8.0, 4.0),
               child: MouseRegion(
                 opaque: false,
-                cursor: MouseCursor.defer ?? MouseCursor.defer,
+                cursor: MouseCursor.defer,
                 onEnter: ((event) async {
                   setState(() => _model.mouseRegionHovered5 = true);
                 }),

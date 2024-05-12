@@ -16,8 +16,8 @@ import 'ticket_info_model.dart';
 export 'ticket_info_model.dart';
 
 class TicketInfoWidget extends StatefulWidget {
-  final HomePageModel? model;
-  const TicketInfoWidget({super.key, this.model});
+  final HomePageModel model;
+  const TicketInfoWidget({super.key, required this.model});
 
   @override
   State<TicketInfoWidget> createState() => _TicketInfoWidgetState();
@@ -43,7 +43,7 @@ class _TicketInfoWidgetState extends State<TicketInfoWidget>
     _model = createModel(context, () => TicketInfoModel());
     _currentTime = _getCurrentTime();
     _startTimer();
-    _homeModel = widget.model!;
+    _homeModel = widget.model;
     history = _homeModel.ticket['history'];
     ticketLogs = [];
     ticketRows = [];
@@ -105,33 +105,35 @@ class _TicketInfoWidgetState extends State<TicketInfoWidget>
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
       List<Widget> ticketLogWidgets = [];
+      if (history.first['date_used'] == null &&
+          history.first['time_used'] == null) return;
       for (var entry in history) {
         TicketLogModel log = TicketLogModel(
           dateUsage:
               DateFormat('M/d/yyyy').format(DateTime.parse(entry['date_used'])),
-          timeUsage: entry['time_used'],
+          timeUsage:
+              DateFormat('h:mm a').format(DateTime.parse(entry['time_used'])),
           loggingType: entry['type'] == 0 ? "Log Out" : "Log In",
         );
         ticketLogs.add(log);
-        ticketLogWidgets.add(Column(
-          mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Container(
-              width: MediaQuery.sizeOf(context).width * 0.25,
-              decoration: const BoxDecoration(),
+
+        ticketLogWidgets.add(
+          Padding(
+            padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 8, 0),
+            child: Container(
+              width: 300,
+              height: 120,
+              decoration: BoxDecoration(
+                color: FlutterFlowTheme.of(context).secondaryBackground,
+              ),
               child: wrapWithModel(
                 model: log,
                 updateCallback: () => setState(() {}),
                 child: const TicketLogWidget(),
               ),
             ),
-            Container(
-              width: MediaQuery.sizeOf(context).width * 0.25,
-              decoration: const BoxDecoration(),
-            ),
-          ],
-        ));
+          ),
+        );
       }
 
       for (var row in splitIntoChunks(ticketLogWidgets, 3)) {
@@ -139,15 +141,25 @@ class _TicketInfoWidgetState extends State<TicketInfoWidget>
         for (var element in row) {
           ticketRowWidgets.add(element);
         }
-        ticketRows.add(SingleChildScrollView(
-          // scrollDirection: Axis.horizontal,
-          child: Row(
+        ticketRows.add(
+          Row(
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.start,
-            // crossAxisAlignment: CrossAxisAlignment.center,
-            children: ticketRowWidgets,
+            children: [
+              Wrap(
+                spacing: 0,
+                runSpacing: 0,
+                alignment: WrapAlignment.start,
+                crossAxisAlignment: WrapCrossAlignment.start,
+                direction: Axis.horizontal,
+                runAlignment: WrapAlignment.start,
+                verticalDirection: VerticalDirection.down,
+                clipBehavior: Clip.none,
+                children: ticketRowWidgets,
+              ),
+            ],
           ),
-        ));
+        );
       }
     });
   }
@@ -161,7 +173,7 @@ class _TicketInfoWidgetState extends State<TicketInfoWidget>
   }
 
   void _startTimer() {
-    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+    _timer = Timer.periodic(const Duration(seconds: 60), (timer) {
       setState(() {
         _currentTime = _getCurrentTime();
       });
@@ -518,8 +530,17 @@ class _TicketInfoWidgetState extends State<TicketInfoWidget>
                                                         setState(() {}),
                                                     child:
                                                         UpperCardContentWidget(
-                                                      info: history.length
-                                                          .toString(),
+                                                      info: (history.first[
+                                                                      "date_used"]
+                                                                  .toString()
+                                                                  .isEmpty &&
+                                                              history.first[
+                                                                      'time_used']
+                                                                  .toString()
+                                                                  .isEmpty)
+                                                          ? "0"
+                                                          : history.length
+                                                              .toString(),
                                                       subInfo: 'Times Used',
                                                       cardicon: Icon(
                                                         Icons.av_timer_outlined,
@@ -541,11 +562,15 @@ class _TicketInfoWidgetState extends State<TicketInfoWidget>
                                                     updateOnChange: true,
                                                     child:
                                                         UpperCardContentWidget(
-                                                      info: DateFormat('h:mm a')
-                                                          .format(DateTime
-                                                              .parse(_homeModel
-                                                                      .ticket[
-                                                                  "check_in"])),
+                                                      info: _homeModel.ticket[
+                                                                  "check_in"] ==
+                                                              null
+                                                          ? "None"
+                                                          : DateFormat('h:mm a')
+                                                              .format(DateTime
+                                                                  .parse(_homeModel
+                                                                          .ticket[
+                                                                      "check_in"])),
                                                       subInfo: 'Check-in Time',
                                                       cardicon: Icon(
                                                         Icons.login_rounded,
@@ -566,11 +591,15 @@ class _TicketInfoWidgetState extends State<TicketInfoWidget>
                                                         setState(() {}),
                                                     child:
                                                         UpperCardContentWidget(
-                                                      info: DateFormat('h:mm a')
-                                                          .format(DateTime
-                                                              .parse(_homeModel
-                                                                      .ticket[
-                                                                  "check_out"])),
+                                                      info: _homeModel.ticket[
+                                                                  "check_out"] ==
+                                                              null
+                                                          ? "None"
+                                                          : DateFormat('h:mm a')
+                                                              .format(DateTime
+                                                                  .parse(_homeModel
+                                                                          .ticket[
+                                                                      "check_out"])),
                                                       subInfo: 'Check-Out Time',
                                                       cardicon: Icon(
                                                         Icons.logout_rounded,
