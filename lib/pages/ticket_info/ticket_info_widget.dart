@@ -380,7 +380,7 @@ class _TicketInfoWidgetState extends State<TicketInfoWidget>
                                                             0.0, 0.0, 0.0, 0.0),
                                                     color: FlutterFlowTheme.of(
                                                             context)
-                                                        .secondary,
+                                                        .primary,
                                                     textStyle: FlutterFlowTheme
                                                             .of(context)
                                                         .titleSmall
@@ -675,8 +675,8 @@ class _TicketInfoWidgetState extends State<TicketInfoWidget>
                                                   child: Padding(
                                                     padding:
                                                         const EdgeInsetsDirectional
-                                                            .fromSTEB(0.0, 0.0,
-                                                            0.0, 36.0),
+                                                            .fromSTEB(48.0, 0.0,
+                                                            48.0, 36.0),
                                                     child:
                                                         SingleChildScrollView(
                                                       child: Column(
@@ -701,25 +701,30 @@ class _TicketInfoWidgetState extends State<TicketInfoWidget>
                                                                   context)
                                                               .width *
                                                           0.75,
-                                                      height: 100.0,
-                                                      decoration:
-                                                          const BoxDecoration(
+                                                      height: 30.0,
+                                                      decoration: BoxDecoration(
                                                         gradient:
                                                             LinearGradient(
                                                           colors: [
-                                                            Color(0x008C81F2),
-                                                            Color(0x25000000)
+                                                            Colors.transparent,
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .accent1
                                                           ],
-                                                          stops: [0.0, 1.0],
+                                                          stops: const [
+                                                            0.0,
+                                                            1.0
+                                                          ],
                                                           begin:
-                                                              AlignmentDirectional(
+                                                              const AlignmentDirectional(
                                                                   0.0, -1.0),
                                                           end:
-                                                              AlignmentDirectional(
+                                                              const AlignmentDirectional(
                                                                   0, 1.0),
                                                         ),
                                                         borderRadius:
-                                                            BorderRadius.only(
+                                                            const BorderRadius
+                                                                .only(
                                                           bottomLeft:
                                                               Radius.circular(
                                                                   24.0),
@@ -832,19 +837,6 @@ class _TicketInfoWidgetState extends State<TicketInfoWidget>
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(8.0),
                                 child: Image.asset(
-                                  'assets/images/icpep-se-ssu-logo.png',
-                                  width: 50.0,
-                                  height: 50.0,
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 0.0, 24.0, 0.0),
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(8.0),
-                                child: Image.asset(
                                   'assets/images/SSU-Logo.png',
                                   width: 50.0,
                                   height: 50.0,
@@ -858,7 +850,20 @@ class _TicketInfoWidgetState extends State<TicketInfoWidget>
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(8.0),
                                 child: Image.asset(
-                                  'assets/images/SSU_USC_Logo.png',
+                                  'assets/images/USC-Logo.png',
+                                  width: 50.0,
+                                  height: 50.0,
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
+                                  0.0, 0.0, 24.0, 0.0),
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(8.0),
+                                child: Image.asset(
+                                  'assets/images/icpep-se-ssu-logo.png',
                                   width: 50.0,
                                   height: 50.0,
                                   fit: BoxFit.cover,
@@ -934,23 +939,6 @@ class _TicketInfoWidgetState extends State<TicketInfoWidget>
                                       .bodyMediumFamily),
                             ),
                       ),
-                    ),
-                    Wrap(
-                      spacing: 0.0,
-                      runSpacing: 0.0,
-                      alignment: WrapAlignment.start,
-                      crossAxisAlignment: WrapCrossAlignment.start,
-                      direction: Axis.horizontal,
-                      runAlignment: WrapAlignment.start,
-                      verticalDirection: VerticalDirection.down,
-                      clipBehavior: Clip.none,
-                      children: [
-                        Container(
-                          width: 100.0,
-                          height: 30.0,
-                          decoration: const BoxDecoration(),
-                        ),
-                      ],
                     ),
                   ],
                 ),
