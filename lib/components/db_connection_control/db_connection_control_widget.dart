@@ -500,7 +500,18 @@ class _DbConnectionControlWidgetState extends State<DbConnectionControlWidget>
                                                         .dropDownValueController ??=
                                                     FormFieldController<String>(
                                                         null),
-                                                options: const ['0'],
+                                                options: const [
+                                                  '0',
+                                                  '1',
+                                                  '2',
+                                                  '3',
+                                                  '4',
+                                                  '5',
+                                                  '6',
+                                                  '7',
+                                                  '8',
+                                                  '9'
+                                                ],
                                                 onChanged: (val) => setState(
                                                     () => _model.dropDownValue =
                                                         val),

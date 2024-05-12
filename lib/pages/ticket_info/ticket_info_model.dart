@@ -19,7 +19,6 @@ class TicketInfoModel extends FlutterFlowModel<TicketInfoWidget> {
 
   @override
   void initState(BuildContext context) {
-    // Ticket Details
     upperCardContentModel1 =
         createModel(context, () => UpperCardContentModel());
     upperCardContentModel2 =

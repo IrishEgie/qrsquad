@@ -3,18 +3,18 @@ import '/flutter_flow/flutter_flow_util.dart';
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'ticket_loggged_model.dart';
-export 'ticket_loggged_model.dart';
+import 'pass_error_model.dart';
+export 'pass_error_model.dart';
 
-class TicketLogggedWidget extends StatefulWidget {
-  const TicketLogggedWidget({super.key});
+class PassErrorWidget extends StatefulWidget {
+  const PassErrorWidget({super.key});
 
   @override
-  State<TicketLogggedWidget> createState() => _TicketLogggedWidgetState();
+  State<PassErrorWidget> createState() => _PassErrorWidgetState();
 }
 
-class _TicketLogggedWidgetState extends State<TicketLogggedWidget> {
-  late TicketLogggedModel _model;
+class _PassErrorWidgetState extends State<PassErrorWidget> {
+  late PassErrorModel _model;
 
   @override
   void setState(VoidCallback callback) {
@@ -25,7 +25,7 @@ class _TicketLogggedWidgetState extends State<TicketLogggedWidget> {
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => TicketLogggedModel());
+    _model = createModel(context, () => PassErrorModel());
 
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
@@ -70,7 +70,7 @@ class _TicketLogggedWidgetState extends State<TicketLogggedWidget> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Icon(
-                      Icons.check_rounded,
+                      Icons.warning_amber_rounded,
                       color: FlutterFlowTheme.of(context).primaryText,
                       size: 128.0,
                     ),
@@ -78,7 +78,7 @@ class _TicketLogggedWidgetState extends State<TicketLogggedWidget> {
                       padding:
                           const EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),
                       child: Text(
-                        'YOU\'RE CHECKED IN!',
+                        'Uh-Oh',
                         style: FlutterFlowTheme.of(context)
                             .headlineMedium
                             .override(
@@ -96,7 +96,7 @@ class _TicketLogggedWidgetState extends State<TicketLogggedWidget> {
                       padding:
                           const EdgeInsetsDirectional.fromSTEB(0.0, 4.0, 0.0, 0.0),
                       child: Text(
-                        'Please enjoy the event!',
+                        'Incorrect Pass Key has Occured',
                         style: FlutterFlowTheme.of(context)
                             .labelMedium
                             .override(
@@ -114,6 +114,68 @@ class _TicketLogggedWidgetState extends State<TicketLogggedWidget> {
                       width: 100.0,
                       height: 100.0,
                       decoration: const BoxDecoration(),
+                    ),
+                    Row(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Wrap(
+                          spacing: 0.0,
+                          runSpacing: 0.0,
+                          alignment: WrapAlignment.start,
+                          crossAxisAlignment: WrapCrossAlignment.start,
+                          direction: Axis.horizontal,
+                          runAlignment: WrapAlignment.start,
+                          verticalDirection: VerticalDirection.down,
+                          clipBehavior: Clip.none,
+                          children: [
+                            InkWell(
+                              splashColor: Colors.transparent,
+                              focusColor: Colors.transparent,
+                              hoverColor: Colors.transparent,
+                              highlightColor: Colors.transparent,
+                              onTap: () async {
+                                Navigator.pop(context);
+                              },
+                              child: Row(
+                                mainAxisSize: MainAxisSize.max,
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                        0.0, 4.0, 8.0, 0.0),
+                                    child: Text(
+                                      'CLOSE',
+                                      style: FlutterFlowTheme.of(context)
+                                          .labelMedium
+                                          .override(
+                                            fontFamily: 'Plus Jakarta Sans',
+                                            color: FlutterFlowTheme.of(context)
+                                                .secondaryText,
+                                            fontSize: 24.0,
+                                            letterSpacing: 0.0,
+                                            fontWeight: FontWeight.w800,
+                                            useGoogleFonts: GoogleFonts.asMap()
+                                                .containsKey(
+                                                    'Plus Jakarta Sans'),
+                                          ),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                        0.0, 4.0, 0.0, 0.0),
+                                    child: Icon(
+                                      Icons.exit_to_app_rounded,
+                                      color: FlutterFlowTheme.of(context)
+                                          .secondaryText,
+                                      size: 24.0,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
                     ),
                   ],
                 ),
