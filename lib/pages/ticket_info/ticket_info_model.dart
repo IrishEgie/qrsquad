@@ -39,6 +39,24 @@ class TicketInfoModel extends FlutterFlowModel<TicketInfoWidget> {
   late TicketLogModel ticketLogModel11;
   // Model for TicketLog component.
   late TicketLogModel ticketLogModel12;
+  // Model for TicketLog component.
+  late TicketLogModel ticketLogModel13;
+  // Model for TicketLog component.
+  late TicketLogModel ticketLogModel14;
+  // Model for TicketLog component.
+  late TicketLogModel ticketLogModel15;
+  // Model for TicketLog component.
+  late TicketLogModel ticketLogModel16;
+  // Model for TicketLog component.
+  late TicketLogModel ticketLogModel17;
+  // Model for TicketLog component.
+  late TicketLogModel ticketLogModel18;
+  // Model for TicketLog component.
+  late TicketLogModel ticketLogModel19;
+  // Model for TicketLog component.
+  late TicketLogModel ticketLogModel20;
+  // Model for TicketLog component.
+  late TicketLogModel ticketLogModel21;
   // Model for Drawer component.
   late DrawerModel drawerModel;
 
@@ -62,6 +80,15 @@ class TicketInfoModel extends FlutterFlowModel<TicketInfoWidget> {
     ticketLogModel10 = createModel(context, () => TicketLogModel());
     ticketLogModel11 = createModel(context, () => TicketLogModel());
     ticketLogModel12 = createModel(context, () => TicketLogModel());
+    ticketLogModel13 = createModel(context, () => TicketLogModel());
+    ticketLogModel14 = createModel(context, () => TicketLogModel());
+    ticketLogModel15 = createModel(context, () => TicketLogModel());
+    ticketLogModel16 = createModel(context, () => TicketLogModel());
+    ticketLogModel17 = createModel(context, () => TicketLogModel());
+    ticketLogModel18 = createModel(context, () => TicketLogModel());
+    ticketLogModel19 = createModel(context, () => TicketLogModel());
+    ticketLogModel20 = createModel(context, () => TicketLogModel());
+    ticketLogModel21 = createModel(context, () => TicketLogModel());
     drawerModel = createModel(context, () => DrawerModel());
   }
 
@@ -83,6 +110,15 @@ class TicketInfoModel extends FlutterFlowModel<TicketInfoWidget> {
     ticketLogModel10.dispose();
     ticketLogModel11.dispose();
     ticketLogModel12.dispose();
+    ticketLogModel13.dispose();
+    ticketLogModel14.dispose();
+    ticketLogModel15.dispose();
+    ticketLogModel16.dispose();
+    ticketLogModel17.dispose();
+    ticketLogModel18.dispose();
+    ticketLogModel19.dispose();
+    ticketLogModel20.dispose();
+    ticketLogModel21.dispose();
     drawerModel.dispose();
   }
 }
