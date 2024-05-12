@@ -60,14 +60,16 @@ app.get("/api/ticket/:uid", (req, res) => {
 
   const ticketId = req.params.uid;
   const query = `
-    SELECT t.*, h.date_used, h.type, h.time_used
+    SELECT t.*, 
+    IFNULL(h.date_used, '') AS date_used, 
+    IFNULL(h.type, '') AS type, 
+    IFNULL(h.time_used, '') AS time_used
     FROM qticketdb t
-    JOIN qticketdb_history h ON t.id = h.ticket_id
+    LEFT JOIN qticketdb_history h ON t.id = h.ticket_id
     WHERE t.uid = ?
     ORDER BY h.date_used DESC, h.time_used DESC 
-    LIMIT 20 
-  `;
-
+    LIMIT 20
+    `;
   db.connection.query(query, [ticketId], (error, results) => {
     if (error) {
       console.log(error);
@@ -81,25 +83,20 @@ app.get("/api/ticket/:uid", (req, res) => {
   });
 });
 
-app.get("/api/status_info", (req, res) => {
-  res.json(getIPAddress());
-});
+app.post("/api/insert_log/:ticket_id", (req, res) => {
+  const ticketId = req.params.ticket_id;
+  const dateUsed = new Date();
+  const type = req.body.type;
+  const timeUsed = new Date();
 
-app.post("/api/update_attendee/:id", (req, res) => {
-  const id = req.params.id;
-  const column = req.body.column;
-  const value = req.body.value;
+  const query = `INSERT INTO qticketdb_history (ticket_id, date_used, type, time_used) VALUES (?, ?, ?, ?)`;
 
-  const query = `UPDATE ${DB_TABLE_NAME} SET ${column} = ? WHERE uid = ?`;
-
-  db.connection.query(query, [value, id], (error, results) => {
+  db.connection.query(query, [ticketId, dateUsed, type, timeUsed], (error, results) => {
     if (error) {
       console.log(error);
       res.status(500).json({ error: 'An error occurred while executing the query.' });
-    } else if (results.affectedRows > 0) {
-      res.json({ success: true });
     } else {
-      res.status(404).json({ success: false, error: 'No ticket found with the given ticket code.' });
+      res.status(200).json({ success: true });
     }
   });
 });

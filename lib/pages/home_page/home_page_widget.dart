@@ -43,12 +43,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
     _startTimer();
 
     // On page load action.
-    SchedulerBinding.instance.addPostFrameCallback((_) async {
-      FFAppState().update(() {
-        FFAppState().StandardMode = true;
-        FFAppState().DebugMode = false;
-      });
-    });
+    SchedulerBinding.instance.addPostFrameCallback((_) {});
     _model.qrInputFieldTextController ??= TextEditingController();
     _model.qrInputFieldFocusNode ??= FocusNode();
 
@@ -104,7 +99,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
   }
 
   void _startTimer() {
-    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+    _timer = Timer.periodic(const Duration(seconds: 60), (timer) {
       setState(() {
         _currentTime = _getCurrentTime();
       });
