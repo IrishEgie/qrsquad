@@ -9,10 +9,6 @@ class HomePageModel extends FlutterFlowModel<HomePageWidget> {
 
   final unfocusNode = FocusNode();
 
-  /// database connection
-  late String apiUrl = "";
-  late Connection connectionStatus = Connection.NULL;
-
   /// Property for Ticket Class
   late Map<String, dynamic> ticket;
   // Model for Drawer component.
