@@ -118,7 +118,7 @@ class _LogSwitchWidgetState extends State<LogSwitchWidget>
                     children: [
                       Icon(
                         Icons.login_rounded,
-                        color: FFAppState().StandardMode
+                        color: FFAppState().login
                             ? FlutterFlowTheme.of(context).primaryText
                             : FlutterFlowTheme.of(context).secondaryText,
                         size: 16.0,
@@ -182,7 +182,7 @@ class _LogSwitchWidgetState extends State<LogSwitchWidget>
                     children: [
                       Icon(
                         Icons.logout_rounded,
-                        color: FFAppState().DebugMode
+                        color: FFAppState().logout
                             ? FlutterFlowTheme.of(context).primaryText
                             : FlutterFlowTheme.of(context).secondaryText,
                         size: 16.0,
