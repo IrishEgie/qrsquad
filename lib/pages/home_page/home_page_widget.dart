@@ -794,9 +794,9 @@ class _HomePageWidgetState extends State<HomePageWidget>
 
   // Authenticate if Ticket exists in Database
   Future<void> authenticateTicket(String value, BuildContext context) async {
-    _model.apiUrl = '127.0.0.1:5000';
+    // _model.apiUrl = '127.0.0.1:5000';
     const Duration timeoutDuration = Duration(milliseconds: 500);
-    late String ipAddress = _model.apiUrl;
+    late String ipAddress = FFAppState().ApiURL;
     late String apiUrl = 'http://$ipAddress/api/ticket/$value';
     try {
       Response response =
@@ -806,8 +806,14 @@ class _HomePageWidgetState extends State<HomePageWidget>
 
         // Check if the "success" key exists and its value is true
         if (!mounted) return;
-        if (data.containsKey("success") && data["success"]) {
+        if (data.containsKey("success") && data["success"] == 200) {
+          // Anti-Logging Duplication logic
           _model.ticket = data;
+          List<dynamic> history = data['history'];
+          bool loggingState = (history.first['type'] == "1") ? true : false;
+          if (loggingState == FFAppState().login) {
+            _model.ticket['success'] = 42069;
+          }
           showModalBottomSheet(
             isScrollControlled: true,
             backgroundColor: Colors.transparent,
@@ -832,7 +838,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
         }
       } else {
         // Handle API error / No ticket detected.
-        _model.ticket = <String, dynamic>{"success": false};
+        _model.ticket = <String, dynamic>{"success": 404};
         if (!mounted) return;
         showModalBottomSheet(
           isScrollControlled: true,
@@ -856,36 +862,10 @@ class _HomePageWidgetState extends State<HomePageWidget>
           },
         ).then((value) => safeSetState(() {}));
       }
-    } on TimeoutException catch (_) {
-      if (!mounted) return;
-      _model.ticket = <String, dynamic>{"success": Null};
-      showModalBottomSheet(
-        isScrollControlled: true,
-        backgroundColor: Colors.transparent,
-        useSafeArea: true,
-        enableDrag: false,
-        context: context,
-        builder: (context) {
-          return GestureDetector(
-            onTap: () => _model.unfocusNode.canRequestFocus
-                ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-                : FocusScope.of(context).unfocus(),
-            child: Padding(
-              padding: MediaQuery.viewInsetsOf(context),
-              child: SizedBox(
-                height: MediaQuery.sizeOf(context).height * 1.0,
-                child: TicketDetectedWidget(_model),
-              ),
-            ),
-          );
-        },
-      ).then((value) {
-        safeSetState(() {});
-      });
     } catch (error) {
       // Handle network error / No database selected.
       if (!mounted) return;
-      _model.ticket = <String, dynamic>{"success": Null};
+      _model.ticket = <String, dynamic>{"success": 500};
       showModalBottomSheet(
         isScrollControlled: true,
         backgroundColor: Colors.transparent,

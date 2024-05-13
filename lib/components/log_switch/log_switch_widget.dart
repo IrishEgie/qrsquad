@@ -279,7 +279,6 @@ class _LogSwitchWidgetState extends State<LogSwitchWidget>
                                           onTap: () async {
                                             setState(() {
                                               FFAppState().login = true;
-                                              FFAppState().logout = false;
                                             });
                                           },
                                           child: Stack(
@@ -456,7 +455,6 @@ class _LogSwitchWidgetState extends State<LogSwitchWidget>
                                         onTap: () async {
                                           setState(() {
                                             FFAppState().login = false;
-                                            FFAppState().logout = true;
                                           });
                                         },
                                         child: Stack(
@@ -552,8 +550,8 @@ class _LogSwitchWidgetState extends State<LogSwitchWidget>
                                                                       ),
                                                                 ),
                                                               ),
-                                                              if (FFAppState()
-                                                                  .logout)
+                                                              if (!FFAppState()
+                                                                  .login)
                                                                 Align(
                                                                   alignment:
                                                                       const AlignmentDirectional(

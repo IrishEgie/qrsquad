@@ -49,11 +49,11 @@ class _TicketDetectedWidgetState extends State<TicketDetectedWidget> {
 
   void fetchingTicket() async {
     // Database connection is established.
-    if ((_homeModel.ticket["success"]) != Null) {
+    if ([200, 404, 42069].contains(_homeModel.ticket["success"])) {
       // Ticket is authenticated
-      if ((_homeModel.ticket["success"])) {
+      if ((_homeModel.ticket["success"]) == 200) {
         // Get the first login, and last logout
-
+        await updateTicketEntry();
         // Debug Mode is ON
         if (FFAppState().DebugMode) {
           Timer(const Duration(milliseconds: 1000), () {
@@ -62,7 +62,6 @@ class _TicketDetectedWidgetState extends State<TicketDetectedWidget> {
         }
         // Debug Mode is OFF
         else {
-          await updateTicketEntry();
           Timer(const Duration(seconds: 2), () {
             showModalBottomSheet(
               isScrollControlled: true,
@@ -97,7 +96,7 @@ class _TicketDetectedWidgetState extends State<TicketDetectedWidget> {
         }
       }
       // No ticket detected. Authentication failed.
-      else {
+      else if ([404, 42069].contains(_homeModel.ticket["success"])) {
         Timer(const Duration(milliseconds: 1000), () {
           Navigator.pop(context);
         });
@@ -144,10 +143,12 @@ class _TicketDetectedWidgetState extends State<TicketDetectedWidget> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Icon(
-                      (_homeModel.ticket["success"] != Null)
-                          ? ((_homeModel.ticket["success"])
+                      [200, 404, 42069].contains(_homeModel.ticket["success"])
+                          ? ((_homeModel.ticket["success"] == 200)
                               ? Icons.qr_code_rounded
-                              : Icons.warning_amber_rounded)
+                              : (_homeModel.ticket["success"] == 42069)
+                                  ? Icons.control_point_duplicate_rounded
+                                  : Icons.warning_amber_rounded)
                           : Icons.pest_control_rounded,
                       color: FlutterFlowTheme.of(context).primary,
                       size: 128.0,
@@ -156,10 +157,12 @@ class _TicketDetectedWidgetState extends State<TicketDetectedWidget> {
                       padding: const EdgeInsetsDirectional.fromSTEB(
                           0.0, 16.0, 0.0, 0.0),
                       child: Text(
-                        (_homeModel.ticket["success"] != Null)
-                            ? ((_homeModel.ticket["success"])
+                        [200, 404, 42069].contains(_homeModel.ticket["success"])
+                            ? ((_homeModel.ticket["success"] == 200)
                                 ? 'Ticket Detected'
-                                : 'Sorry, Ticket not Found!')
+                                : (_homeModel.ticket["success"] == 42069)
+                                    ? 'Duplicated Logging Detected'
+                                    : 'Sorry but ticket not Found!')
                             : 'Database Connection Error',
                         style: FlutterFlowTheme.of(context)
                             .headlineMedium
@@ -178,10 +181,12 @@ class _TicketDetectedWidgetState extends State<TicketDetectedWidget> {
                       padding: const EdgeInsetsDirectional.fromSTEB(
                           0.0, 4.0, 0.0, 0.0),
                       child: Text(
-                        (_homeModel.ticket["success"] != Null)
-                            ? ((_homeModel.ticket["success"])
+                        [200, 404, 42069].contains(_homeModel.ticket["success"])
+                            ? ((_homeModel.ticket["success"] == 200)
                                 ? 'Please wait while our system logs your ticket to the event'
-                                : 'Please try to use a valid ticket. Thank you!')
+                                : (_homeModel.ticket["success"] == 42069)
+                                    ? 'Please try to ${(_homeModel.ticket['history'] as List<dynamic>).first['type'] == '1' ? 'Log-out' : 'Log-in'} first.'
+                                    : 'Please try to use a valid ticket. Thank you!')
                             : 'Please try to establish connection first in the Network Section from Quick Menu',
                         style:
                             FlutterFlowTheme.of(context).labelMedium.override(
@@ -212,10 +217,9 @@ class _TicketDetectedWidgetState extends State<TicketDetectedWidget> {
 
   Future<void> updateTicketEntry() async {
     final String apiUrl =
-        'http://${_homeModel.apiUrl}/api/insert_log/${_homeModel.ticket["id"]}';
+        'http://${FFAppState().ApiURL}/api/insert_log/${_homeModel.ticket["id"]}';
     // Login = 1, Logout = 0
     final Map<String, dynamic> requestData = {
-      // 'type': 1,
       'type': FFAppState().login ? 1 : 0,
     };
 

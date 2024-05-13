@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:q_r_checkin/pages/home_page/home_page_model.dart';
 
+import 'package:intl/intl.dart';
 import '/components/drawer/drawer_widget.dart';
 import '/components/ticket_log/ticket_log_widget.dart';
 import '/components/upper_card_content/upper_card_content_widget.dart';
@@ -107,13 +108,14 @@ class _TicketInfoWidgetState extends State<TicketInfoWidget>
       List<Widget> ticketLogWidgets = [];
       if (history.first['date_used'] == null &&
           history.first['time_used'] == null) return;
-      for (var entry in history) {
+      for (var i = 0; i < 20 && i < history.length; i++) {
+        var entry = history[i];
         TicketLogModel log = TicketLogModel(
           dateUsage:
               DateFormat('M/d/yyyy').format(DateTime.parse(entry['date_used'])),
           timeUsage:
               DateFormat('h:mm a').format(DateTime.parse(entry['time_used'])),
-          loggingType: entry['type'] == 0 ? "Log Out" : "Log In",
+          loggingType: entry['type'] == "0" ? "Log Out" : "Log In",
         );
         ticketLogs.add(log);
 
@@ -567,10 +569,11 @@ class _TicketInfoWidgetState extends State<TicketInfoWidget>
                                                               null
                                                           ? "None"
                                                           : DateFormat('h:mm a')
-                                                              .format(DateTime
-                                                                  .parse(_homeModel
-                                                                          .ticket[
-                                                                      "check_in"])),
+                                                              .format(DateTime.parse(
+                                                                      _homeModel
+                                                                              .ticket[
+                                                                          "check_in"])
+                                                                  .toLocal()),
                                                       subInfo: 'Check-in Time',
                                                       cardicon: Icon(
                                                         Icons.login_rounded,
@@ -596,10 +599,11 @@ class _TicketInfoWidgetState extends State<TicketInfoWidget>
                                                               null
                                                           ? "None"
                                                           : DateFormat('h:mm a')
-                                                              .format(DateTime
-                                                                  .parse(_homeModel
-                                                                          .ticket[
-                                                                      "check_out"])),
+                                                              .format(DateTime.parse(
+                                                                      _homeModel
+                                                                              .ticket[
+                                                                          "check_out"])
+                                                                  .toLocal()),
                                                       subInfo: 'Check-Out Time',
                                                       cardicon: Icon(
                                                         Icons.logout_rounded,
