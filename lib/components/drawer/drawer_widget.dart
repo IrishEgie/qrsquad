@@ -155,76 +155,13 @@ class _DrawerWidgetState extends State<DrawerWidget>
                 onExit: ((event) async {
                   setState(() => _model.mouseRegionHovered1 = false);
                 }),
-                child: InkWell(
-                  splashColor: Colors.transparent,
-                  focusColor: Colors.transparent,
-                  hoverColor: Colors.transparent,
-                  highlightColor: Colors.transparent,
-                  onTap: () async {
-                    await showModalBottomSheet(
-                      isScrollControlled: true,
-                      backgroundColor: Colors.transparent,
-                      useSafeArea: true,
-                      context: context,
-                      builder: (context) {
-                        return Padding(
-                          padding: MediaQuery.viewInsetsOf(context),
-                          child: SizedBox(
-                            height: MediaQuery.sizeOf(context).height * 1.0,
-                            child: const LogSwitchWidget(),
-                          ),
-                        );
-                      },
-                    ).then((value) => safeSetState(() {}));
-                  },
-                  child: AnimatedContainer(
-                    duration: const Duration(milliseconds: 150),
-                    curve: Curves.easeInOut,
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      color: _model.mouseRegionHovered1
-                          ? FlutterFlowTheme.of(context).primaryBackground
-                          : FlutterFlowTheme.of(context).secondaryBackground,
-                      borderRadius: BorderRadius.circular(8.0),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsetsDirectional.fromSTEB(
-                          0.0, 8.0, 0.0, 8.0),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.max,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(
-                                12.0, 0.0, 0.0, 0.0),
-                            child: Icon(
-                              Icons.switch_left_rounded,
-                              color: FlutterFlowTheme.of(context).primaryText,
-                              size: 20.0,
-                            ),
-                          ),
-                          Expanded(
-                            child: Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
-                                  12.0, 0.0, 0.0, 0.0),
-                              child: Text(
-                                'Log Switch',
-                                style: FlutterFlowTheme.of(context)
-                                    .bodyMedium
-                                    .override(
-                                      fontFamily: FlutterFlowTheme.of(context)
-                                          .bodyMediumFamily,
-                                      letterSpacing: 0.0,
-                                      useGoogleFonts: GoogleFonts.asMap()
-                                          .containsKey(
-                                              FlutterFlowTheme.of(context)
-                                                  .bodyMediumFamily),
-                                    ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
+                child: Container(
+                  height: 35.0,
+                  decoration: const BoxDecoration(),
+                  child: wrapWithModel(
+                    model: _model.logSwitchModel,
+                    updateCallback: () => setState(() {}),
+                    child: const LogSwitchWidget(),
                   ),
                 ),
               ),
@@ -336,7 +273,7 @@ class _DrawerWidgetState extends State<DrawerWidget>
             Padding(
               padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 8.0),
               child: Container(
-                height: 30.0,
+                height: 35.0,
                 decoration: const BoxDecoration(),
                 alignment: const AlignmentDirectional(0.0, 0.0),
                 child: wrapWithModel(

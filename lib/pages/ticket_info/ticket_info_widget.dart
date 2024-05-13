@@ -123,7 +123,7 @@ class _TicketInfoWidgetState extends State<TicketInfoWidget>
           Padding(
             padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 8, 0),
             child: Container(
-              width: 300,
+              width: 250,
               height: 120,
               decoration: BoxDecoration(
                 color: FlutterFlowTheme.of(context).secondaryBackground,

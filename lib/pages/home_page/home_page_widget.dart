@@ -44,6 +44,12 @@ class _HomePageWidgetState extends State<HomePageWidget>
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) {});
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      FFAppState().update(() {
+        FFAppState().StandardMode = true;
+      });
+    });
+
     _model.qrInputFieldTextController ??= TextEditingController();
     _model.qrInputFieldFocusNode ??= FocusNode();
 
@@ -471,79 +477,66 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                           Padding(
                                             padding: const EdgeInsetsDirectional
                                                 .fromSTEB(36.0, 0.0, 36.0, 0.0),
-                                            child: InkWell(
-                                              splashColor: Colors.transparent,
-                                              focusColor: Colors.transparent,
-                                              hoverColor: Colors.transparent,
-                                              highlightColor:
-                                                  Colors.transparent,
-                                              child: AutoSizeText(
-                                                'SCAN YOUR TICKET',
-                                                textAlign: TextAlign.start,
-                                                maxLines: 3,
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyMedium
-                                                        .override(
-                                                          fontFamily:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .bodyMediumFamily,
-                                                          fontSize: 136.0,
-                                                          letterSpacing: 0.0,
-                                                          fontWeight:
-                                                              FontWeight.w600,
-                                                          useGoogleFonts: GoogleFonts
-                                                                  .asMap()
-                                                              .containsKey(
-                                                                  FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .bodyMediumFamily),
-                                                          lineHeight: 0.9,
-                                                        ),
-                                                minFontSize: 64.0,
-                                              ),
-                                            ),
+                                            child: SelectionArea(
+                                                child: AutoSizeText(
+                                              'SCAN YOUR TICKET',
+                                              textAlign: TextAlign.start,
+                                              maxLines: 3,
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .override(
+                                                        fontFamily:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyMediumFamily,
+                                                        fontSize: 128.0,
+                                                        letterSpacing: 0.0,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        useGoogleFonts: GoogleFonts
+                                                                .asMap()
+                                                            .containsKey(
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyMediumFamily),
+                                                        lineHeight: 0.9,
+                                                      ),
+                                              minFontSize: 64.0,
+                                            )),
                                           ),
                                           Padding(
                                             padding: const EdgeInsetsDirectional
                                                 .fromSTEB(
                                                 36.0, 12.0, 36.0, 0.0),
-                                            child: InkWell(
-                                              splashColor: Colors.transparent,
-                                              focusColor: Colors.transparent,
-                                              hoverColor: Colors.transparent,
-                                              highlightColor:
-                                                  Colors.transparent,
-                                              child: AutoSizeText(
-                                                ' TO CHECK IN TO THE EVENT ',
-                                                textAlign: TextAlign.start,
-                                                maxLines: 1,
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyMedium
-                                                        .override(
-                                                          fontFamily:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .bodyMediumFamily,
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .primary,
-                                                          fontSize: 32.0,
-                                                          letterSpacing: 0.0,
-                                                          fontWeight:
-                                                              FontWeight.w200,
-                                                          useGoogleFonts: GoogleFonts
-                                                                  .asMap()
-                                                              .containsKey(
-                                                                  FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .bodyMediumFamily),
-                                                        ),
-                                                minFontSize: 16.0,
-                                              ),
-                                            ),
+                                            child: SelectionArea(
+                                                child: AutoSizeText(
+                                              ' TO CHECK IN TO THE EVENT ',
+                                              textAlign: TextAlign.start,
+                                              maxLines: 1,
+                                              style: FlutterFlowTheme.of(
+                                                      context)
+                                                  .bodyMedium
+                                                  .override(
+                                                    fontFamily:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .bodyMediumFamily,
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .primary,
+                                                    fontSize: 32.0,
+                                                    letterSpacing: 0.0,
+                                                    fontWeight: FontWeight.w200,
+                                                    useGoogleFonts: GoogleFonts
+                                                            .asMap()
+                                                        .containsKey(
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyMediumFamily),
+                                                  ),
+                                              minFontSize: 16.0,
+                                            )),
                                           ),
                                           // here is the keyboard func to put the qr's code - ej
                                           //

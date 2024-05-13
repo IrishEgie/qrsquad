@@ -1,4 +1,3 @@
-import '/components/password/password_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -159,24 +158,8 @@ class _DebugSwitchWidgetState extends State<DebugSwitchWidget>
                 onTap: () async {
                   FFAppState().update(() {
                     FFAppState().StandardMode = false;
+                    FFAppState().DebugMode = true;
                   });
-                  await showModalBottomSheet(
-                    isScrollControlled: true,
-                    backgroundColor: Colors.transparent,
-                    isDismissible: false,
-                    enableDrag: false,
-                    useSafeArea: true,
-                    context: context,
-                    builder: (context) {
-                      return Padding(
-                        padding: MediaQuery.viewInsetsOf(context),
-                        child: SizedBox(
-                          height: MediaQuery.sizeOf(context).height * 1.0,
-                          child: const PasswordWidget(),
-                        ),
-                      );
-                    },
-                  ).then((value) => safeSetState(() {}));
                 },
                 child: Container(
                   width: 115.0,
