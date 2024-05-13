@@ -588,7 +588,7 @@ class _TicketInfoWidgetState extends State<TicketInfoWidget>
                                                           Row(
                                                             mainAxisSize:
                                                                 MainAxisSize
-                                                                    .max,
+                                                                    .min,
                                                             mainAxisAlignment:
                                                                 MainAxisAlignment
                                                                     .center,
@@ -623,7 +623,7 @@ class _TicketInfoWidgetState extends State<TicketInfoWidget>
                                                                     child:
                                                                         Container(
                                                                       width:
-                                                                          300.0,
+                                                                          250.0,
                                                                       height:
                                                                           120.0,
                                                                       decoration:
@@ -653,7 +653,7 @@ class _TicketInfoWidgetState extends State<TicketInfoWidget>
                                                                     child:
                                                                         Container(
                                                                       width:
-                                                                          300.0,
+                                                                          250.0,
                                                                       height:
                                                                           120.0,
                                                                       decoration:
@@ -683,7 +683,7 @@ class _TicketInfoWidgetState extends State<TicketInfoWidget>
                                                                     child:
                                                                         Container(
                                                                       width:
-                                                                          300.0,
+                                                                          250.0,
                                                                       height:
                                                                           120.0,
                                                                       decoration:
@@ -710,7 +710,7 @@ class _TicketInfoWidgetState extends State<TicketInfoWidget>
                                                           Row(
                                                             mainAxisSize:
                                                                 MainAxisSize
-                                                                    .max,
+                                                                    .min,
                                                             mainAxisAlignment:
                                                                 MainAxisAlignment
                                                                     .center,
@@ -745,7 +745,7 @@ class _TicketInfoWidgetState extends State<TicketInfoWidget>
                                                                     child:
                                                                         Container(
                                                                       width:
-                                                                          300.0,
+                                                                          250.0,
                                                                       height:
                                                                           120.0,
                                                                       decoration:
@@ -775,7 +775,7 @@ class _TicketInfoWidgetState extends State<TicketInfoWidget>
                                                                     child:
                                                                         Container(
                                                                       width:
-                                                                          300.0,
+                                                                          250.0,
                                                                       height:
                                                                           120.0,
                                                                       decoration:
@@ -805,7 +805,7 @@ class _TicketInfoWidgetState extends State<TicketInfoWidget>
                                                                     child:
                                                                         Container(
                                                                       width:
-                                                                          300.0,
+                                                                          250.0,
                                                                       height:
                                                                           120.0,
                                                                       decoration:
@@ -832,7 +832,7 @@ class _TicketInfoWidgetState extends State<TicketInfoWidget>
                                                           Row(
                                                             mainAxisSize:
                                                                 MainAxisSize
-                                                                    .max,
+                                                                    .min,
                                                             mainAxisAlignment:
                                                                 MainAxisAlignment
                                                                     .center,
@@ -867,7 +867,7 @@ class _TicketInfoWidgetState extends State<TicketInfoWidget>
                                                                     child:
                                                                         Container(
                                                                       width:
-                                                                          300.0,
+                                                                          250.0,
                                                                       height:
                                                                           120.0,
                                                                       decoration:
@@ -897,7 +897,7 @@ class _TicketInfoWidgetState extends State<TicketInfoWidget>
                                                                     child:
                                                                         Container(
                                                                       width:
-                                                                          300.0,
+                                                                          250.0,
                                                                       height:
                                                                           120.0,
                                                                       decoration:
@@ -927,7 +927,7 @@ class _TicketInfoWidgetState extends State<TicketInfoWidget>
                                                                     child:
                                                                         Container(
                                                                       width:
-                                                                          300.0,
+                                                                          250.0,
                                                                       height:
                                                                           120.0,
                                                                       decoration:
@@ -954,7 +954,7 @@ class _TicketInfoWidgetState extends State<TicketInfoWidget>
                                                           Row(
                                                             mainAxisSize:
                                                                 MainAxisSize
-                                                                    .max,
+                                                                    .min,
                                                             mainAxisAlignment:
                                                                 MainAxisAlignment
                                                                     .center,
@@ -989,7 +989,7 @@ class _TicketInfoWidgetState extends State<TicketInfoWidget>
                                                                     child:
                                                                         Container(
                                                                       width:
-                                                                          300.0,
+                                                                          250.0,
                                                                       height:
                                                                           120.0,
                                                                       decoration:
@@ -1019,7 +1019,7 @@ class _TicketInfoWidgetState extends State<TicketInfoWidget>
                                                                     child:
                                                                         Container(
                                                                       width:
-                                                                          300.0,
+                                                                          250.0,
                                                                       height:
                                                                           120.0,
                                                                       decoration:
@@ -1049,7 +1049,7 @@ class _TicketInfoWidgetState extends State<TicketInfoWidget>
                                                                     child:
                                                                         Container(
                                                                       width:
-                                                                          300.0,
+                                                                          250.0,
                                                                       height:
                                                                           120.0,
                                                                       decoration:
@@ -1076,7 +1076,7 @@ class _TicketInfoWidgetState extends State<TicketInfoWidget>
                                                           Row(
                                                             mainAxisSize:
                                                                 MainAxisSize
-                                                                    .max,
+                                                                    .min,
                                                             mainAxisAlignment:
                                                                 MainAxisAlignment
                                                                     .center,
@@ -1111,7 +1111,7 @@ class _TicketInfoWidgetState extends State<TicketInfoWidget>
                                                                     child:
                                                                         Container(
                                                                       width:
-                                                                          300.0,
+                                                                          250.0,
                                                                       height:
                                                                           120.0,
                                                                       decoration:
@@ -1141,7 +1141,7 @@ class _TicketInfoWidgetState extends State<TicketInfoWidget>
                                                                     child:
                                                                         Container(
                                                                       width:
-                                                                          300.0,
+                                                                          250.0,
                                                                       height:
                                                                           120.0,
                                                                       decoration:
@@ -1171,7 +1171,7 @@ class _TicketInfoWidgetState extends State<TicketInfoWidget>
                                                                     child:
                                                                         Container(
                                                                       width:
-                                                                          300.0,
+                                                                          250.0,
                                                                       height:
                                                                           120.0,
                                                                       decoration:
@@ -1198,7 +1198,7 @@ class _TicketInfoWidgetState extends State<TicketInfoWidget>
                                                           Row(
                                                             mainAxisSize:
                                                                 MainAxisSize
-                                                                    .max,
+                                                                    .min,
                                                             mainAxisAlignment:
                                                                 MainAxisAlignment
                                                                     .center,
@@ -1233,7 +1233,7 @@ class _TicketInfoWidgetState extends State<TicketInfoWidget>
                                                                     child:
                                                                         Container(
                                                                       width:
-                                                                          300.0,
+                                                                          250.0,
                                                                       height:
                                                                           120.0,
                                                                       decoration:
@@ -1263,7 +1263,7 @@ class _TicketInfoWidgetState extends State<TicketInfoWidget>
                                                                     child:
                                                                         Container(
                                                                       width:
-                                                                          300.0,
+                                                                          250.0,
                                                                       height:
                                                                           120.0,
                                                                       decoration:
@@ -1293,7 +1293,7 @@ class _TicketInfoWidgetState extends State<TicketInfoWidget>
                                                                     child:
                                                                         Container(
                                                                       width:
-                                                                          300.0,
+                                                                          250.0,
                                                                       height:
                                                                           120.0,
                                                                       decoration:
@@ -1320,7 +1320,7 @@ class _TicketInfoWidgetState extends State<TicketInfoWidget>
                                                           Row(
                                                             mainAxisSize:
                                                                 MainAxisSize
-                                                                    .max,
+                                                                    .min,
                                                             mainAxisAlignment:
                                                                 MainAxisAlignment
                                                                     .center,
@@ -1355,7 +1355,7 @@ class _TicketInfoWidgetState extends State<TicketInfoWidget>
                                                                     child:
                                                                         Container(
                                                                       width:
-                                                                          300.0,
+                                                                          250.0,
                                                                       height:
                                                                           120.0,
                                                                       decoration:
@@ -1385,7 +1385,7 @@ class _TicketInfoWidgetState extends State<TicketInfoWidget>
                                                                     child:
                                                                         Container(
                                                                       width:
-                                                                          300.0,
+                                                                          250.0,
                                                                       height:
                                                                           120.0,
                                                                       decoration:
@@ -1415,7 +1415,7 @@ class _TicketInfoWidgetState extends State<TicketInfoWidget>
                                                                     child:
                                                                         Container(
                                                                       width:
-                                                                          300.0,
+                                                                          250.0,
                                                                       height:
                                                                           120.0,
                                                                       decoration:
