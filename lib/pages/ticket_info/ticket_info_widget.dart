@@ -211,7 +211,7 @@ class _TicketInfoWidgetState extends State<TicketInfoWidget>
             child: wrapWithModel(
               model: _model.drawerModel,
               updateCallback: () => setState(() {}),
-              child: DrawerWidget(_homeModel),
+              child: const DrawerWidget(),
             ),
           ),
         ),

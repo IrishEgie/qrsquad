@@ -23,9 +23,6 @@ class FFAppState extends ChangeNotifier {
     _safeInit(() {
       _login = prefs.getBool('ff_login') ?? _login;
     });
-    _safeInit(() {
-      _logout = prefs.getBool('ff_logout') ?? _logout;
-    });
   }
 
   void update(VoidCallback callback) {

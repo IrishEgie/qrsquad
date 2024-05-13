@@ -94,7 +94,6 @@ class _LogSwitchWidgetState extends State<LogSwitchWidget>
                 onTap: () async {
                   FFAppState().update(() {
                     FFAppState().login = true;
-                    FFAppState().logout = false;
                   });
                 },
                 child: Container(
@@ -157,7 +156,6 @@ class _LogSwitchWidgetState extends State<LogSwitchWidget>
                 highlightColor: Colors.transparent,
                 onTap: () async {
                   FFAppState().update(() {
-                    FFAppState().logout = true;
                     FFAppState().login = false;
                   });
                 },
@@ -165,12 +163,12 @@ class _LogSwitchWidgetState extends State<LogSwitchWidget>
                   width: 115.0,
                   height: 100.0,
                   decoration: BoxDecoration(
-                    color: FFAppState().logout
+                    color: !FFAppState().login
                         ? FlutterFlowTheme.of(context).alternate
                         : FlutterFlowTheme.of(context).primaryBackground,
                     borderRadius: BorderRadius.circular(10.0),
                     border: Border.all(
-                      color: FFAppState().logout
+                      color: !FFAppState().login
                           ? FlutterFlowTheme.of(context).alternate
                           : FlutterFlowTheme.of(context).primaryBackground,
                       width: 1.0,
@@ -182,7 +180,7 @@ class _LogSwitchWidgetState extends State<LogSwitchWidget>
                     children: [
                       Icon(
                         Icons.logout_rounded,
-                        color: FFAppState().logout
+                        color: !FFAppState().login
                             ? FlutterFlowTheme.of(context).primaryText
                             : FlutterFlowTheme.of(context).secondaryText,
                         size: 16.0,
@@ -197,7 +195,7 @@ class _LogSwitchWidgetState extends State<LogSwitchWidget>
                               .override(
                                 fontFamily: FlutterFlowTheme.of(context)
                                     .bodyMediumFamily,
-                                color: FFAppState().logout
+                                color: !FFAppState().login
                                     ? FlutterFlowTheme.of(context).primaryText
                                     : FlutterFlowTheme.of(context)
                                         .secondaryText,

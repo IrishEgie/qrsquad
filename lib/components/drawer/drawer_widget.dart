@@ -1,5 +1,3 @@
-import 'package:q_r_checkin/pages/home_page/home_page_model.dart';
-
 import '/alert_notif/info_notif/info_notif_widget.dart';
 import '/components/dark_light_switch_small/dark_light_switch_small_widget.dart';
 import '/components/db_connection_control/db_connection_control_widget.dart';
@@ -17,8 +15,7 @@ import 'drawer_model.dart';
 export 'drawer_model.dart';
 
 class DrawerWidget extends StatefulWidget {
-  final HomePageModel _homeModel;
-  const DrawerWidget(this._homeModel, {super.key});
+  const DrawerWidget({super.key});
 
   @override
   State<DrawerWidget> createState() => _DrawerWidgetState();
@@ -27,7 +24,6 @@ class DrawerWidget extends StatefulWidget {
 class _DrawerWidgetState extends State<DrawerWidget>
     with TickerProviderStateMixin {
   late DrawerModel _model;
-  late HomePageModel _homeModel;
 
   final animationsMap = <String, AnimationInfo>{};
 
@@ -41,7 +37,6 @@ class _DrawerWidgetState extends State<DrawerWidget>
   void initState() {
     super.initState();
     _model = createModel(context, () => DrawerModel());
-    _homeModel = widget._homeModel;
     animationsMap.addAll({
       'containerOnPageLoadAnimation1': AnimationInfo(
         trigger: AnimationTrigger.onPageLoad,
@@ -474,7 +469,7 @@ class _DrawerWidgetState extends State<DrawerWidget>
                           padding: MediaQuery.viewInsetsOf(context),
                           child: SizedBox(
                             height: MediaQuery.sizeOf(context).height * 1.0,
-                            child: DbConnectionControlWidget(_homeModel),
+                            child: const DbConnectionControlWidget(),
                           ),
                         );
                       },

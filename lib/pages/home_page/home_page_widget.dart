@@ -134,7 +134,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
             child: wrapWithModel(
               model: _model.drawerModel,
               updateCallback: () => setState(() {}),
-              child: DrawerWidget(_model),
+              child: const DrawerWidget(),
             ),
           ),
         ),
