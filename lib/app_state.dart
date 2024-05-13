@@ -20,6 +20,9 @@ class FFAppState extends ChangeNotifier {
     _safeInit(() {
       _StandardMode = prefs.getBool('ff_StandardMode') ?? _StandardMode;
     });
+    _safeInit(() {
+      _login = prefs.getBool('ff_login') ?? _login;
+    });
   }
 
   void update(VoidCallback callback) {
@@ -64,6 +67,7 @@ class FFAppState extends ChangeNotifier {
   bool get login => _login;
   set login(bool value) {
     _login = value;
+    prefs.setBool('ff_login', value);
   }
 }
 
