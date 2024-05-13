@@ -123,7 +123,7 @@ class _TicketInfoWidgetState extends State<TicketInfoWidget>
           Padding(
             padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 8, 0),
             child: Container(
-              width: 300,
+              width: 250,
               height: 120,
               decoration: BoxDecoration(
                 color: FlutterFlowTheme.of(context).secondaryBackground,
@@ -138,7 +138,7 @@ class _TicketInfoWidgetState extends State<TicketInfoWidget>
         );
       }
 
-      for (var row in splitIntoChunks(ticketLogWidgets, 3)) {
+      for (var row in splitIntoChunks(ticketLogWidgets, 4)) {
         List<Widget> ticketRowWidgets = [];
         for (var element in row) {
           ticketRowWidgets.add(element);
@@ -211,7 +211,7 @@ class _TicketInfoWidgetState extends State<TicketInfoWidget>
             child: wrapWithModel(
               model: _model.drawerModel,
               updateCallback: () => setState(() {}),
-              child: DrawerWidget(_homeModel),
+              child: const DrawerWidget(),
             ),
           ),
         ),

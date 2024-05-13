@@ -8,7 +8,6 @@ import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
 
 import 'package:q_r_checkin/index.dart';
-import 'package:q_r_checkin/pages/home_page/home_page_model.dart';
 
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_drop_down.dart';
@@ -21,8 +20,7 @@ import 'db_connection_control_model.dart';
 export 'db_connection_control_model.dart';
 
 class DbConnectionControlWidget extends StatefulWidget {
-  final HomePageModel _homeModel;
-  const DbConnectionControlWidget(this._homeModel, {super.key});
+  const DbConnectionControlWidget({super.key});
 
   @override
   State<DbConnectionControlWidget> createState() =>
@@ -32,7 +30,6 @@ class DbConnectionControlWidget extends StatefulWidget {
 class _DbConnectionControlWidgetState extends State<DbConnectionControlWidget>
     with TickerProviderStateMixin {
   late DbConnectionControlModel _model;
-  late HomePageModel _homeModel;
 
   String connectionStatus(Connection iconName, {String periods = "..."}) {
     String message = "Not connected to server";
@@ -113,7 +110,6 @@ class _DbConnectionControlWidgetState extends State<DbConnectionControlWidget>
   void initState() {
     super.initState();
     _model = createModel(context, () => DbConnectionControlModel());
-    _homeModel = widget._homeModel;
     _model.textController ??= TextEditingController();
     _model.textFieldFocusNode ??= FocusNode();
 
