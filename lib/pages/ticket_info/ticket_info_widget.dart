@@ -138,7 +138,7 @@ class _TicketInfoWidgetState extends State<TicketInfoWidget>
         );
       }
 
-      for (var row in splitIntoChunks(ticketLogWidgets, 3)) {
+      for (var row in splitIntoChunks(ticketLogWidgets, 4)) {
         List<Widget> ticketRowWidgets = [];
         for (var element in row) {
           ticketRowWidgets.add(element);
