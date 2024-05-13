@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:q_r_checkin/index.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class FFAppState extends ChangeNotifier {
@@ -28,6 +29,18 @@ class FFAppState extends ChangeNotifier {
 
   late SharedPreferences prefs;
 
+  String _ApiURL = "";
+  String get ApiURL => _ApiURL;
+  set ApiURL(String value) {
+    _ApiURL = value;
+  }
+
+  Connection _connectionStatus = Connection.NULL;
+  Connection get connectionStatus => _connectionStatus;
+  set connectionStatus(Connection value) {
+    _connectionStatus = value;
+  }
+
   bool _DebugMode = false;
   bool get DebugMode => _DebugMode;
   set DebugMode(bool value) {
@@ -47,16 +60,10 @@ class FFAppState extends ChangeNotifier {
     _passkey = value;
   }
 
-  bool _login = false;
+  bool _login = true;
   bool get login => _login;
   set login(bool value) {
     _login = value;
-  }
-
-  bool _logout = false;
-  bool get logout => _logout;
-  set logout(bool value) {
-    _logout = value;
   }
 }
 

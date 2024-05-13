@@ -1,6 +1,12 @@
 import 'dart:async';
+import 'dart:ui';
 
+import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
+
 import 'package:q_r_checkin/index.dart';
 import 'package:q_r_checkin/pages/home_page/home_page_model.dart';
 
@@ -10,12 +16,8 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
-import 'dart:ui';
-import 'package:http/http.dart' as http;
-import 'package:flutter/material.dart';
-import 'package:flutter_animate/flutter_animate.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'db_connection_control_model.dart';
+
 export 'db_connection_control_model.dart';
 
 class DbConnectionControlWidget extends StatefulWidget {
@@ -115,7 +117,7 @@ class _DbConnectionControlWidgetState extends State<DbConnectionControlWidget>
     _model.textController ??= TextEditingController();
     _model.textFieldFocusNode ??= FocusNode();
 
-    currentConnectionMessage = connectionStatus(_homeModel.connectionStatus);
+    currentConnectionMessage = connectionStatus(FFAppState().connectionStatus);
 
     animationsMap.addAll({
       'containerOnPageLoadAnimation': AnimationInfo(
@@ -228,7 +230,6 @@ class _DbConnectionControlWidgetState extends State<DbConnectionControlWidget>
   @override
   void dispose() {
     _model.maybeDispose();
-
     super.dispose();
   }
 
@@ -352,7 +353,8 @@ class _DbConnectionControlWidgetState extends State<DbConnectionControlWidget>
                                 child: Row(
                                   mainAxisSize: MainAxisSize.max,
                                   children: [
-                                    connectionIcon(_homeModel.connectionStatus,
+                                    connectionIcon(
+                                        FFAppState().connectionStatus,
                                         size: 48.0),
                                     Padding(
                                       padding:
@@ -366,9 +368,9 @@ class _DbConnectionControlWidgetState extends State<DbConnectionControlWidget>
                                             CrossAxisAlignment.start,
                                         children: [
                                           Text(
-                                            (_homeModel.apiUrl.isEmpty)
+                                            (FFAppState().ApiURL.isEmpty)
                                                 ? 'IP Address'
-                                                : _homeModel.apiUrl,
+                                                : FFAppState().ApiURL,
                                             style: FlutterFlowTheme.of(context)
                                                 .displaySmall
                                                 .override(
@@ -814,7 +816,7 @@ class _DbConnectionControlWidgetState extends State<DbConnectionControlWidget>
                                               child: FFButtonWidget(
                                                 onPressed: () {
                                                   setState(() {
-                                                    _homeModel.apiUrl =
+                                                    FFAppState().ApiURL =
                                                         _model.apiUrl;
                                                   });
 
@@ -1144,15 +1146,16 @@ class _DbConnectionControlWidgetState extends State<DbConnectionControlWidget>
   void checkConnection() {
     void connectionFailed(Timer timer) {
       timerStillRunning = false;
-      if (_homeModel.connectionStatus == Connection.CONNECTED ||
-          _homeModel.connectionStatus == Connection.SUCCESSFUL) {
+      if (FFAppState().connectionStatus == Connection.CONNECTED ||
+          FFAppState().connectionStatus == Connection.SUCCESSFUL) {
         currentConnectionMessage =
-            connectionStatus(_homeModel.connectionStatus);
+            connectionStatus(FFAppState().connectionStatus);
         timer.cancel();
         return;
       }
-      _homeModel.connectionStatus = Connection.NOTCONNECTED;
-      currentConnectionMessage = connectionStatus(_homeModel.connectionStatus);
+      FFAppState().connectionStatus = Connection.NOTCONNECTED;
+      currentConnectionMessage =
+          connectionStatus(FFAppState().connectionStatus);
       timer.cancel();
     }
 
@@ -1162,16 +1165,17 @@ class _DbConnectionControlWidgetState extends State<DbConnectionControlWidget>
     late String apiUrl = 'http://$ipAddress/api/';
 
     bool hasStarted = true;
-    _homeModel.connectionStatus = Connection.CONNECTING;
+    FFAppState().connectionStatus = Connection.CONNECTING;
     Timer.periodic(const Duration(milliseconds: 100), (timer) {
       timerStillRunning = true;
       setState(() {
-        currentConnectionMessage = connectionStatus(_homeModel.connectionStatus,
+        currentConnectionMessage = connectionStatus(
+            FFAppState().connectionStatus,
             periods: String.fromCharCodes(
                 Iterable.generate((timer.tick % 3) + 1, (_) => 46)));
         if (timer.tick > tickDuration &&
-            (_homeModel.connectionStatus != Connection.CONNECTED ||
-                _homeModel.connectionStatus != Connection.SUCCESSFUL)) {
+            (FFAppState().connectionStatus != Connection.CONNECTED ||
+                FFAppState().connectionStatus != Connection.SUCCESSFUL)) {
           connectionFailed(timer);
         }
         if (hasStarted) {
@@ -1180,10 +1184,10 @@ class _DbConnectionControlWidgetState extends State<DbConnectionControlWidget>
             (http.get(Uri.parse(apiUrl)).timeout(timeoutDuration))
                 .then((Response response) {
               if (response.statusCode == 200) {
-                _homeModel.connectionStatus = Connection.SUCCESSFUL;
+                FFAppState().connectionStatus = Connection.SUCCESSFUL;
                 timerStillRunning = false;
                 Timer(const Duration(milliseconds: 500), () {
-                  _homeModel.connectionStatus = Connection.CONNECTED;
+                  FFAppState().connectionStatus = Connection.CONNECTED;
                 });
               } else {
                 connectionFailed(timer);

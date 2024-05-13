@@ -49,7 +49,7 @@ app.get("/api/ticket/:uid", (req, res) => {
     }));
 
     return {
-      success: true,
+      success: 200,
       id: ticketData.id,
       uid: ticketData.uid,
       check_in: ticketData.check_in,
@@ -68,9 +68,8 @@ app.get("/api/ticket/:uid", (req, res) => {
     LEFT JOIN qticketdb_history h ON t.id = h.ticket_id
     WHERE t.uid = ?
     ORDER BY h.date_used DESC, h.time_used DESC 
-    LIMIT 20
     `;
-  db.connection.query(query, [ticketId], (error, results) => {
+  db.getConnection().query(query, [ticketId], (error, results) => {
     if (error) {
       console.log(error);
       res.status(500).json({ error: 'An error occurred while fetching the ticket data.' });
@@ -78,7 +77,7 @@ app.get("/api/ticket/:uid", (req, res) => {
       const ticket = restructureTicketData(results); // Refactor the result into the desired format
       res.json(ticket);
     } else {
-      res.status(404).json({ success: false, error: 'Ticket not found.' });
+      res.status(404).json({ success: 404, error: 'Ticket not found.' });
     }
   });
 });
@@ -89,17 +88,56 @@ app.post("/api/insert_log/:ticket_id", (req, res) => {
   const type = req.body.type;
   const timeUsed = new Date();
 
-  const query = `INSERT INTO qticketdb_history (ticket_id, date_used, type, time_used) VALUES (?, ?, ?, ?)`;
+  const query = `
+    INSERT INTO qticketdb_history (ticket_id, date_used, type, time_used) 
+    VALUES (?, ?, ?, ?)
+  `;
 
-  db.connection.query(query, [ticketId, dateUsed, type, timeUsed], (error, results) => {
+  db.getConnection().query(query, [ticketId, dateUsed, type, timeUsed], (error, results) => {
     if (error) {
       console.log(error);
       res.status(500).json({ error: 'An error occurred while executing the query.' });
     } else {
-      res.status(200).json({ success: true });
+      // Fetch both check_in and check_out values in a single query
+      const combinedQuery = `
+        SELECT
+          (SELECT IFNULL(MIN(h.date_used), '') FROM qticketdb_history h WHERE h.ticket_id = t.id) AS check_in,
+          (SELECT IFNULL(MAX(h.date_used), '') FROM qticketdb_history h WHERE h.ticket_id = t.id) AS check_out
+        FROM qticketdb t
+        WHERE t.id = ?
+      `;
+
+      db.getConnection().query(combinedQuery, [ticketId], (error, result) => {
+        if (error) {
+          console.log(error);
+          res.status(500).json({ error: 'An error occurred while executing the query.' });
+        } else {
+          const checkInValue = new Date(result[0].check_in);
+          // const checkInValue = new Date();
+          const checkOutValue = new Date(result[0].check_out);
+          // Update qticketdb table with the new check_in and check_out values
+          const updateQuery = `
+            UPDATE qticketdb
+            SET check_in = ?,
+                check_out = ?
+            WHERE id = ?
+          `;
+
+          db.getConnection().query(updateQuery, [checkInValue, checkOutValue, ticketId], (error, updateResult) => {
+            if (error) {
+              console.log(error);
+              res.status(500).json({ error: 'An error occurred while updating the check_in and check_out values.' });
+            } else {
+              // console.log(updateResult);
+              res.status(200).json({ success: 200 });
+            }
+          });
+        }
+      });
     }
   });
 });
+
 
 app.listen(PORT, () => {
   const networkInterfaces = os.networkInterfaces();
