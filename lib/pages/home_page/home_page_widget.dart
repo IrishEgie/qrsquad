@@ -788,7 +788,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
   // Authenticate if Ticket exists in Database
   Future<void> authenticateTicket(String value, BuildContext context) async {
     // _model.apiUrl = '127.0.0.1:5000';
-    const Duration timeoutDuration = Duration(milliseconds: 500);
+    const Duration timeoutDuration = Duration(milliseconds: 2500);
     late String ipAddress = FFAppState().ApiURL;
     late String apiUrl = 'http://$ipAddress/api/ticket/$value';
     try {

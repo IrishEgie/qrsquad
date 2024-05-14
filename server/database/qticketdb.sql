@@ -40,4 +40,4 @@ VALUES (1, NOW(), 0, NOW());
 SELECT t.*, h.date_used, h.type, h.time_used 
 FROM qticketdb t
 JOIN qticketdb_history h ON t.id = h.ticket_id
-WHERE t.id = 4; 
+WHERE t.id = 1; 

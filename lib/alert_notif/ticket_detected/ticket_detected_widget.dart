@@ -62,7 +62,7 @@ class _TicketDetectedWidgetState extends State<TicketDetectedWidget> {
         }
         // Debug Mode is OFF
         else {
-          Timer(const Duration(seconds: 2), () {
+          Timer(const Duration(milliseconds: 2500), () {
             showModalBottomSheet(
               isScrollControlled: true,
               backgroundColor: Colors.transparent,
@@ -89,7 +89,7 @@ class _TicketDetectedWidgetState extends State<TicketDetectedWidget> {
                     Navigator.pop(context); // Close the modal
                   });
                 }));
-            Timer(const Duration(milliseconds: 1000), () async {
+            Timer(const Duration(milliseconds: 2500), () async {
               Navigator.pop(context);
             });
           });
@@ -97,14 +97,14 @@ class _TicketDetectedWidgetState extends State<TicketDetectedWidget> {
       }
       // No ticket detected. Authentication failed.
       else if ([404, 42069].contains(_homeModel.ticket["success"])) {
-        Timer(const Duration(milliseconds: 1000), () {
+        Timer(const Duration(milliseconds: 2500), () {
           Navigator.pop(context);
         });
       }
     }
     // Database connection not yet established.
     else {
-      Timer(const Duration(milliseconds: 1000), () {
+      Timer(const Duration(milliseconds: 2500), () {
         Navigator.pop(context);
       });
     }
@@ -161,8 +161,8 @@ class _TicketDetectedWidgetState extends State<TicketDetectedWidget> {
                             ? ((_homeModel.ticket["success"] == 200)
                                 ? 'Ticket Detected'
                                 : (_homeModel.ticket["success"] == 42069)
-                                    ? 'Duplicated Logging Detected'
-                                    : 'Sorry but ticket not Found!')
+                                    ? 'Double Log-in Attempt Detected'
+                                    : 'Ticket not found')
                             : 'Database Connection Error',
                         style: FlutterFlowTheme.of(context)
                             .headlineMedium
@@ -185,8 +185,8 @@ class _TicketDetectedWidgetState extends State<TicketDetectedWidget> {
                             ? ((_homeModel.ticket["success"] == 200)
                                 ? 'Please wait while our system logs your ticket to the event'
                                 : (_homeModel.ticket["success"] == 42069)
-                                    ? 'Please try to ${(_homeModel.ticket['history'] as List<dynamic>).first['type'] == '1' ? 'Log-out' : 'Log-in'} first.'
-                                    : 'Please try to use a valid ticket. Thank you!')
+                                    ? 'Please ${(_homeModel.ticket['history'] as List<dynamic>).first['type'] == '1' ? 'Log-out' : 'Log in'} first, then try again.'
+                                    : 'Please try using a valid ticket. Thank you.')
                             : 'Please try to establish connection first in the Network Section from Quick Menu',
                         style:
                             FlutterFlowTheme.of(context).labelMedium.override(
@@ -232,7 +232,7 @@ class _TicketDetectedWidgetState extends State<TicketDetectedWidget> {
             },
             body: jsonEncode(requestData),
           )
-          .timeout(Duration(milliseconds: 5000));
+          .timeout(const Duration(milliseconds: 5000));
 
       if (response.statusCode == 200) {
         print('Ticket entry updated successfully');

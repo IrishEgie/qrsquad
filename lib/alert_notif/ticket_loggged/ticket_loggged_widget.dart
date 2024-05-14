@@ -75,10 +75,10 @@ class _TicketLogggedWidgetState extends State<TicketLogggedWidget> {
                       size: 128.0,
                     ),
                     Padding(
-                      padding:
-                          const EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),
+                      padding: const EdgeInsetsDirectional.fromSTEB(
+                          0.0, 16.0, 0.0, 0.0),
                       child: Text(
-                        'YOU\'RE CHECKED IN!',
+                        'Logged In Successfully',
                         style: FlutterFlowTheme.of(context)
                             .headlineMedium
                             .override(
@@ -93,10 +93,10 @@ class _TicketLogggedWidgetState extends State<TicketLogggedWidget> {
                       ),
                     ),
                     Padding(
-                      padding:
-                          const EdgeInsetsDirectional.fromSTEB(0.0, 4.0, 0.0, 0.0),
+                      padding: const EdgeInsetsDirectional.fromSTEB(
+                          0.0, 4.0, 0.0, 0.0),
                       child: Text(
-                        'Please enjoy the event!',
+                        'Welcome, and please enjoy the event!',
                         style: FlutterFlowTheme.of(context)
                             .labelMedium
                             .override(

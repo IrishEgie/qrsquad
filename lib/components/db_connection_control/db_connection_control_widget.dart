@@ -97,7 +97,7 @@ class _DbConnectionControlWidgetState extends State<DbConnectionControlWidget>
   }
 
   late String currentConnectionMessage;
-  late bool timerStillRunning = false;
+  late Timer _connectionTimer;
   final animationsMap = <String, AnimationInfo>{};
 
   @override
@@ -112,9 +112,8 @@ class _DbConnectionControlWidgetState extends State<DbConnectionControlWidget>
     _model = createModel(context, () => DbConnectionControlModel());
     _model.textController ??= TextEditingController();
     _model.textFieldFocusNode ??= FocusNode();
-
+    _connectionTimer = Timer(const Duration(microseconds: 1), () {});
     currentConnectionMessage = connectionStatus(FFAppState().connectionStatus);
-
     animationsMap.addAll({
       'containerOnPageLoadAnimation': AnimationInfo(
         trigger: AnimationTrigger.onPageLoad,
@@ -220,12 +219,21 @@ class _DbConnectionControlWidgetState extends State<DbConnectionControlWidget>
       ),
     });
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {
+          if (FFAppState().connectionStatus == Connection.CONNECTING) {
+            FFAppState().connectionStatus = Connection.NOTCONNECTED;
+          } else if (FFAppState().connectionStatus == Connection.SUCCESSFUL) {
+            FFAppState().connectionStatus = Connection.CONNECTED;
+          }
+          currentConnectionMessage =
+              connectionStatus(FFAppState().connectionStatus);
+        }));
   }
 
   @override
   void dispose() {
     _model.maybeDispose();
+    _connectionTimer.cancel();
     super.dispose();
   }
 
@@ -286,9 +294,7 @@ class _DbConnectionControlWidgetState extends State<DbConnectionControlWidget>
                     focusColor: Colors.transparent,
                     hoverColor: Colors.transparent,
                     highlightColor: Colors.transparent,
-                    onTap: () async {
-                      Navigator.pop(context);
-                    },
+                    onTap: () {},
                     child: Column(
                       mainAxisSize: MainAxisSize.max,
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -1076,11 +1082,11 @@ class _DbConnectionControlWidgetState extends State<DbConnectionControlWidget>
                                     const AlignmentDirectional(0.0, 0.05),
                                 child: FFButtonWidget(
                                   onPressed: () async {
-                                    if (!timerStillRunning) {
+                                    if (!_connectionTimer.isActive) {
                                       Navigator.pop(context);
                                     }
                                   },
-                                  text: (!timerStillRunning)
+                                  text: (!_connectionTimer.isActive)
                                       ? 'Close'
                                       : 'Running',
                                   options: FFButtonOptions(
@@ -1140,19 +1146,18 @@ class _DbConnectionControlWidgetState extends State<DbConnectionControlWidget>
   }
 
   void checkConnection() {
-    void connectionFailed(Timer timer) {
-      timerStillRunning = false;
+    void connectionFailed() {
+      FFAppState().connectionStatus = Connection.NOTCONNECTED;
       if (FFAppState().connectionStatus == Connection.CONNECTED ||
           FFAppState().connectionStatus == Connection.SUCCESSFUL) {
         currentConnectionMessage =
             connectionStatus(FFAppState().connectionStatus);
-        timer.cancel();
+        _connectionTimer.cancel();
         return;
       }
-      FFAppState().connectionStatus = Connection.NOTCONNECTED;
       currentConnectionMessage =
           connectionStatus(FFAppState().connectionStatus);
-      timer.cancel();
+      _connectionTimer.cancel();
     }
 
     const int tickDuration = 20;
@@ -1162,37 +1167,47 @@ class _DbConnectionControlWidgetState extends State<DbConnectionControlWidget>
 
     bool hasStarted = true;
     FFAppState().connectionStatus = Connection.CONNECTING;
-    Timer.periodic(const Duration(milliseconds: 100), (timer) {
-      timerStillRunning = true;
-      setState(() {
-        currentConnectionMessage = connectionStatus(
-            FFAppState().connectionStatus,
-            periods: String.fromCharCodes(
-                Iterable.generate((timer.tick % 3) + 1, (_) => 46)));
-        if (timer.tick > tickDuration &&
-            (FFAppState().connectionStatus != Connection.CONNECTED ||
-                FFAppState().connectionStatus != Connection.SUCCESSFUL)) {
-          connectionFailed(timer);
+    _connectionTimer =
+        Timer.periodic(const Duration(milliseconds: 100), (Timer timer) {
+      _connectionTimer = timer;
+      if (_connectionTimer.tick > tickDuration &&
+          (FFAppState().connectionStatus != Connection.CONNECTED ||
+              FFAppState().connectionStatus != Connection.SUCCESSFUL)) {
+        connectionFailed();
+      }
+      if (!_connectionTimer.isActive && mounted)
+        setState(() => connectionFailed());
+      if (mounted) {
+        setState(() {
+          currentConnectionMessage = connectionStatus(
+              FFAppState().connectionStatus,
+              periods: String.fromCharCodes(Iterable.generate(
+                  (_connectionTimer.tick % 3) + 1, (_) => 46)));
+        });
+      }
+      if (!hasStarted) return;
+      hasStarted = false;
+      (http.get(Uri.parse(apiUrl)).timeout(timeoutDuration))
+          .then((Response response) {
+        if (response.statusCode == 200) {
+          FFAppState().connectionStatus = Connection.SUCCESSFUL;
+          Timer(const Duration(milliseconds: 500), () {
+            if (mounted) {
+              setState(() {
+                FFAppState().connectionStatus = Connection.CONNECTED;
+                _connectionTimer.cancel();
+              });
+            }
+          });
+        } else
+          throw TimeoutException("Force to Fail");
+      }).catchError((error) {
+        if (error is TimeoutException) {
+          print('Request timed out.');
+        } else {
+          print('An error occurred: $error');
         }
-        if (hasStarted) {
-          hasStarted = false;
-          try {
-            (http.get(Uri.parse(apiUrl)).timeout(timeoutDuration))
-                .then((Response response) {
-              if (response.statusCode == 200) {
-                FFAppState().connectionStatus = Connection.SUCCESSFUL;
-                timerStillRunning = false;
-                Timer(const Duration(milliseconds: 500), () {
-                  FFAppState().connectionStatus = Connection.CONNECTED;
-                });
-              } else {
-                connectionFailed(timer);
-              }
-            });
-          } catch (error) {
-            connectionFailed(timer);
-          }
-        }
+        if (mounted) setState(() => connectionFailed());
       });
     });
   }
