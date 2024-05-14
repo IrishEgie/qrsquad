@@ -57,12 +57,6 @@ class FFAppState extends ChangeNotifier {
     prefs.setBool('ff_StandardMode', value);
   }
 
-  String _passkey = '';
-  String get passkey => _passkey;
-  set passkey(String value) {
-    _passkey = value;
-  }
-
   bool _login = true;
   bool get login => _login;
   set login(bool value) {

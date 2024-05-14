@@ -1,7 +1,17 @@
-def split_into_chunks(arr, chunk_size):
-    return [arr[i:i+chunk_size] for i in range(0, len(arr), chunk_size)]
+import serial
 
-arr = [1, 2, 3, 4, 5, 6, 7]
-chunk_size = 3
-result = split_into_chunks(arr, chunk_size)
-print(result)  # Output: [[1, 2, 3], [4, 5]]
+ser = serial.Serial('COM14', 9600)
+
+print("Starting", ser.is_open)
+while True:
+  try:
+    print("Scanned")
+    _id = ser.read(16).decode()
+    print(ser.read(16))
+    if "b0e4-0b-85-83-34" == _id:
+      print("True")
+    # ser.close()
+  except KeyboardInterrupt:
+    print("Interrupted")
+    ser.close()
+    break

@@ -161,7 +161,7 @@ class _TicketDetectedWidgetState extends State<TicketDetectedWidget> {
                             ? ((_homeModel.ticket["success"] == 200)
                                 ? 'Ticket Detected'
                                 : (_homeModel.ticket["success"] == 42069)
-                                    ? 'Double Log-in Attempt Detected'
+                                    ? 'Double Logging Attempt Detected'
                                     : 'Ticket not found')
                             : 'Database Connection Error',
                         style: FlutterFlowTheme.of(context)
