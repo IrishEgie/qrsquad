@@ -58,7 +58,7 @@ class _DarkLightSwitchSmallWidgetState extends State<DarkLightSwitchSmallWidget>
 
   @override
   void dispose() {
-    _model.maybeDispose();
+    _model.dispose();
 
     super.dispose();
   }
@@ -108,7 +108,8 @@ class _DarkLightSwitchSmallWidgetState extends State<DarkLightSwitchSmallWidget>
                 Align(
                   alignment: const AlignmentDirectional(-0.9, 0.0),
                   child: Padding(
-                    padding: const EdgeInsetsDirectional.fromSTEB(6.0, 0.0, 0.0, 0.0),
+                    padding: const EdgeInsetsDirectional.fromSTEB(
+                        6.0, 0.0, 0.0, 0.0),
                     child: Icon(
                       Icons.wb_sunny_rounded,
                       color: FlutterFlowTheme.of(context).secondaryText,
@@ -119,7 +120,8 @@ class _DarkLightSwitchSmallWidgetState extends State<DarkLightSwitchSmallWidget>
                 Align(
                   alignment: const AlignmentDirectional(1.0, 0.0),
                   child: Padding(
-                    padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 6.0, 0.0),
+                    padding: const EdgeInsetsDirectional.fromSTEB(
+                        0.0, 0.0, 6.0, 0.0),
                     child: Icon(
                       Icons.mode_night_rounded,
                       color: FlutterFlowTheme.of(context).secondaryText,

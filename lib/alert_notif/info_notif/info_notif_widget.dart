@@ -32,7 +32,7 @@ class _InfoNotifWidgetState extends State<InfoNotifWidget> {
 
   @override
   void dispose() {
-    _model.maybeDispose();
+    _model.dispose();
 
     super.dispose();
   }
@@ -72,7 +72,8 @@ class _InfoNotifWidgetState extends State<InfoNotifWidget> {
                   size: 128.0,
                 ),
                 Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),
+                  padding:
+                      const EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),
                   child: Text(
                     'Need Help?',
                     style: FlutterFlowTheme.of(context).headlineMedium.override(
@@ -87,10 +88,11 @@ class _InfoNotifWidgetState extends State<InfoNotifWidget> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 4.0, 0.0, 0.0),
+                  padding:
+                      const EdgeInsetsDirectional.fromSTEB(0.0, 4.0, 0.0, 0.0),
                   child: Text(
-                    'It seems that you don\'t have any recent activity.\nSimply scan your ticket at the QR Scanner nearby to check in to the event',
-                    textAlign: TextAlign.center,
+                    '1. It seems that you don\'t have any recent activity. Simply scan your ticket at the QR Scanner nearby to check in to the event. \n2. If the scanner cannot read any ticket. Simply unplug and plug the cable, then press F5.',
+                    textAlign: TextAlign.justify,
                     style: FlutterFlowTheme.of(context).labelMedium.override(
                           fontFamily: 'Plus Jakarta Sans',
                           color: FlutterFlowTheme.of(context).primaryText,

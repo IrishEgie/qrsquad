@@ -108,7 +108,7 @@ class _ExportWidgetState extends State<ExportWidget>
 
   @override
   void dispose() {
-    _model.maybeDispose();
+    _model.dispose();
 
     super.dispose();
   }

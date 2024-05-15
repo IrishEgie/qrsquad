@@ -245,8 +245,9 @@ class _TicketInfoWidgetState extends State<TicketInfoWidget>
                                   crossAxisAlignment: CrossAxisAlignment.end,
                                   children: [
                                     FFButtonWidget(
-                                      onPressed: () async {
-                                        context.goNamed('HomePage');
+                                      onPressed: () {
+                                        // context.goNamed('HomePage');
+                                        while (context.canPop()) context.pop();
                                       },
                                       text: 'Back',
                                       icon: const Icon(

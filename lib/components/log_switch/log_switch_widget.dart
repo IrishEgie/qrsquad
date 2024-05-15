@@ -59,7 +59,7 @@ class _LogSwitchWidgetState extends State<LogSwitchWidget>
 
   @override
   void dispose() {
-    _model.maybeDispose();
+    _model.dispose();
 
     super.dispose();
   }

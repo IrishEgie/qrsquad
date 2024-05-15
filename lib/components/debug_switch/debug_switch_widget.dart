@@ -59,7 +59,7 @@ class _DebugSwitchWidgetState extends State<DebugSwitchWidget>
 
   @override
   void dispose() {
-    _model.maybeDispose();
+    _model.dispose();
 
     super.dispose();
   }
@@ -124,8 +124,8 @@ class _DebugSwitchWidgetState extends State<DebugSwitchWidget>
                         size: 16.0,
                       ),
                       Padding(
-                        padding:
-                            const EdgeInsetsDirectional.fromSTEB(4.0, 0.0, 0.0, 0.0),
+                        padding: const EdgeInsetsDirectional.fromSTEB(
+                            4.0, 0.0, 0.0, 0.0),
                         child: Text(
                           'Standard',
                           style: FlutterFlowTheme.of(context)
@@ -188,8 +188,8 @@ class _DebugSwitchWidgetState extends State<DebugSwitchWidget>
                         size: 16.0,
                       ),
                       Padding(
-                        padding:
-                            const EdgeInsetsDirectional.fromSTEB(4.0, 0.0, 0.0, 0.0),
+                        padding: const EdgeInsetsDirectional.fromSTEB(
+                            4.0, 0.0, 0.0, 0.0),
                         child: Text(
                           'Debug',
                           style: FlutterFlowTheme.of(context)

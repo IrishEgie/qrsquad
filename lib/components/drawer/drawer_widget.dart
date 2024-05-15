@@ -81,7 +81,7 @@ class _DrawerWidgetState extends State<DrawerWidget>
 
   @override
   void dispose() {
-    _model.maybeDispose();
+    _model.dispose();
     super.dispose();
   }
 
@@ -366,80 +366,6 @@ class _DrawerWidgetState extends State<DrawerWidget>
                     ),
                   ).animateOnPageLoad(
                           animationsMap['containerOnPageLoadAnimation1']!),
-                ),
-              ),
-            if (FFAppState().DebugMode)
-              Padding(
-                padding:
-                    const EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 8.0, 4.0),
-                child: MouseRegion(
-                  opaque: false,
-                  cursor: MouseCursor.defer,
-                  onEnter: ((event) async {
-                    setState(() => _model.mouseRegionHovered4 = true);
-                  }),
-                  onExit: ((event) async {
-                    setState(() => _model.mouseRegionHovered4 = false);
-                  }),
-                  child: InkWell(
-                    splashColor: Colors.transparent,
-                    focusColor: Colors.transparent,
-                    hoverColor: Colors.transparent,
-                    highlightColor: Colors.transparent,
-                    onTap: () async {
-                      context.pushNamed('TicketInfo');
-                    },
-                    child: AnimatedContainer(
-                      duration: const Duration(milliseconds: 150),
-                      curve: Curves.easeInOut,
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                        color: _model.mouseRegionHovered4
-                            ? FlutterFlowTheme.of(context).primaryBackground
-                            : FlutterFlowTheme.of(context).secondaryBackground,
-                        borderRadius: BorderRadius.circular(8.0),
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsetsDirectional.fromSTEB(
-                            0.0, 8.0, 0.0, 8.0),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.max,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
-                                  12.0, 0.0, 0.0, 0.0),
-                              child: Icon(
-                                Icons.airplane_ticket_outlined,
-                                color: FlutterFlowTheme.of(context).primaryText,
-                                size: 20.0,
-                              ),
-                            ),
-                            Expanded(
-                              child: Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
-                                    12.0, 0.0, 0.0, 0.0),
-                                child: Text(
-                                  'Ticket Page',
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyMedium
-                                      .override(
-                                        fontFamily: FlutterFlowTheme.of(context)
-                                            .bodyMediumFamily,
-                                        letterSpacing: 0.0,
-                                        useGoogleFonts: GoogleFonts.asMap()
-                                            .containsKey(
-                                                FlutterFlowTheme.of(context)
-                                                    .bodyMediumFamily),
-                                      ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ).animateOnPageLoad(
-                      animationsMap['containerOnPageLoadAnimation2']!),
                 ),
               ),
             Padding(
