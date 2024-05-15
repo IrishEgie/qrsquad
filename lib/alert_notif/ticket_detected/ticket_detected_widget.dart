@@ -52,16 +52,15 @@ class _TicketDetectedWidgetState extends State<TicketDetectedWidget> {
     if ([200, 404, 42069].contains(_homeModel.ticket["success"])) {
       // Ticket is authenticated
       if ((_homeModel.ticket["success"]) == 200) {
-        // Get the first login, and last logout
-        await updateTicketEntry();
         // Debug Mode is ON
         if (FFAppState().DebugMode) {
           Timer(const Duration(milliseconds: 1000), () {
-            context.goNamed("TicketInfo", extra: _homeModel);
+            context.pushNamed("TicketInfo", extra: _homeModel);
           });
         }
         // Debug Mode is OFF
         else {
+          await updateTicketEntry();
           Timer(const Duration(milliseconds: 2500), () {
             showModalBottomSheet(
               isScrollControlled: true,

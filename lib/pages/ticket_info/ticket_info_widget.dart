@@ -246,7 +246,8 @@ class _TicketInfoWidgetState extends State<TicketInfoWidget>
                                   children: [
                                     FFButtonWidget(
                                       onPressed: () {
-                                        context.goNamed('HomePage');
+                                        // context.goNamed('HomePage');
+                                        while (context.canPop()) context.pop();
                                       },
                                       text: 'Back',
                                       icon: const Icon(

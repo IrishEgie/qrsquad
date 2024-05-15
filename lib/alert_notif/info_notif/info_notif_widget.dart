@@ -32,7 +32,7 @@ class _InfoNotifWidgetState extends State<InfoNotifWidget> {
 
   @override
   void dispose() {
-    _model.maybeDispose();
+    _model.dispose();
 
     super.dispose();
   }

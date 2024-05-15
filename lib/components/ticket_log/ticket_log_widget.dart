@@ -68,7 +68,7 @@ class _TicketLogWidgetState extends State<TicketLogWidget>
 
   @override
   void dispose() {
-    _model.maybeDispose();
+    _model.dispose();
 
     super.dispose();
   }

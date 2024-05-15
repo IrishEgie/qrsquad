@@ -81,7 +81,7 @@ class _DrawerWidgetState extends State<DrawerWidget>
 
   @override
   void dispose() {
-    _model.maybeDispose();
+    _model.dispose();
     super.dispose();
   }
 

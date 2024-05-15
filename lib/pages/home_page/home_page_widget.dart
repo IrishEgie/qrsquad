@@ -50,6 +50,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
   late HomePageModel _model;
   late String _currentTime;
   late Timer _timer;
+  late Timer _autoRefresh;
   final FocusNode _focusNode = FocusNode();
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
@@ -71,8 +72,8 @@ class _HomePageWidgetState extends State<HomePageWidget>
     configuration.parity = 0;
     port.config = configuration;
     SerialPortReader reader = SerialPortReader(port, timeout: 1000);
-
     bool canRead = true;
+
     try {
       port.openReadWrite();
       reader.stream.listen((data) {
@@ -86,6 +87,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
     } catch (error) {
       if (port.isOpen) {
         port.close();
+        reader.close();
         print('serial port error');
       }
     }
@@ -157,6 +159,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
   void dispose() {
     _model.dispose();
     _timer.cancel();
+    _autoRefresh.cancel();
     super.dispose();
   }
 
@@ -165,6 +168,10 @@ class _HomePageWidgetState extends State<HomePageWidget>
       setState(() {
         _currentTime = _getCurrentTime();
       });
+    });
+
+    _autoRefresh = Timer.periodic(const Duration(milliseconds: 100), (timer) {
+      initPorts();
     });
   }
 
@@ -881,7 +888,6 @@ class _HomePageWidgetState extends State<HomePageWidget>
 
   // Authenticate if Ticket exists in Database
   Future<void> authenticateTicket(String value, BuildContext context) async {
-    // _model.apiUrl = '127.0.0.1:5000';
     const Duration timeoutDuration = Duration(milliseconds: 2500);
     late String ipAddress = FFAppState().ApiURL;
     late String apiUrl = 'http://$ipAddress/api/ticket/$value';
@@ -898,7 +904,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
           _model.ticket = data;
           List<dynamic> history = data['history'];
           bool loggingState = (history.first['type'] == "1") ? true : false;
-          if (loggingState == FFAppState().login) {
+          if (loggingState == FFAppState().login && !FFAppState().DebugMode) {
             _model.ticket['success'] = 42069;
           }
           showModalBottomSheet(
