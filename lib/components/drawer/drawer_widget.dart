@@ -5,8 +5,11 @@ import '/components/debug_switch/debug_switch_widget.dart';
 import '/components/export/export_widget.dart';
 import '/components/log_switch/log_switch_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
+import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import 'dart:async';
+import '/custom_code/actions/index.dart' as actions;
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -551,6 +554,41 @@ class _DrawerWidgetState extends State<DrawerWidget>
                 model: _model.darkLightSwitchSmallModel,
                 updateCallback: () => setState(() {}),
                 child: const DarkLightSwitchSmallWidget(),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsetsDirectional.fromSTEB(12.0, 4.0, 0.0, 8.0),
+              child: Text(
+                'Refresh',
+                textAlign: TextAlign.start,
+                style: FlutterFlowTheme.of(context).labelMedium.override(
+                      fontFamily:
+                          FlutterFlowTheme.of(context).labelMediumFamily,
+                      letterSpacing: 0.0,
+                      useGoogleFonts: GoogleFonts.asMap().containsKey(
+                          FlutterFlowTheme.of(context).labelMediumFamily),
+                    ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsetsDirectional.fromSTEB(12.0, 0.0, 0.0, 0.0),
+              child: FlutterFlowIconButton(
+                borderColor: FlutterFlowTheme.of(context).accent4,
+                borderRadius: 20.0,
+                borderWidth: 1.0,
+                buttonSize: 40.0,
+                icon: Icon(
+                  Icons.refresh_rounded,
+                  color: FlutterFlowTheme.of(context).primaryText,
+                  size: 24.0,
+                ),
+                onPressed: () async {
+                  unawaited(
+                    () async {
+                      await actions.restartApp();
+                    }(),
+                  );
+                },
               ),
             ),
           ],
