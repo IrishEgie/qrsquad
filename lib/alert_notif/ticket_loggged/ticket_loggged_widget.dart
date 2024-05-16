@@ -77,7 +77,9 @@ class _TicketLogggedWidgetState extends State<TicketLogggedWidget> {
                       padding: const EdgeInsetsDirectional.fromSTEB(
                           0.0, 16.0, 0.0, 0.0),
                       child: Text(
-                        'Logged In Successfully',
+                        FFAppState().login
+                            ? 'Logged In Successfully'
+                            : 'Logged Out Successfully',
                         style: FlutterFlowTheme.of(context)
                             .headlineMedium
                             .override(
