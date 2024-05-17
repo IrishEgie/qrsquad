@@ -61,7 +61,7 @@ class _TicketDetectedWidgetState extends State<TicketDetectedWidget> {
         // Debug Mode is OFF
         else {
           await updateTicketEntry();
-          Timer(const Duration(milliseconds: 2500), () {
+          Timer(const Duration(milliseconds: 1000), () {
             showModalBottomSheet(
               isScrollControlled: true,
               backgroundColor: Colors.transparent,
@@ -88,7 +88,7 @@ class _TicketDetectedWidgetState extends State<TicketDetectedWidget> {
                     Navigator.pop(context); // Close the modal
                   });
                 }));
-            Timer(const Duration(milliseconds: 2500), () async {
+            Timer(const Duration(milliseconds: 1000), () async {
               Navigator.pop(context);
             });
           });
@@ -96,14 +96,14 @@ class _TicketDetectedWidgetState extends State<TicketDetectedWidget> {
       }
       // No ticket detected. Authentication failed.
       else if ([404, 42069].contains(_homeModel.ticket["success"])) {
-        Timer(const Duration(milliseconds: 2500), () {
+        Timer(const Duration(milliseconds: 1000), () {
           Navigator.pop(context);
         });
       }
     }
     // Database connection not yet established.
     else {
-      Timer(const Duration(milliseconds: 2500), () {
+      Timer(const Duration(milliseconds: 1000), () {
         Navigator.pop(context);
       });
     }
